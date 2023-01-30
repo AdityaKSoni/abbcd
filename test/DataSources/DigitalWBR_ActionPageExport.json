@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "3f8365cc-7423-4da5-878d-bac25f7eeb01",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "DigitalWBR_ActionPageExport",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

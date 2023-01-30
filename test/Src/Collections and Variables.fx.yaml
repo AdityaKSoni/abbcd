@@ -1,0 +1,337 @@
+"'Collections and Variables' As screen":
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =
+    Orientation: =If('Collections and Variables'.Width < 'Collections and Variables'.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= 'Collections and Variables'.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    AppTitle As label:
+        FocusedBorderColor: =AppTitle.BorderColor
+        FontWeight: =Bold
+        HoverBorderColor: =AppTitle.BorderColor
+        HoverColor: =AppTitle.Color
+        HoverFill: =AppTitle.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =AppTitle.BorderColor
+        PressedColor: =AppTitle.Color
+        PressedFill: =AppTitle.Fill
+        Size: =18.27
+        Text: ="Digital Joint MBR"
+        Width: =449.78
+        X: =289.55
+        Y: =294
+        ZIndex: =5
+
+    LabelAppTitle As label:
+        FocusedBorderColor: =LabelAppTitle.BorderColor
+        HoverBorderColor: =LabelAppTitle.BorderColor
+        HoverColor: =LabelAppTitle.Color
+        HoverFill: =LabelAppTitle.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelAppTitle.BorderColor
+        PressedColor: =LabelAppTitle.Color
+        PressedFill: =LabelAppTitle.Fill
+        Size: =18.27
+        Text: |-
+            ="AppTitle:"
+        Width: =210.83
+        X: =78.71
+        Y: =294
+        ZIndex: =7
+
+    LabelCurrentLesson As label:
+        FocusedBorderColor: =LabelCurrentLesson.BorderColor
+        HoverBorderColor: =LabelCurrentLesson.BorderColor
+        HoverColor: =LabelCurrentLesson.Color
+        HoverFill: =LabelCurrentLesson.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelCurrentLesson.BorderColor
+        PressedColor: =LabelCurrentLesson.Color
+        PressedFill: =LabelCurrentLesson.Fill
+        Size: =18.27
+        Text: |-
+            ="CurrentLesson:"
+        Width: =210.83
+        X: =78.71
+        Y: =334
+        ZIndex: =8
+
+    LabelCurrentLessonValue As label:
+        FocusedBorderColor: =LabelCurrentLessonValue.BorderColor
+        FontWeight: =Bold
+        HoverBorderColor: =LabelCurrentLessonValue.BorderColor
+        HoverColor: =LabelCurrentLessonValue.Color
+        HoverFill: =LabelCurrentLessonValue.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelCurrentLessonValue.BorderColor
+        PressedColor: =LabelCurrentLessonValue.Color
+        PressedFill: =LabelCurrentLessonValue.Fill
+        Size: =18.27
+        Text: =_CurrentLesson
+        Width: =210.83
+        X: =289.55
+        Y: =333
+        ZIndex: =9
+
+    Resources As htmlViewer:
+        BorderColor: =RGBA(116, 116, 116, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =1
+        Height: =434
+        HoverBorderColor: =Resources.BorderColor
+        HtmlText: |-
+            ="<div style='color: #444444; padding: 1em 2em 0 1em; width: 100%; overflow: hidden;'>
+              
+                <div style='font-size: 1.2em; font-weight: bold;'>Support &amp; Resources Links</div>
+                <ul>
+                  <li><a href='https://aka.ms/IsGrowth'>Industry Solution Growth Pillar Dashboard</a></li>
+                  <li><a href='https://aka.ms/FY22DROB'>Digital ROB</a></li> 
+                  <li><a href='https://aka.ms/ACLV2'>Consulting Leader Insights</a></li>
+                </ul>
+              </div>"
+              
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =Resources.BorderColor
+        Size: =15.46
+        Width: =469
+        X: =289.55
+        Y: =373
+        ZIndex: =10
+
+    LabelResources As label:
+        FocusedBorderColor: =LabelResources.BorderColor
+        HoverBorderColor: =LabelResources.BorderColor
+        HoverColor: =LabelResources.Color
+        HoverFill: =LabelResources.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelResources.BorderColor
+        PressedColor: =LabelResources.Color
+        PressedFill: =LabelResources.Fill
+        Size: =18.27
+        Text: |-
+            ="Resources:"
+        Width: =210.83
+        X: =78.71
+        Y: =373
+        ZIndex: =11
+
+    LabelSeparator As label:
+        FocusedBorderColor: =LabelSeparator.BorderColor
+        HoverBorderColor: =LabelSeparator.BorderColor
+        HoverColor: =LabelSeparator.Color
+        HoverFill: =LabelSeparator.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelSeparator.BorderColor
+        PressedColor: =LabelSeparator.Color
+        PressedFill: =LabelSeparator.Fill
+        Size: =18.27
+        Text: |-
+            ="Separator:"
+        Width: =210.83
+        X: =78.71
+        Y: =589
+        ZIndex: =12
+
+    LabelSeparatorValue As label:
+        FocusedBorderColor: =LabelSeparatorValue.BorderColor
+        FontWeight: =Bold
+        HoverBorderColor: =LabelSeparatorValue.BorderColor
+        HoverColor: =LabelSeparatorValue.Color
+        HoverFill: =LabelSeparatorValue.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =LabelSeparatorValue.BorderColor
+        PressedColor: =LabelSeparatorValue.Color
+        PressedFill: =LabelSeparatorValue.Fill
+        Size: =18.27
+        Text: =_Separator
+        Width: =210.83
+        X: =289.55
+        Y: =589
+        ZIndex: =13
+
+    ButtonUnlock As button:
+        BorderColor: =ColorFade(ButtonUnlock.Fill, -15%)
+        FocusedBorderColor: =ButtonUnlock.BorderColor
+        HoverBorderColor: =ColorFade(ButtonUnlock.BorderColor, 20%)
+        HoverColor: =ButtonUnlock.Color
+        HoverFill: =ColorFade(ButtonUnlock.Fill, 20%)
+        OnSelect: =Set(_CurrentLesson, Max(Lessons,num))
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =ButtonUnlock.Fill
+        PressedColor: =ButtonUnlock.Fill
+        PressedFill: =ButtonUnlock.Color
+        Size: =21.08
+        Text: ="Unlock All"
+        Width: =224.89
+        X: =677.48
+        Y: =696
+        ZIndex: =14
+
+    Button1 As button:
+        OnSelect: |+
+            =Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Overview");
+            ClearCollect(Lessons,
+            //{num:1, icon: Basel_Home, 			name:"Digital WBR", 		screen: 'Digital WBR', 			screen_name:"Digital WBR" , Icon: Icon.Home}, 
+            {num:2, icon: Basel_Home, 			name:"IS QTD Performance", 		screen: L01_ISDQtrPerformance_Old, 			screen_name:"L01_ISDQtrPerformance" , Icon: Icon.TrendingUpwards}, 
+            {num:3, icon: Basel_Compose, 		name: "Financial Services", 			screen: L01_Finance, screen_name: "L01_Finance", Icon: Icon.Money},
+            {num:4, icon: Basel_Compose, 		name: "Energy & Sustainability", 			screen: L02_EnergySustainability_1, screen_name: "L02_EnergySustainability", Icon: Icon.LightningBolt},
+            {num:5, icon: Basel_Compose, 		name: "Defense & Intelligence", 			screen: L03_DefenseIntelligence, screen_name: "L03_DefenseIntelligence", Icon: Icon.Airplane },
+            {num:6, icon: Basel_Compose, 		name: "Retail & Consumer", 			screen: L04_RetailConsumerGoods_1, screen_name: "L04_RetailConsumerGoods", Icon: Icon.Transportation },
+            {num:7, icon: Basel_Home, 			name: "Manufacturing", 						screen: L05_Manufacture_1, 			screen_name:"L05_Manufacture" , Icon: Icon.Manufacture}, 
+            {num:8, icon: Basel_Compose, 		name: "Auto,Mobility,Transpt", 		screen: L06_AutomotiveMobilityTranspt_, screen_name: "L06_AutomotiveMobilityTranspt", Icon: Icon.Cars},
+            {num:9, icon: Basel_Compose, 		name: "Media & Comm", 			screen: L07_MediaCommunications_1, screen_name: "L07_MediaCommunications", Icon: Icon.Video},
+            {num:10, icon: Basel_Compose, 		name: "Healthcare", 						screen: L08_Healthcare_1, screen_name: "L08_Healthcare", Icon: Icon.Hospital },
+            {num:11, icon: Basel_Compose, 		name: "Government", 						screen: L09_Government_1, screen_name: "L09_Government", Icon: Icon.OfficeBuilding },
+            {num:12, icon: Basel_Compose, 		name: "Education", 							screen: L10_Education_, screen_name: "L10_Education", Icon: Icon.ComputerDesktop },
+            {num:17, icon: Basel_Search, 		name: "Partner", 	screen: L06_Partner, screen_name: "L06_Partner", Icon: Icon.LogJournal},
+            {num:18, icon: Basel_Search, 		name: "Actions Items Review", 	screen: L06_ActionReviewPage, screen_name: "L06_ActionReviewPage", Icon: Icon.Flag}
+            
+            );
+            Set(_CurrentLesson, 20);
+            Set(_ThisScreen,2);
+            Set(_CurrentLesson, 20); // unlock all exercises
+            Set(_Separator,If(Left(Text(0.1,"[$-en-us]#.0"),1)=".",",",";")); 
+            
+            
+            Set(_Results1, true);
+            Set(_Results2, false); 
+            Set(_Results3, false); 
+            Set(_Results4, false);
+            Set(_Results5, false); 
+            Set(_Results6, false);
+            Set(_Results7, false);
+            Set(_Results8, false); 
+            Set(_Results9, false);
+            Set(_Results10, false); 
+            Set(_Results11, false);
+            Set(_Results12, false);
+            Set(_Results13, false);
+            Set(_Results14, false);
+            Set(CollapseRM,true);
+            Set(IsShowResourcesTab, false);
+            Set(_EditMode, false);
+            
+            Set(_Screen,"ISDQtrPerformance");
+            Set(_SubScreen,"Overview");
+            
+            ClearCollect (RectNumbers,{Num:1},{Num:2},{Num:12} ,{Num:15},{Num:16},{Num:17},{Num:18});
+            
+            Set(
+                SliderWidth,
+                50
+            );
+            Set(
+                SliderHeight,
+                50  
+            );
+            Set(
+                SliderXPos,
+                1480
+                
+            );
+            Set(
+                SliderYPos,
+                900
+            );
+            
+            Set(gblIsItemSelected,false);
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        Text: ="Button"
+        X: =40
+        Y: =40
+        ZIndex: =15
+
+    "Gallery1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Items: =APPServiceLinePipeline
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        X: =956
+        Y: =161
+        ZIndex: =16
+
+        Image5 As image:
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title2 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.OpportunityId
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image5.Width - 104
+            X: =Image5.X + Image5.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        Subtitle2 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.OpportunityId
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title2.Width
+            X: =Title2.X
+            Y: =Title2.Y + Title2.Height + 4
+            ZIndex: =3
+
+        NextArrow2 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator3 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+

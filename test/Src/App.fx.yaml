@@ -1,0 +1,209 @@
+App As appinfo:
+    BackEnabled: =false
+    OnError: =
+    OnStart: |+
+        =Set(varDashboard,Param("Dashboard"));
+        //Set(varDashboard,"TAM");
+        //Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Overview");
+        /*
+        ClearCollect(Lessons,
+        //{num:1, icon: Basel_Home, 			name:"Strategy & Growth", 		screen: 'L00_Strategy & Planning', 			screen_name:"L00_Strategy & Planning" , Icon: Icon.Home}, 
+        {num:2, icon: Basel_Home, 			name:"Cross Industry", 		screen: L01_ISDQtrPerformance, 			screen_name:"L01_ISDQtrPerformance" , Icon: Icon.Home},
+        
+        {num:3, icon: Basel_Compose, 		name: "Healthcare", 						screen: L08_Healthcare, screen_name: "L08_Healthcare", Icon: Icon.Hospital },
+        {num:4, icon: Basel_Compose, 		name: "Retail & Consumer", 			screen:L04_RetailConsumerGoods, screen_name: "L04_RetailConsumerGoods", Icon: Icon.ShoppingCart },
+        {num:5, icon: Basel_Compose, 		name: "Telco & Media", 			screen:L07_MediaCommunications, screen_name: "L07_MediaCommunications", Icon: Icon.Video},
+        {num:6, icon: Basel_Compose, 		name: "Government", 			screen:L09_Government,			screen_name: "L09_Government", Icon: Icon.OfficeBuilding },
+        {num:7, icon: Basel_Home, 			name: "Industrials & MFG", 			screen:L05_Manufacture,			screen_name:"L05_Manufacture" , Icon: Icon.Manufacture}, 
+        {num:8, icon: Basel_Compose, 		name: "Auto, Mobility, Transpt",screen: L06_AutomotiveMobilityTranspt, screen_name: "L06_AutomotiveMobilityTranspt", Icon: Icon.Cars},
+        {num:9, icon: Basel_Compose, 		name: "Financial Services", 			screen: L01_Finance, screen_name: "L01_Finance", Icon: Icon.Money},
+        {num:10, icon: Basel_Compose, 		name: "Energy & Resources", 	screen:L02_EnergySustainability,		screen_name: "L02_EnergySustainability", Icon: Icon.LightningBolt},
+        {num:11, icon: Basel_Compose, 		name: "Defense & Intelligence", screen:L03_DefenseIntelligence,			screen_name: "L03_DefenseIntelligence", Icon: Icon.Airplane },
+        {num:12, icon: Basel_Compose, 		name: "Education", 			screen: L10_Education,				 screen_name: "L10_Education", Icon: Icon.ComputerDesktop },
+        {num:13, icon: Basel_Compose, 		name: "Software, Data & PLTFS", 			screen: L11_Software,				 screen_name: "L11_Software", Icon: Icon.Laptop },
+        {num:14, icon: Basel_Compose, 		name: "Prof & Business Svcs", 			screen: 'L12_Prof&BusinessServices',				 screen_name: "L12_Prof & Business Services", Icon: Icon.Money },
+        {num:15, icon: Basel_Home, 			name: "IS Core", 		screen: L01_ISCorp, 			screen_name:"L01_ISCorp" , Icon: Icon.TrendingUpwards},
+        {num:14, icon: Basel_Home, 			name: "IS Core", 		screen: L01_ISCorp, 			screen_name:"L01_ISCorp" , Icon: Icon.TrendingUpwards},
+        {num:15, icon: Basel_Search, 		name: "Revenue Planner", 	screen: L06_Partner, screen_name: "L06_Partner", Icon: Icon.LogJournal}
+        
+        {num:16, icon: Basel_Search, 		name: "Revenue Planner", 	screen: L06_Partner, screen_name: "L06_Partner", Icon: Icon.LogJournal}
+        );*/
+        ClearCollect(Lessons,
+        {num:1, icon: Basel_Home, 			name:"Cross Industry", 		screen: L01_CrossIndustry, 			screen_name:"L01_CrossIndustry" , Icon: Icon.Home},
+        
+        {num:8, icon: Basel_Compose, 		name: "Healthcare", 						screen: L08_Healthcare, screen_name: "L08_Healthcare", Icon: Icon.Hospital },
+        {num:11, icon: Basel_Compose, 		name: "Retail & Consumer", 			screen:L04_RetailConsumerGoods, screen_name: "L04_RetailConsumerGoods", Icon: Icon.ShoppingCart },
+        {num:13, icon: Basel_Compose, 		name: "Telco & Media", 			screen:L07_MediaCommunications, screen_name: "L07_MediaCommunications", Icon: Icon.Video},
+        {num:7, icon: Basel_Compose, 		name: "Government", 			screen:L09_Government,			screen_name: "L09_Government", Icon: Icon.OfficeBuilding },
+        {num:9, icon: Basel_Home, 			name: "Industrials & MFG", 			screen:L05_Manufacture,			screen_name:"L05_Manufacture" , Icon: Icon.Manufacture}, 
+        {num:2, icon: Basel_Compose, 		name: "Auto, Mobility, Transpt",screen: L01_AMT, screen_name: "L01_AutomotiveMobilityTranspt", Icon: Icon.Cars},
+        {num:6, icon: Basel_Compose, 		name: "Financial Services", 			screen: L01_Finance, screen_name: "L01_Finance", Icon: Icon.Money},
+        {num:5, icon: Basel_Compose, 		name: "Energy & Resources", 	screen:L02_EnergySustainability,		screen_name: "L02_EnergySustainability", Icon: Icon.LightningBolt},
+        {num:3, icon: Basel_Compose, 		name: "Defense & Intelligence", screen:L01_Defense,			screen_name: "L01_Defense", Icon: Icon.Airplane },
+        {num:4, icon: Basel_Compose, 		name: "Education", 			screen: L01_Education,				 screen_name: "L01_Education", Icon: Icon.ComputerDesktop },
+        {num:12, icon: Basel_Compose, 		name: "Software, Data & PLTFS", 			screen: L11_Software,				 screen_name: "L11_Software", Icon: Icon.Laptop },
+        {num:10, icon: Basel_Compose, 		name: "Prof & Business Svcs", 			screen: 'L12_Prof&BusinessServices',				 screen_name: "L12_Prof & Business Services", Icon: Icon.Money },
+        {num:14, icon: Basel_Home, 			name: "Non Profit & IGO", 		screen: L01_NonProfitIGO, 			screen_name:"L01_NonProfitIGO" , Icon: Icon.TrendingUpwards},
+        {num:15, icon: Basel_Search, 		name: "Sustainability", 	screen: L06_Sustainability, screen_name: "L06_Sustainability", Icon: Icon.LogJournal}
+        );
+        Set(_CurrentLesson, 20);
+        Set(_ThisScreen,9);
+        Set(_CurrentLesson, 14); // unlock all exercises
+        Set(_Separator,If(Left(Text(0.1,"[$-en-us]#.0"),1)=".",",",";")); 
+        Set(_Screen,"Manufacturing");
+        Set(_SubScreen,"Overview");
+        Set(_Results1, true);
+        Set(_Results2, false); 
+        Set(_Results3, false); 
+        Set(_Results4, false);
+        Set(_Results5, false); 
+        Set(_Results6, false);
+        Set(_Results7, false);
+        Set(_Results8, false); 
+        Set(_Results9, false);
+        Set(_Results10, false); 
+        Set(_Results11, false);
+        Set(_Results12, false);
+        Set(_Results13, false);
+        Set(_Results14, false);
+        Set(_Results15, false); 
+        Set(_Results16, false);
+        Set(_Results17, false);
+        Set(_Results18, false);
+        Set(_Results19, false);
+        Set(CollapseRM,true);
+        Set(IsShowResourcesTab, false);
+        Set(_EditMode, false);
+        
+        Set(_ExpandOpport, false);
+        
+        ClearCollect (RectNumbers,{Num:1},{Num:14},{Num:15},{Num:17},{Num:18},{Num:19});
+        
+        Set(
+            SliderWidth,
+            50
+        );
+        Set(
+            SliderHeight,
+            50  
+        );
+        Set(
+            SliderXPos,
+            1480
+            
+        );
+        Set(
+            SliderYPos,
+            900
+        );
+        
+        Set(gblIsItemSelected,false);
+        //ClearCollect(CollectFiscalQuarter,SortByColumns( Distinct(AppDigitalWBROpporty, FiscalQuarter ),"Result",Ascending));
+        //ClearCollect(CollectSegment,SortByColumns( Distinct(AppDigitalWBROpporty,Segment),"Result",Ascending));
+        //ClearCollect(CollectTimeZone,SortByColumns( Distinct(AppDigitalWBROpporty,Timezone),"Result",Ascending));
+        
+        Set (varSortRCGCol, "OpportunityRevenueCD");
+        Set (varSortRCGDir, Descending);
+        Set (varRCGImg, 1);
+        Set (varHealthImg, 1);
+        Set (varGovImg, 1);
+        Set (varMediaImg, 1);
+        Set (varAMTImg, 1);
+        Set (varMFTImg, 1);
+        
+        Set (varSortSLTCol, "field_10");
+        Set (varSortSLTDir, "Descending");
+        Set(_ExpandOpport, false);
+        Set(_NextItem_2,false);
+        Set(_ExpandOpport, false);
+        //Set(_OpportId, "");
+        Set(_Newform,false);
+        Set(_EditOpporty_SPT,false);
+        
+        
+        //Initialize the values for Revenue Planner
+        Set(_Loading,false);
+        
+        Set(    Enter_Cal_Value,    0);
+        Set(    Cust_Cal_Value,    0);
+        Set(    Oper_Cal_Value,    0);
+        Set(    Product_Cal_Value,    0);
+        
+        
+        Set(    Enter_Cal_Value_2,    0);
+        Set(    Cust_Cal_Value_2,    0);
+        Set(    Oper_Cal_Value_2,    0);
+        Set(    Product_Cal_Value_2,    0);
+        
+        
+        Set(    Enter_Cal_Value_3,    0);
+        Set(    Cust_Cal_Value_3,    0);
+        Set(    Oper_Cal_Value_3,    0);
+        Set(    Product_Cal_Value_3,    0);
+        
+        
+        
+        Set(    Enter_Cal_Value_4,    0);
+        Set(    Cust_Cal_Value_4,    0);
+        Set(    Oper_Cal_Value_4,    0);
+        Set(    Product_Cal_Value_4,    0);
+        
+        
+        
+        Set(    Enter_Cal_Value_5,    0);
+        Set(    Cust_Cal_Value_5,    0);
+        Set(    Oper_Cal_Value_5,    0);
+        Set(    Product_Cal_Value_5,    0);
+        //ClearCollect(DWBR,Digital_WBR_Comments);
+        ClearCollect(MAIGovernance,Filter('dbCommon.Reporting_vwMAIMetricGovernance',ReportName="FY22 Digital ROB" || ReportName="IS Growth Pillar" || ReportName="Industry Cloud" || ReportName="FY23 IS ROB"));
+        ForAll(MAIGovernance,Collect(MAIGovernancelist,Last(FirstN(AddColumns(MAIGovernance,"RowId",CountRows(MAIGovernancelist) + 1),CountRows(MAIGovernancelist) + 1))))
+        
+    StartScreen: |+
+        =If(
+            Param("Industry") = "Finance",
+            L01_Finance,
+            (If(
+                Param("Industry") = "Healthcare",
+                L08_Healthcare,
+                (If(
+                    Param("Industry") = "Retail",
+                    L04_RetailConsumerGoods,
+                    (If(
+                        Param("Industry") = "MediaComm",
+                        L07_MediaCommunications,
+                        (If(
+                            Param("Industry") = "Government",
+                            L09_Government,
+                            (If(
+                                Param("Industry") = "Energy",
+                                L02_EnergySustainability,
+                                (If(
+                                    Param("Industry") = "Manufacturing",
+                                    L05_Manufacture,
+                                    (If(
+                                        Param("Industry") = "Defense",
+                                        L01_Defense,
+                                        (If(
+                                            Param("Industry") = "Education",
+                                            L01_Education,
+                                            (If(
+                                                Param("Industry") = "Automotive, Mobility, Transpt", L01_AMT, 
+                                            (If(
+                                                Param("Industry") = "Automotive,", L01_AMT, 
+                                                (If(
+                                                    IsBlank(Param("Industry")),
+                                                    L01_CrossIndustry,
+                                                   L01_CrossIndustry
+                                                ))
+                                            ))
+                                        ))
+                                    ))
+                                ))
+                            ))
+                        ))
+                    ))
+                ))
+            ))
+        )))//L01_Finance
+        
+

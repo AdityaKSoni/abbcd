@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "1e3fbbea-ac35-4eb1-a6a7-313b80b76432",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "Industry180-TeamsMsg",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

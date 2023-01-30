@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_industry180roleses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_industry180roles",
+    "MaxGetRowsCount": 2000,
+    "Name": "Industry180Roles",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_industry180roles_AsyncOperations": "System Jobs",
+      "crdd7_industry180roles_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_industry180roles_DuplicateBaseRecord": "Duplicate Records (crdd7_industry180roles_DuplicateBaseRecord)",
+      "crdd7_industry180roles_DuplicateMatchingRecord": "Duplicate Records (crdd7_industry180roles_DuplicateMatchingRecord)",
+      "crdd7_industry180roles_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_industry180roles_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_industry180roles_ProcessSession": "Process Sessions",
+      "crdd7_industry180roles_SyncErrors": "Sync Errors",
+      "crdd7_industry180rolesid": "Industry180Roles",
+      "crdd7_name": "Name",
+      "crdd7_role": "Role",
+      "crdd7_rolecategory": "RoleCategory",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Industry180Roles",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Industry180Roles (Views)",
+    "Name": "_crdd7_industry180roles_views",
+    "RelatedEntityName": "Industry180Roles",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "419cdf0e-477f-448f-bf94-9a582d875592": "Industry180Roles Advanced Find View",
+      "8adf6f80-e2e9-45f1-9a76-a309352f4dd3": "Industry180Roles Lookup View",
+      "c4ecfb1c-89a8-4ba9-be34-2816abc1362d": "Industry180Roles Associated View",
+      "f0aa832e-97cb-4135-83aa-5a6975872257": "Active Industry180Roles",
+      "f851d1ec-3a69-49e5-87e0-1be4b8d0ab14": "Inactive Industry180Roles"
+    }
+  },
+  {
+    "DisplayName": "Status (Industry180Roles)",
+    "Name": "crdd7_industry180roles_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Industry180Roles"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Industry180Roles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Industry180Roles)",
+    "Name": "crdd7_industry180roles_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Industry180Roles"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Industry180Roles",
+    "Type": "OptionSetInfo"
+  }
+]

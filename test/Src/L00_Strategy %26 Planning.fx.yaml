@@ -1,0 +1,3649 @@
+"'L00_Strategy & Planning' As screen":
+    Height: |
+        =Max(App.Height, App.DesignHeight)
+    OnVisible: |
+        =Set(_Screen,"ISDQtrPerformance");
+        
+        If(_EditMode=false,
+        UpdateContext({IsShowResourcesTab: false});
+        UpdateContext({Actions: false});
+        UpdateContext({ActionEdit: false}); );
+        Set(_Screen,"ISDQtrPerformance");
+        Set(_Edit1,false);Set(_Edit2,false);Set(_Edit3,false);
+    Orientation: =If('L00_Strategy & Planning'.Width < 'L00_Strategy & Planning'.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= 'L00_Strategy & Planning'.Width)
+    Width: |
+        =Max(App.Width, App.DesignWidth)
+
+    TaskNum_55 As label:
+        Align: =Right
+        BorderColor: =RGBA(130, 144, 156, 1)
+        Color: =RGBA(62, 96, 170, 1)
+        DisabledColor: =ColorFade(RGBA(47, 41, 43, 1),90%)
+        DisplayMode: =DisplayMode.Disabled
+        FocusedBorderColor: =TaskNum_55.BorderColor
+        Height: =264
+        HoverBorderColor: =TaskNum_55.BorderColor
+        HoverColor: =TaskNum_55.Color
+        HoverFill: =TaskNum_55.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =TaskNum_55.BorderColor
+        PressedColor: =TaskNum_55.Color
+        PressedFill: =TaskNum_55.Fill
+        Size: =210.83
+        Text: =LookUp(Lessons,screen = App.ActiveScreen,num)
+        Width: =317.66
+        X: =1602.34
+        Y: =504
+        ZIndex: =8
+
+    CanvasMain_ISD_1 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(241,241,241,1)
+        Height: =920
+        NumberOfColumns: =2
+        Width: |+
+            =1100 + If(
+                IsExpand && !_EditMode && CollapseRM,
+                730
+                ,
+                If(
+                    !IsExpand && !_EditMode && CollapseRM,
+                    550,
+                    If(
+                        !IsExpand && !_EditMode && !CollapseRM,
+                        200,
+                        If(
+                            IsExpand && !_EditMode && !CollapseRM,
+                            400,400
+                            
+                        )
+                    )
+                )
+            )
+            
+            
+            
+        X: =If(!IsExpand, GalleryLessons_48.X+GalleryLessons_48.Width, RectangleBorder2_55.X+1)
+        Y: =60
+        ZIndex: =9
+
+        DataCardMain_ISD_1 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: |+
+                =CanvasMain_ISD_1.Height
+                
+                
+                
+            Width: =CanvasMain_ISD_1.Width
+            WidthFit: =false
+            X: =0
+            Y: |
+                =CanvasMain_ISD_1.Y
+            ZIndex: =1
+
+            Label_Title_7 As label:
+                Color: =RGBA(39, 113, 194, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Bold
+                PaddingBottom: =0
+                PaddingTop: =0
+                Size: =23.5
+                Text: ="ISD Qtr Performance"
+                Visible: |+
+                    =false // If(_Results9,true,false)
+                    
+                    
+                    
+                    
+                    
+                Width: |
+                    =DataCardMain_ISD_1.Width-100
+                X: |
+                    =DataCardMain_ISD_1.X+60
+                Y: |+
+                    =0
+                    
+                    
+                    
+                ZIndex: =42
+
+            PowerBIReports_1 As group:
+                Height: =5
+                Width: =5
+                X: =80
+                Y: =80
+                ZIndex: =55
+
+                PowerBI_ISD_3 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-5
+                        
+                        
+                        
+                    LoadPowerBIContent: |
+                        =_Results1
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=1a94c453-489b-4976-abf3-badbcedcb84b&pageName=ReportSection026abb37051383856760"
+                        
+                        //"https://msit.powerbi.com/reportEmbed?reportId=1a94c453-489b-4976-abf3-badbcedcb84b&autoAuth=true&pageName=ReportSection5e9869b041179ab18831"
+                        
+                        
+                    Visible: |
+                        =_Results1
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-20
+                        
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =2
+
+                PowerBI_ISD_16 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: =200
+                    TileUrl: |+
+                        =    "https://msit.powerbi.com/reportEmbed?reportId=af872e22-2c11-4c49-9b43-d58927270a24&autoAuth=true&pageName=ReportSection85dc51fa02e30146a82c&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Industry%20eq%20%27Financial%20Services%27"
+                            
+                        
+                        
+                        
+                    Visible: |+
+                        =false //If(_Results1,true,false)
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-510
+                        
+                        
+                        
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =501
+                    ZIndex: =3
+
+                PowerBI_ISD_10 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-5
+                        
+                        
+                        
+                    LoadPowerBIContent: |+
+                        =_Results4
+                        
+                        
+                        
+                    TileUrl: |-
+                        ="https://msit.powerbi.com/reportEmbed?reportId=28dcb302-c0a6-44e2-b743-252e38679933&pageName=ReportSection99424b12d211a62f4c3e"
+                    Visible: |+
+                        =_Results4
+                        
+                        
+                        
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                    ZIndex: =4
+
+                PowerBI_ISD_11 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-5
+                        
+                        
+                        
+                    LoadPowerBIContent: =_Results5
+                    TileUrl: |
+                        ="https://msit.powerbi.com/reportEmbed?reportId=af872e22-2c11-4c49-9b43-d58927270a24&pageName=ReportSection6ac932ae84db246c1bbd"
+                    Visible: =_Results5
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                    ZIndex: =5
+
+                PowerBI_ISD_12 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-5
+                        
+                        
+                        
+                    LoadPowerBIContent: =_Results6
+                    TileUrl: |
+                        ="https://msit.powerbi.com/reportEmbed?reportId=af872e22-2c11-4c49-9b43-d58927270a24&pageName=ReportSectiona4e65a16d09009037d7c"
+                    Visible: =_Results6
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                    ZIndex: =6
+
+                PowerBI_ISD_13 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-40
+                        
+                        
+                        
+                    LoadPowerBIContent: =_Results7
+                    TileUrl: |
+                        ="https://msit.powerbi.com/reportEmbed?reportId=af872e22-2c11-4c49-9b43-d58927270a24&autoAuth=true&pageName=ReportSection6cd0541e1a3edaf794a6"
+                    Visible: =_Results7
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                    ZIndex: =7
+
+                PowerBI_ISD_14 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-40
+                        
+                        
+                        
+                    LoadPowerBIContent: |+
+                        =_Results8
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=1a94c453-489b-4976-abf3-badbcedcb84b&autoAuth=true&pageName=ReportSection026abb37051383856760"
+                        
+                        
+                        
+                        
+                    Visible: |+
+                        =false
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                    ZIndex: =8
+
+                PowerBI_ISD_15 As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =1
+                    DashboardId: ="c5f8eeb5-5134-47b5-94e1-2beb26de8056"
+                    Height: |+
+                        =DataCardMain_ISD_1.Height-40
+                        
+                        
+                        
+                    LoadPowerBIContent: |+
+                        =_Results9
+                        
+                    TileUrl: |
+                        ="https://msit.powerbi.com/reportEmbed?reportId=af872e22-2c11-4c49-9b43-d58927270a24&autoAuth=true&pageName=ReportSection8e553435cc1744208423"
+                    Visible: |+
+                        =_Results9
+                        
+                    Width: |+
+                        =DataCardMain_ISD_1.Width-5
+                        
+                    WorkspaceId: ="854f3862-6ea6-4555-8d63-751b68e09dba"
+                    X: =DataCardMain_ISD_1.X
+                    Y: |+
+                        =Button_ISD_12.Y+Button_ISD_12.Height-40
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =44
+
+            Image10_1 As image:
+                Height: =764
+                Image: |+
+                    ="https://microsoft.sharepoint.com/teams/SIRob/Shared%20Documents/DigitalWBR_Excels/wbr-agenda.png"
+                    
+                Visible: =_Results8
+                Width: =1606
+                X: =2
+                Y: =40
+                ZIndex: =57
+
+            Group13_1 As group:
+                Height: =5
+                Width: =5
+                X: =80
+                Y: =80
+                ZIndex: =57
+
+                Rect_Button_Back_15 As rectangle:
+                    Fill: =RGBA(241, 241, 241, 1)
+                    Height: =38
+                    Width: |+
+                        =DataCardMain_ISD_1.Width
+                        
+                        
+                        
+                        
+                    X: |
+                        =DataCardMain_ISD_1.X
+                    Y: |+
+                        =DataCardMain_ISD_1.Y
+                        
+                    ZIndex: =45
+
+                Rectangle1_62 As rectangle:
+                    BorderColor: =RGBA(204, 204, 204, 1)
+                    Fill: =RGBA(241, 241, 241, 1)
+                    Height: =40
+                    Width: =DataCardMain_ISD_1.Width
+                    X: =DataCardMain_ISD_1.X
+                    Y: =851
+                    ZIndex: =53
+
+            Group16_1 As group:
+                Height: =5
+                Width: =5
+                X: =80
+                Y: =80
+                ZIndex: =60
+
+                Button_ISD_12 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results1,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: =If(_Results1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, true);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        
+                        
+                        
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Industry Cloud"
+                    Width: =180
+                    X: =2
+                    Y: =1
+                    ZIndex: =46
+
+                Button_ISD_20 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results2,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: =If(_Results2,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, true); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        
+                        Set(_SubScreen,"Opportunities for Review");Set(_Screen,"ISDQtrPerformance");
+                        
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Text: ="Pipeline Summary"
+                    Visible: =false
+                    Width: =136
+                    X: =412
+                    Y: =8
+                    ZIndex: =47
+
+                Button_ISD_11 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results3,White,RGBA(0, 0, 0, 1))
+                        
+                    Fill: |
+                        =If(_Results3,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, true); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        
+                        Set(_Screen,"Finance");Set(_SubScreen,"Accounts for Review");
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});Set(_Edit_Accform,false);Set(_Newform1,false);
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Text: ="Accounts"
+                    Visible: =false
+                    Width: =136
+                    X: =590
+                    ZIndex: =48
+
+                Button_ISD_13 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results4,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results4,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, true);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Pipeline Summary");
+                        
+                        Set(CollapseRM,true);
+                        UpdateContext({IsShowResourcesTab: false});
+                        UpdateContext({Actions: false});
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Pipe Summary"
+                    Width: =180
+                    X: =Button_ISD_12.X+Button_ISD_12.Width+15
+                    Y: =1
+                    ZIndex: =49
+
+                Button_ISD_14 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results5,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                        
+                    Fill: |+
+                        =If(_Results5,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, true); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        Set(_Results13,false);
+                        Set(_Results14, false);
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"FRA Summary");
+                        
+                        
+                        Set(CollapseRM,true);
+                        UpdateContext({IsShowResourcesTab: false});
+                        UpdateContext({Actions: false});
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="FRA Summary"
+                    Width: =180
+                    X: =Button_ISD_13.X+Button_ISD_13.Width+15
+                    Y: =1
+                    ZIndex: =50
+
+                Button_ISD_15 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results6,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results6,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                        
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, true);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        Set(_Results13,false);
+                        Set(_Results14, false);
+                        
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Must Wins");
+                        
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Must Wins"
+                    Width: =180
+                    X: =Button_ISD_14.X+Button_ISD_14.Width+15
+                    Y: =1
+                    ZIndex: =51
+
+                Button_ISD_16 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results7,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results7,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, true);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, true);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Enterprise MBR");
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false});UpdateContext({Comments: false});
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Service Line"
+                    Width: =180
+                    X: =Button_ISD_15.X+Button_ISD_15.Width+15
+                    Y: =1
+                    ZIndex: =52
+
+                Button_ISD_17 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results8,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results8,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, true); 
+                        Set(_Results9, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        Set(_Results10, false);
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Key Trends");
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Agenda"
+                    Visible: =false
+                    Width: =120
+                    X: =665
+                    Y: =1
+                    ZIndex: =54
+
+                Button_ISD_18 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results9,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results9,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                        
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, true);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Industry Motion");
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Industry Motion"
+                    Visible: =false
+                    Width: =120
+                    X: =900
+                    Y: =1
+                    ZIndex: =55
+
+                Button_ISD_19 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |+
+                        =If(_Results7,White,RGBA(0, 0, 0, 1))
+                        
+                        
+                    Fill: |+
+                        =If(_Results7,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                        
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =30
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, true);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        
+                        Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Industry Motion");
+                        
+                        
+                        
+                        UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false}); UpdateContext({Comments: false});
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Text: ="Industry Motion"
+                    Visible: =false
+                    Width: =120
+                    X: =1044
+                    Y: =1
+                    ZIndex: =56
+
+    HtmlSteps_53 As htmlViewer:
+        AutoHeight: =true
+        Font: =Font.'Segoe UI'
+        Height: =198
+        HoverBorderColor: =HtmlSteps_53.BorderColor
+        HtmlText: |-
+            ="
+            <div style='color: #000000; padding: 1em 2em 0 1em; width: 100%; overflow: hidden;'>
+            
+              
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >1</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Make sure you're editing your app - press <strong>&lt;Esc&gt;</strong> to ensure you're in edit mode<br /><br />
+                </div>
+                <div style='clear: both'></div>
+              
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >2</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Change the fill color of the black rectangle. Use ""Color"" on the ""Properties"" panel to your right<br /><br />
+                </div>
+                <div style='clear: both'></div>
+               
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >3</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Change font size of the second label. Use <strong>Home</strong> toolbar on top of the screen -
+                    font size should be 14 or greater.<br /><br />
+                </div>
+                <div style='clear: both'></div>
+            
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >4</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Replace the image in the image container with an image from your computer. Use the <strong>Image</strong> property on the <strong>Properties</strong> panel to your right<br /><br />
+                </div>
+                <div style='clear: both'></div>
+             
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >5</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Play your app and press ""Next""<br /><br />
+                </div>
+                <div style='clear: both'></div>
+            
+            </div>
+              "
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =HtmlSteps_53.BorderColor
+        Size: =15.46
+        Visible: =
+        Width: =1629.05
+        X: =282.52
+        Y: =60
+        ZIndex: =10
+
+    ImagePowerAppsLogo_54 As image:
+        BorderColor: =RGBA(51, 51, 51, 1)
+        FocusedBorderColor: =ImagePowerAppsLogo_54.BorderColor
+        Height: =40
+        HoverBorderColor: =ColorFade(ImagePowerAppsLogo_54.BorderColor, 20%)
+        HoverFill: =ColorFade(ImagePowerAppsLogo_54.Fill, 20%)
+        Image: =ModernAnalyticsInsights_Logo_rev
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        PressedBorderColor: =ColorFade(ImagePowerAppsLogo_54.BorderColor, -20%)
+        PressedFill: =ColorFade(ImagePowerAppsLogo_54.Fill, -20%)
+        Width: =152
+        X: =20
+        Y: =10
+        ZIndex: =11
+
+    "'Sales Form_44' As form":
+        AcceptsFocus: =false
+        DataSource: =Digital_WBR_Comments
+        Height: =878
+        Item: |
+            =Gallery_Commentary_42.Selected
+        NumberOfColumns: =1
+        SnapToColumns: =false
+        Visible: =IsShowResourcesTab && !Actions && !CollapseRM
+        Width: |+
+            =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)-20
+            
+        X: =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+        Y: =33
+        ZIndex: =18
+
+        Comments_DataCard2_51 As typedDataCard.richTextEditorEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Comments"
+            Default: =ThisItem.Comments
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Comments"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =812
+            Required: =false
+            Update: =DataCardValue9_51.HtmlText
+            Width: =359
+            X: =0
+            Y: =7
+            ZIndex: =1
+
+            DataCardKey9_51 As label:
+                Color: =RGBA(9, 33, 98, 1)
+                Fill: =RGBA(230, 230, 230, 1)
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: ="Insights and Comments"
+                Width: |
+                    =Parent.Width - 10
+                Wrap: =false
+                X: =10
+                ZIndex: =1
+
+            DataCardValue9_51 As richTextEditor:
+                Default: =Parent.Default
+                DisplayMode: =Parent.DisplayMode
+                Height: =768
+                Width: =Parent.Width - 10
+                X: =10
+                Y: =DataCardKey9_51.Y + DataCardKey9_51.Height + 5
+                ZIndex: =2
+
+            ErrorMessage9_51 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue9_51.Y + DataCardValue9_51.Height
+                ZIndex: =3
+
+            StarVisible9_51 As label:
+                Align: =Align.Center
+                Height: =DataCardKey9_51.Height
+                PaddingBottom: =DataCardKey9_51.PaddingBottom
+                PaddingLeft: =DataCardKey9_51.PaddingLeft
+                PaddingRight: =DataCardKey9_51.PaddingRight
+                PaddingTop: =DataCardKey9_51.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey9_51.Y
+                ZIndex: =4
+
+        SubScreen_DataCard3_13 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="SubScreen"
+            Default: =_SubScreen
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="SubScreen"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "SubScreen")
+            Required: =false
+            Update: =_SubScreen
+            Visible: =false
+            Width: =459
+            X: =0
+            Y: =8
+            ZIndex: =1
+
+            DataCardKey8_15 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue9_15 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey8_15.Y + DataCardKey8_15.Height + 5
+                ZIndex: =2
+
+            ErrorMessage8_15 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue9_15.Y + DataCardValue9_15.Height
+                ZIndex: =3
+
+            StarVisible8_15 As label:
+                Align: =Align.Center
+                Height: =DataCardKey8_15.Height
+                PaddingBottom: =DataCardKey8_15.PaddingBottom
+                PaddingLeft: =DataCardKey8_15.PaddingLeft
+                PaddingRight: =DataCardKey8_15.PaddingRight
+                PaddingTop: =DataCardKey8_15.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey8_15.Y
+                ZIndex: =4
+
+        Title_DataCard1_40 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Title"
+            Default: =ThisItem.Title
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Title"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "Title")
+            Required: =false
+            Update: =DataCardValue16_36.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =0
+            ZIndex: =21
+
+            DataCardKey16_36 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue16_36 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey16_36.Y + DataCardKey16_36.Height + 5
+                ZIndex: =2
+
+            ErrorMessage16_36 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue16_36.Y + DataCardValue16_36.Height
+                ZIndex: =3
+
+            StarVisible16_36 As label:
+                Align: =Align.Center
+                Height: =DataCardKey16_36.Height
+                PaddingBottom: =DataCardKey16_36.PaddingBottom
+                PaddingLeft: =DataCardKey16_36.PaddingLeft
+                PaddingRight: =DataCardKey16_36.PaddingRight
+                PaddingTop: =DataCardKey16_36.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey16_36.Y
+                ZIndex: =4
+
+        FiscalYear_DataCard1_31 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_FiscalYear"
+            Default: =ThisItem.FiscalYear
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="FiscalYear"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_FiscalYear")
+            Required: =false
+            Update: =DataCardValue26_34.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =1
+            ZIndex: =21
+
+            DataCardKey26_34 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue26_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey26_34.Y + DataCardKey26_34.Height + 5
+                ZIndex: =2
+
+            ErrorMessage26_34 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue26_34.Y + DataCardValue26_34.Height
+                ZIndex: =3
+
+            StarVisible26_34 As label:
+                Align: =Align.Center
+                Height: =DataCardKey26_34.Height
+                PaddingBottom: =DataCardKey26_34.PaddingBottom
+                PaddingLeft: =DataCardKey26_34.PaddingLeft
+                PaddingRight: =DataCardKey26_34.PaddingRight
+                PaddingTop: =DataCardKey26_34.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey26_34.Y
+                ZIndex: =4
+
+        FiscalQuarter_DataCard1_31 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_FiscalQuarter"
+            Default: =ThisItem.FiscalQuarter
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="FiscalQuarter"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_FiscalQuarter")
+            Required: =false
+            Update: =DataCardValue27_34.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =2
+            ZIndex: =21
+
+            DataCardKey27_34 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue27_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey27_34.Y + DataCardKey27_34.Height + 5
+                ZIndex: =2
+
+            ErrorMessage27_34 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue27_34.Y + DataCardValue27_34.Height
+                ZIndex: =3
+
+            StarVisible27_34 As label:
+                Align: =Align.Center
+                Height: =DataCardKey27_34.Height
+                PaddingBottom: =DataCardKey27_34.PaddingBottom
+                PaddingLeft: =DataCardKey27_34.PaddingLeft
+                PaddingRight: =DataCardKey27_34.PaddingRight
+                PaddingTop: =DataCardKey27_34.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey27_34.Y
+                ZIndex: =4
+
+        FiscalMonth_DataCard7_36 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_FiscalMonth"
+            Default: =ThisItem.FiscalMonth
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="FiscalMonth"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_FiscalMonth")
+            Required: =false
+            Update: =DataCardValue28_34.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =3
+            ZIndex: =21
+
+            DataCardKey28_34 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue28_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey28_34.Y + DataCardKey28_34.Height + 5
+                ZIndex: =2
+
+            ErrorMessage28_39 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue28_34.Y + DataCardValue28_34.Height
+                ZIndex: =3
+
+            StarVisible28_39 As label:
+                Align: =Align.Center
+                Height: =DataCardKey28_34.Height
+                PaddingBottom: =DataCardKey28_34.PaddingBottom
+                PaddingLeft: =DataCardKey28_34.PaddingLeft
+                PaddingRight: =DataCardKey28_34.PaddingRight
+                PaddingTop: =DataCardKey28_34.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey28_34.Y
+                ZIndex: =4
+
+        FiscalWeek_DataCard1_31 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_FiscalWeek"
+            Default: =ThisItem.FiscalWeek
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="FiscalWeek"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_FiscalWeek")
+            Required: =false
+            Update: =DataCardValue29_34.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =4
+            ZIndex: =21
+
+            DataCardKey29_39 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue29_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey29_39.Y + DataCardKey29_39.Height + 5
+                ZIndex: =2
+
+            ErrorMessage29_39 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue29_34.Y + DataCardValue29_34.Height
+                ZIndex: =3
+
+            StarVisible29_39 As label:
+                Align: =Align.Center
+                Height: =DataCardKey29_39.Height
+                PaddingBottom: =DataCardKey29_39.PaddingBottom
+                PaddingLeft: =DataCardKey29_39.PaddingLeft
+                PaddingRight: =DataCardKey29_39.PaddingRight
+                PaddingTop: =DataCardKey29_39.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey29_39.Y
+                ZIndex: =4
+
+        Area_DataCard1_42 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_Area"
+            Default: =ThisItem.Area
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Area"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_Area")
+            Required: =false
+            Update: =DataCardValue30_34.Text
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =5
+            ZIndex: =21
+
+            DataCardKey30_39 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue30_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey30_39.Y + DataCardKey30_39.Height + 5
+                ZIndex: =2
+
+            ErrorMessage30_34 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue30_34.Y + DataCardValue30_34.Height
+                ZIndex: =3
+
+            StarVisible30_34 As label:
+                Align: =Align.Center
+                Height: =DataCardKey30_39.Height
+                PaddingBottom: =DataCardKey30_39.PaddingBottom
+                PaddingLeft: =DataCardKey30_39.PaddingLeft
+                PaddingRight: =DataCardKey30_39.PaddingRight
+                PaddingTop: =DataCardKey30_39.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey30_39.Y
+                ZIndex: =4
+
+        SheetOrPage_DataCard1_66 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_SheetOrPage"
+            Default: =_Screen
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="SheetOrPage"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =800
+            MaxLength: =DataSourceInfo([@Digital_WBR_Comments], DataSourceInfo.MaxLength, "field_SheetOrPage")
+            Required: =false
+            Update: |
+                =_Screen
+            Visible: =false
+            Width: ='Sales Form_44'.Width
+            X: =0
+            Y: =6
+            ZIndex: =21
+
+            DataCardKey31_34 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: ="Narrative"
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =50
+                ZIndex: =1
+
+            DataCardValue31_34 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey31_34.Y + DataCardKey31_34.Height + 5
+                ZIndex: =2
+
+            ErrorMessage31_39 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue31_34.Y + DataCardValue31_34.Height
+                ZIndex: =3
+
+            StarVisible31_39 As label:
+                Align: =Align.Center
+                Height: =DataCardKey31_34.Height
+                PaddingBottom: =DataCardKey31_34.PaddingBottom
+                PaddingLeft: =DataCardKey31_34.PaddingLeft
+                PaddingRight: =DataCardKey31_34.PaddingRight
+                PaddingTop: =DataCardKey31_34.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey31_34.Y
+                ZIndex: =4
+
+    Button1_88 As button:
+        BorderThickness: =0
+        Fill: =RGBA(62, 96, 170, 1)
+        Font: =Font.'Lato Light'
+        Height: =21
+        OnSelect: |
+            =SubmitForm('Sales Form_44');UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false});Refresh(Digital_WBR_Comments)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =12
+        Text: ="Save"
+        Visible: |
+            =IsShowResourcesTab && !Actions && !CollapseRM
+        Width: =76
+        X: =1800
+        Y: =209
+        ZIndex: =19
+
+    Gallery_Commentary_42 As gallery.galleryVertical:
+        Height: =620
+        Items: |
+            =Filter(
+                SortByColumns(
+                    Digital_WBR_Comments,
+                    "Modified",
+                    Descending
+                ),
+                SheetOrPage = _Screen && SubScreen = _SubScreen 
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =500
+        Visible: |
+            =If(!IsShowResourcesTab && !Actions,true,false) && !CollapseRM && !Comments
+        Width: |
+            =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+        X: =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+        Y: =190
+        ZIndex: =20
+
+        Label_97 As label:
+            Align: =Align.Center
+            Fill: =RGBA(224, 230, 241, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Text: ="Key Themes & Comments"
+            Visible: =false
+            Width: |+
+                =Label_93.Width
+                
+                
+            X: |+
+                =Label_93.X
+                
+                
+            Y: =470
+            ZIndex: =2
+
+        Label_101 As label:
+            Align: =Align.Center
+            Fill: =RGBA(224, 230, 241, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Text: ="Upcoming Focus Areas"
+            Visible: =false
+            Width: |+
+                =Label_93.Width
+                
+                
+            X: |+
+                =Label_93.X
+                
+                
+            Y: =470
+            ZIndex: =4
+
+        PerforrmanceOutlook_72 As htmlViewer:
+            Font: =Font.'Segoe UI'
+            Height: =500
+            HtmlText: =ThisItem.Comments
+            OnSelect: =Select(Parent)
+            Size: =14
+            Width: |+
+                =Label_93.Width
+                
+                
+            X: =Label_93.X
+            Y: =Label_93.Y+Label_93.Height
+            ZIndex: =5
+
+        Label_93 As label:
+            Align: =Align.Center
+            Fill: =RGBA(230, 230, 230, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Text: ="Insights & Comments"
+            Width: |+
+                =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)-20
+                
+                
+            X: =10
+            Y: =14
+            ZIndex: =6
+
+        Icon1_87 As icon.Edit:
+            Height: =25
+            Icon: =Icon.Edit
+            OnSelect: |
+                = UpdateContext({IsShowResourcesTab: true});
+                 If(IsBlank(Gallery_Commentary_42.Selected),NewForm('Sales Form_44'),EditForm('Sales Form_44'));
+                 Navigate('Sales Form_44');
+                 UpdateContext({Actions: false}); 
+                 Set (_EditMode, true);
+                 Set(IsExpand,true);
+                 UpdateContext({ActionEdit: false});
+                 
+                 
+                 
+                
+                 
+                 
+            Tooltip: ="Edit"
+            Visible: =!CollapseRM
+            Width: =18
+            X: |
+                =(Label_93.X+Label_93.Width)-50
+            Y: =19
+            ZIndex: =7
+
+    Button4_44 As button:
+        BorderStyle: =BorderStyle.None
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        FocusedBorderColor: =Blue
+        FontWeight: =If(IsShowResourcesTab && !Actions,FontWeight.Bold, FontWeight.Normal)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(62, 96, 170, 1)
+        OnSelect: |
+            = UpdateContext({IsShowResourcesTab: true});If(IsBlank(Gallery_Commentary_42.Selected),NewForm('Sales Form_44'),EditForm('Sales Form_44'));Navigate('Sales Form_44');UpdateContext({Actions: false}); Set (_EditMode, true);Set(IsExpand,true);UpdateContext({ActionEdit: false});
+             
+            
+             
+             
+        PressedColor: |
+            =Self.Fill
+        Text: ="Edit"
+        Visible: =false
+        Width: =If(IsExpand,20,0)
+        X: |
+            =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+        Y: =Button_Act_S_1.Y
+        ZIndex: =21
+
+    "'ISSummary-bNarrative_1' As button":
+        BorderStyle: |
+            =BorderStyle.None
+        BorderThickness: =1
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        FontWeight: |
+            =If(!IsShowResourcesTab && !Actions && !Comments, FontWeight.Bold, FontWeight.Normal)
+        HoverColor: |+
+            =RGBA(255,255,255,1)
+            
+        HoverFill: |
+            =RGBA(62,96,170,1)
+        OnSelect: |
+            =UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false});UpdateContext({Comments: false});
+            
+            
+             
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Text: ="Narratives"
+        Visible: =!CollapseRM
+        Width: =120
+        X: |+
+            =If(_EditMode  && IsExpand ,Button4_44.X + Button4_44.Width + 40,Button4_44.X + Button4_44.Width+ 40)
+            
+        Y: =Button_Act_S_1.Y
+        ZIndex: =22
+
+    "'ISSummary-bAction_1' As button":
+        BorderStyle: |
+            =BorderStyle.None
+        BorderThickness: =1
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        FontWeight: =If(ActionEdit || Actions , FontWeight.Bold, FontWeight.Normal)
+        HoverColor: |
+            =RGBA(255,255,255,1)
+        HoverFill: |
+            =RGBA(62,96,170,1)
+        OnSelect: |
+            =UpdateContext({Actions: true});UpdateContext({ActionEdit: false});
+            Set (_EditMode, false);UpdateContext({Comments: false});
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Text: ="Action"
+        Visible: =!CollapseRM
+        Width: =116
+        X: |
+            ='ISSummary-bNarrative_1'.X+'ISSummary-bNarrative_1'.Width + 40
+        Y: =Button_Act_S_1.Y
+        ZIndex: =23
+
+    GroupMenu_55 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =40
+        ZIndex: =23
+
+        "GalleryLessons_48 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            AccessibleLabel: ="List of available lessons"
+            DisabledBorderColor: =GalleryLessons_48.BorderColor
+            DisabledFill: =GalleryLessons_48.Fill
+            Height: =911
+            HoverBorderColor: =GalleryLessons_48.BorderColor
+            HoverFill: =GalleryLessons_48.Fill
+            Items: =Filter(Lessons, num >= 0 && num <= 20)
+            Layout: =Layout.Vertical
+            LoadingSpinnerColor: =GalleryLessons_48.BorderColor
+            OnSelect: |
+                =Set(_Results1, true);
+                Set(_Results2, false); 
+                Set(_Results3, false); 
+                Set(_Results4, false);
+                Set(_Results5, false); 
+                Set(_Results6, false);
+                Set(_Results7, false);
+                Set(_Results8, false); 
+                Set(_Results9, false);
+                Set(_Results10, false);
+                Set(_Results11, false);
+                Set(_Results12, false);
+                Set(_Results13, false);
+                Set(_Results14, false);
+                Set(_SubScreen,"Overview");
+                Set(CollapseRM,true);
+            PressedBorderColor: =GalleryLessons_48.BorderColor
+            PressedFill: =GalleryLessons_48.Fill
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =220
+            Y: =100
+            ZIndex: =2
+
+            RectangleCurrentSelected_56 As rectangle:
+                DisabledFill: =RectangleCurrentSelected_56.Fill
+                Fill: =RGBA(220, 220, 220, 1)
+                FocusedBorderColor: =RectangleCurrentSelected_56.BorderColor
+                Height: =40
+                HoverFill: =RectangleCurrentSelected_56.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(_EditMode,false);Set(IsExpand,true);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                PressedFill: =RectangleCurrentSelected_56.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =GalleryLessons_48.X+GalleryLessons_48.Width
+                ZIndex: =2
+
+            RectangleSelected_56 As rectangle:
+                DisabledFill: =RectangleSelected_56.Fill
+                Fill: =RGBA(116, 39, 116, 1)
+                FocusedBorderColor: =RectangleSelected_56.BorderColor
+                Height: =20
+                HoverFill: =RectangleSelected_56.Fill
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PressedFill: =RectangleSelected_56.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =5.62
+                X: =1
+                Y: =11
+                ZIndex: =3
+
+            LabelName_56 As label:
+                Color: =RGBA(51, 51, 51, 1)
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =LabelName_56.BorderColor
+                Font: =Font.'Segoe UI'
+                HoverBorderColor: =LabelName_56.BorderColor
+                HoverColor: =LabelName_56.Color
+                HoverFill: =LabelName_56.Fill
+                LineHeight: =0
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PaddingRight: =7.03
+                PaddingTop: =7.03
+                PressedBorderColor: =LabelName_56.BorderColor
+                PressedColor: =LabelName_56.Color
+                PressedFill: =LabelName_56.Fill
+                Size: =12
+                Text: =ThisItem.name
+                Tooltip: =ThisItem.name
+                Width: =(GalleryLessons_48.X+GalleryLessons_48.Width)-RectangleBorder2_55.X
+                X: =38
+                ZIndex: =5
+
+            ImageLessonIcon_54 As image:
+                AccessibleLabel: ="Navigate to " & ThisItem.name & " screen"
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =ImageLessonIcon_54.BorderColor
+                Height: =16
+                HoverBorderColor: =ColorFade(ImageLessonIcon_54.BorderColor, 20%)
+                HoverFill: =ColorFade(ImageLessonIcon_54.Fill, 20%)
+                Image: =ThisItem.icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PaddingRight: =0.00
+                PaddingTop: =0.00
+                PressedBorderColor: =ColorFade(ImageLessonIcon_54.BorderColor, -20%)
+                PressedFill: =ColorFade(ImageLessonIcon_54.Fill, -20%)
+                TabIndex: =If(ThisItem.num>_CurrentLesson, -1,0)
+                Tooltip: =ThisItem.name
+                Visible: =false
+                Width: =22.49
+                X: =12
+                Y: =13
+                ZIndex: =6
+
+            Icon2_42 As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =16
+                Icon: =ThisItem.Icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false); 
+                    Set(_Results11, false); 
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                Tooltip: =ThisItem.name
+                Width: =22.49
+                X: =12
+                Y: =13
+                ZIndex: =7
+
+            Rectangle2_23 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Visible: |
+                    =If(ThisItem.num in (RectNumbers.Num), true, false)
+                Width: =220
+                X: |
+                    =0
+                Y: =39
+                ZIndex: =8
+
+        iconHamburgerMenu_55 As icon.Hamburger:
+            AccessibleLabel: ="expand or compact the menu"
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledFill: =iconHamburgerMenu_55.Fill
+            FocusedBorderColor: =iconHamburgerMenu_55.BorderColor
+            Height: =24
+            HoverBorderColor: =ColorFade(iconHamburgerMenu_55.BorderColor, 20%)
+            HoverColor: =ColorFade(iconHamburgerMenu_55.Color, 20%)
+            HoverFill: =iconHamburgerMenu_55.Fill
+            Icon: =Icon.Hamburger
+            OnSelect: |+
+                =Set(IsExpand, !IsExpand);
+                //Set(CollapseRM,false);Set (_EditMode, false); UpdateContext({IsShowResourcesTab: false});
+                
+                
+                
+                
+                
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =ColorFade(iconHamburgerMenu_55.BorderColor, -20%)
+            PressedColor: =ColorFade(iconHamburgerMenu_55.Color, -20%)
+            PressedFill: =iconHamburgerMenu_55.Fill
+            TabIndex: =0
+            Width: =17
+            X: =15
+            Y: =70
+            ZIndex: =3
+
+        RectangleBorder2_55 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder2_55.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder2_55.BorderColor
+            Height: =CanvasMain_ISD_1.Height+25
+            HoverFill: =RectangleBorder2_55.Fill
+            PressedFill: =RectangleBorder2_55.Fill
+            Visible: =IsExpand
+            Width: =1
+            X: =40
+            Y: =60
+            ZIndex: =4
+
+        RectangleBorder1_55 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder1_55.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder1_55.BorderColor
+            Height: =CanvasMain_ISD_1.Height+25
+            HoverFill: =RectangleBorder1_55.Fill
+            PressedFill: =RectangleBorder1_55.Fill
+            Visible: =!IsExpand
+            Width: =1
+            X: =GalleryLessons_48.X+GalleryLessons_48.Width-2
+            Y: =60
+            ZIndex: =5
+
+    GroupDetailsPanel_56 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =26
+
+        RectangleDetailsBackground_ISD_1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0.16)
+            BorderThickness: =1
+            DisabledFill: =RectangleDetailsBackground_ISD_1.Fill
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =RectangleDetailsBackground_ISD_1.BorderColor
+            Height: |
+                =DataCardMain_ISD_1.Height
+            HoverFill: =RectangleDetailsBackground_ISD_1.Fill
+            PressedFill: =RectangleDetailsBackground_ISD_1.Fill
+            Visible: =!CollapseRM
+            Width: |
+                =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+            X: |
+                =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+            Y: =60
+            ZIndex: =12
+
+        LabelDetalisTitle_S_1 As label:
+            Align: =Align.Center
+            FocusedBorderColor: =LabelDetalisTitle_S_1.BorderColor
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Lighter
+            Height: =35
+            HoverBorderColor: =LabelDetalisTitle_S_1.BorderColor
+            HoverColor: =LabelDetalisTitle_S_1.Color
+            HoverFill: =LabelDetalisTitle_S_1.Fill
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =LabelDetalisTitle_S_1.BorderColor
+            PressedColor: =LabelDetalisTitle_S_1.Color
+            PressedFill: =LabelDetalisTitle_S_1.Fill
+            Size: =21.08
+            Text: ="LT Commentary"
+            Visible: =!CollapseRM
+            Width: =330
+            X: |+
+                =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+                
+            Y: =77
+            ZIndex: =13
+
+        RectangleTab1_F_36 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleTab1_F_36.Fill
+            Fill: =RGBA(116, 39, 116, 1)
+            FocusedBorderColor: =RectangleTab1_F_36.BorderColor
+            Height: =3
+            HoverFill: =RectangleTab1_F_36.Fill
+            OnSelect: |
+                =false
+            PressedFill: =RectangleTab1_F_36.Fill
+            Visible: |
+                =Comments
+            Width: =Button6_43.Width
+            X: =Button6_43.X
+            Y: =180
+            ZIndex: =14
+
+        RectangleTab_F_39 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleTab_F_39.Fill
+            Fill: =RGBA(116, 39, 116, 1)
+            FocusedBorderColor: =RectangleTab_F_39.BorderColor
+            Height: =3
+            HoverFill: =RectangleTab_F_39.Fill
+            PressedFill: =RectangleTab_F_39.Fill
+            Visible: |+
+                =(IsShowResourcesTab || !IsShowResourcesTab || _EditMode ) && !Actions && !Comments && !CollapseRM
+                
+                
+            Width: ='ISSummary-bNarrative_1'.Width
+            X: |
+                ='ISSummary-bNarrative_1'.X
+            Y: =RectangleTab2_S_1.Y
+            ZIndex: =40
+
+    Button6_43 As button:
+        BorderStyle: |
+            =BorderStyle.None
+        BorderThickness: =1
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        FontWeight: |
+            =If(Comments , FontWeight.Bold, FontWeight.Normal)
+        HoverColor: |
+            =RGBA(255,255,255,1)
+        HoverFill: |
+            =RGBA(62,96,170,1)
+        OnSelect: |
+            =UpdateContext({Comments: true});
+            UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false);UpdateContext({ActionEdit: false});
+             
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Text: ="Collaborative & AI"
+        Visible: |
+            =0
+        Width: =190
+        X: =1718
+        Y: =Button_Act_S_1.Y
+        ZIndex: =27
+
+    GrpAction_44 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =28
+
+        RectangleTab1_72 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleTab1_72.Fill
+            Fill: =RGBA(116, 39, 116, 1)
+            FocusedBorderColor: =RectangleTab1_72.BorderColor
+            Height: =3
+            HoverFill: =RectangleTab1_72.Fill
+            OnSelect: |
+                =false
+            PressedFill: =RectangleTab1_72.Fill
+            Visible: =false
+            Width: |
+                =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+            X: |
+                =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+            Y: =RectangleTab2_1.Y
+            ZIndex: =15
+
+        "Gallery_Actionitems_isqtd_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            Height: =714
+            Items: |+
+                =Sort(Filter(DigitalWBR_Actionitems ,Screen=_Screen && SubScreen=_SubScreen ),Modified,Descending)
+                
+                
+                
+            Layout: =Layout.Vertical
+            OnSelect: |+
+                =UpdateContext({ActionEdit: true});EditForm(Form_ActionSummery_ISQTD_1);
+                
+                
+                
+            TemplatePadding: =0
+            TemplateSize: =250
+            Transition: =Transition.Pop
+            Visible: |+
+                =Actions && !ActionEdit && !CollapseRM
+                
+            Width: =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+            X: |
+                =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+            Y: =197
+            ZIndex: =16
+
+            Title3_44 As label:
+                Font: =Font.'Segoe UI'
+                Height: =146
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =10
+                Size: =15
+                Text: =ThisItem.Title
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.Width
+                ZIndex: =2
+
+            lblProgress_44 As label:
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Bold
+                Height: =36
+                Italic: =true
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =15
+                Text: =ThisItem.Status.Value
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Gallery_Actionitems_isqtd_1.TemplateWidth
+                Y: =209
+                ZIndex: =3
+
+            Separator3_44 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+                ZIndex: =5
+
+            Subtitle3_45 As label:
+                Align: =Align.Right
+                Font: =Font.'Segoe UI'
+                Height: =31
+                Italic: =true
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =13
+                Text: |-
+                    ="Due On: " & ThisItem.ActionDueOn
+                VerticalAlign: =VerticalAlign.Top
+                Width: =364
+                Y: =214
+                ZIndex: =6
+
+            txtAction_44 As rectangle:
+                DisplayMode: =DisplayMode.View
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =73
+                OnSelect: |
+                    =Select(Parent);UpdateContext({ActionEdit: true});EditForm(Form_ActionSummery_ISQTD_1);
+                Width: =364
+                ZIndex: =7
+
+            lblDueDays_44 As label:
+                Align: =Align.Right
+                Font: =Font.'Segoe UI'
+                Height: =65
+                OnSelect: =Select(Parent)
+                Size: =12
+                Text: |-
+                    ="Due in: " & If(DateDiff(Now(),ThisItem.ActionDueOn) < 0, "Past Due", DateDiff(Now(),ThisItem.ActionDueOn) & " Days")
+                Width: =364
+                Y: =145
+                ZIndex: =8
+
+            LabelOwner_3 As label:
+                FontWeight: =FontWeight.Semibold
+                Height: =56
+                OnSelect: =Select(Parent)
+                Size: =12
+                Text: =Concat(ThisItem.'Assigned To'.DisplayName, DisplayName & ",")
+                Width: =250
+                Y: =145
+                ZIndex: =9
+
+            LabelOwner_2 As label:
+                Font: =Font.'Segoe UI'
+                Height: =73
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.'Desired Outcome'
+                Width: =364
+                Y: =73
+                ZIndex: =10
+
+        Button1_89 As button:
+            BorderThickness: =1
+            Font: =Font.'Lato Light'
+            Height: =31
+            OnSelect: |+
+                =UpdateContext({ActionEdit: true});NewForm(Form_ActionSummery_ISQTD_1);
+                
+                
+                
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Add new item"
+            Visible: |+
+                =!ActionEdit && Actions && !CollapseRM
+                
+                
+            Width: =149
+            X: =1652
+            Y: |+
+                =Form_ActionSummery_ISQTD_1.Y+Form_ActionSummery_ISQTD_1.Height-50
+                
+                
+                
+                
+            ZIndex: =17
+
+    RIghtIcon_41 As icon.ChevronRight:
+        Height: =30
+        Icon: =Icon.ChevronRight
+        OnSelect: |
+            =Set(CollapseRM,true);UpdateContext({Actions: false}); UpdateContext({ActionEdit: false});UpdateContext({IsShowResourcesTab: false});Set (_EditMode, false); UpdateContext({Comments: false});Set(IsExpand, false);
+        Visible: =If(!CollapseRM,true)
+        Width: =25
+        X: =1870
+        Y: =80
+        ZIndex: =29
+
+    Label_Collapse_36 As label:
+        Height: =34
+        Text: |
+            ="CollapseRM" &CollapseRM
+        Visible: =false
+        Width: =204
+        X: =866
+        Y: =140
+        ZIndex: =30
+
+    Label_IsExpand_36 As label:
+        Text: |-
+            ="Expand :"&IsExpand
+        Visible: =false
+        X: =1117
+        Y: =110
+        ZIndex: =31
+
+    Label_IsEdit_36 As label:
+        Text: |+
+            ="ISExpand :"& IsExpand
+            
+        Visible: =false
+        X: =1058
+        Y: =164
+        ZIndex: =32
+
+    Al_16 As image:
+        Height: =44
+        Image: =AL
+        Visible: |+
+            =If(Comments,true,false)
+            
+            
+            
+            
+            
+            
+        Width: =65
+        X: |
+            =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+        Y: =Button6_43.Y+Button6_43.Height+5
+        ZIndex: =36
+
+    PerforrmanceOutlook_75 As htmlViewer:
+        Font: =Font.'Segoe UI'
+        Height: =300
+        HtmlText: =First(Filter(DigitalWBR_Insights, ID=1)).Insights
+        OnSelect: =
+        Size: =14
+        Visible: |+
+            =If(Comments,true,false)
+            
+            
+            
+            
+            
+            
+        Width: |+
+            =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+            
+            
+            
+        X: |
+            =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+        Y: |+
+            =Al_16.Y+Al_16.Height
+            
+        ZIndex: =38
+
+    RightMenu_Comments_34 As group:
+        Height: =5
+        Width: =5
+        X: =-1
+        Y: =100
+        ZIndex: =38
+
+        RectangleBorder_RM_Background_ISD_1 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder_RM_Background_ISD_1.Fill
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =RectangleBorder_RM_Background_ISD_1.BorderColor
+            Height: =911
+            HoverFill: =RectangleBorder_RM_Background_ISD_1.Fill
+            PressedFill: =RectangleBorder_RM_Background_ISD_1.Fill
+            Visible: =CollapseRM
+            Width: =50
+            X: =RectangleBorder_RM_ISD_1.X
+            Y: =57
+            ZIndex: =24
+
+        Title_ISD_1 As image:
+            DisplayMode: =DisplayMode.View
+            Height: =172
+            Image: ='LT Commentary'
+            ImageRotation: |+
+                =ImageRotation.Rotate90
+                
+            Visible: =CollapseRM
+            Width: =28
+            X: |+
+                =RectangleBorder_RM_ISD_1.X+8
+                
+            Y: =125
+            ZIndex: =25
+
+        RectangleBorder_RM_ISD_1 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder_RM_ISD_1.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder_RM_ISD_1.BorderColor
+            Height: =911
+            HoverFill: =RectangleBorder_RM_ISD_1.Fill
+            PressedFill: =RectangleBorder_RM_ISD_1.Fill
+            Visible: =CollapseRM
+            Width: =1
+            X: =CanvasMain_ISD_1.X+CanvasMain_ISD_1.Width
+            Y: =57
+            ZIndex: =26
+
+        LeftIcon_40 As icon.ExpandView:
+            Height: =34
+            Icon: =Icon.ChevronLeft
+            OnSelect: |-
+                =Set(CollapseRM,false);UpdateContext({IsShowResourcesTab: false});UpdateContext({Actions: false}); Set (_EditMode, false); UpdateContext({ActionEdit: false});UpdateContext({ActionEdit: false});
+            Tooltip: ="Expand Comments Section"
+            Visible: =CollapseRM
+            Width: =24
+            X: =Title_ISD_1.X
+            Y: =83
+            ZIndex: =28
+
+    Label3_5 As label:
+        Text: =_Results1
+        Visible: =false
+        X: =426
+        Y: =860
+        ZIndex: =39
+
+    RectangleTab_F_40 As rectangle:
+        BorderStyle: =BorderStyle.None
+        DisabledFill: =RectangleTab_F_40.Fill
+        Fill: =RGBA(116, 39, 116, 1)
+        FocusedBorderColor: =RectangleTab_F_40.BorderColor
+        Height: =3
+        HoverFill: =RectangleTab_F_40.Fill
+        PressedFill: =RectangleTab_F_40.Fill
+        Visible: |
+            =ActionEdit || Actions
+        Width: ='ISSummary-bAction_1'.Width
+        X: |
+            ='ISSummary-bAction_1'.X
+        Y: =RectangleTab2_S_1.Y
+        ZIndex: =41
+
+    Label6_3 As label:
+        Text: |
+            =First(_SelectedOpportz).Opporty_Id
+        Visible: =false
+        X: =1255
+        Y: =127
+        ZIndex: =42
+
+    Group5_1 As group:
+        Height: =5
+        Width: =5
+        X: =120
+        Y: =120
+        ZIndex: =48
+
+        Form_ActionSummery_ISQTD_1 As form:
+            AcceptsFocus: =false
+            DataSource: =DigitalWBR_Actionitems
+            Height: =600
+            Item: =Gallery_Actionitems_isqtd_1.Selected
+            NumberOfColumns: =2
+            SnapToColumns: =false
+            Visible: |
+                =ActionEdit && Actions
+            Width: |
+                =1920-(CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width)
+            X: =CanvasMain_ISD_1.X + CanvasMain_ISD_1.Width
+            Y: =200
+            ZIndex: =43
+
+            Title_DataCard3_16 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Title"
+                Default: =ThisItem.Title
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Action Item"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "Title")
+                Required: =false
+                Update: =DataCardValue73_16.Text
+                Width: =372
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey72_16 As label:
+                    AutoHeight: =true
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =106
+                    Wrap: =false
+                    X: =10
+                    ZIndex: =1
+
+                DataCardValue73_16 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =78
+                    MaxLength: =Parent.MaxLength
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =12
+                    Tooltip: =Parent.DisplayName
+                    Width: =255
+                    X: =116
+                    Y: =10
+                    ZIndex: =2
+
+                ErrorMessage59_16 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue73_16.Y + DataCardValue73_16.Height
+                    ZIndex: =3
+
+                StarVisible59_16 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey72_16.Height
+                    PaddingBottom: =DataCardKey72_16.PaddingBottom
+                    PaddingLeft: =DataCardKey72_16.PaddingLeft
+                    PaddingRight: =DataCardKey72_16.PaddingRight
+                    PaddingTop: =DataCardKey72_16.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey72_16.Y
+                    ZIndex: =4
+
+            Screen_DataCard2_44 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Screen"
+                Default: = _Screen
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Screen"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "Screen")
+                Required: =false
+                Update: = _Screen
+                Visible: =false
+                Width: =159
+                X: =4
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey6_40 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue6_40 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey6_40.Y + DataCardKey6_40.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage6_40 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue6_40.Y + DataCardValue6_40.Height
+                    ZIndex: =3
+
+                StarVisible6_40 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey6_40.Height
+                    PaddingBottom: =DataCardKey6_40.PaddingBottom
+                    PaddingLeft: =DataCardKey6_40.PaddingLeft
+                    PaddingRight: =DataCardKey6_40.PaddingRight
+                    PaddingTop: =DataCardKey6_40.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey6_40.Y
+                    ZIndex: =4
+
+            FiscalMonth_DataCard3_40 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="FiscalMonth"
+                Default: =ThisItem.FiscalMonth
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="FiscalMonth"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "FiscalMonth")
+                Required: =false
+                Update: =DataCardValue7_38.Text
+                Visible: =false
+                Width: =239
+                X: =0
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey7_41 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue7_38 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey7_41.Y + DataCardKey7_41.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage7_41 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue7_38.Y + DataCardValue7_38.Height
+                    ZIndex: =3
+
+                StarVisible7_41 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey7_41.Height
+                    PaddingBottom: =DataCardKey7_41.PaddingBottom
+                    PaddingLeft: =DataCardKey7_41.PaddingLeft
+                    PaddingRight: =DataCardKey7_41.PaddingRight
+                    PaddingTop: =DataCardKey7_41.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey7_41.Y
+                    ZIndex: =4
+
+            AreaName_DataCard6_38 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="AreaName"
+                Default: =ThisItem.AreaName
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="AreaName"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "AreaName")
+                Required: =false
+                Update: =DataCardValue19_38.Text
+                Visible: =false
+                Width: =239
+                X: =1
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey19_40 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue19_38 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: ="WW"
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey19_40.Y + DataCardKey19_40.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage19_40 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue19_38.Y + DataCardValue19_38.Height
+                    ZIndex: =3
+
+                StarVisible19_40 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey19_40.Height
+                    PaddingBottom: =DataCardKey19_40.PaddingBottom
+                    PaddingLeft: =DataCardKey19_40.PaddingLeft
+                    PaddingRight: =DataCardKey19_40.PaddingRight
+                    PaddingTop: =DataCardKey19_40.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey19_40.Y
+                    ZIndex: =4
+
+            SubScreen_DataCard2_21 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="SubScreen"
+                Default: =_SubScreen
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="SubScreen"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "SubScreen")
+                Required: =false
+                Update: |
+                    =_SubScreen
+                Visible: =false
+                Width: =81
+                X: =4
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey7_50 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue8_22 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey7_50.Y + DataCardKey7_50.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage7_50 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue8_22.Y + DataCardValue8_22.Height
+                    ZIndex: =3
+
+                StarVisible7_50 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey7_50.Height
+                    PaddingBottom: =DataCardKey7_50.PaddingBottom
+                    PaddingLeft: =DataCardKey7_50.PaddingLeft
+                    PaddingRight: =DataCardKey7_50.PaddingRight
+                    PaddingTop: =DataCardKey7_50.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey7_50.Y
+                    ZIndex: =4
+
+            "'Assigned To_DataCard3_1' As typedDataCard.comboBoxMultiSelectEditCard":
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="AssignedTo"
+                Default: =ThisItem.'Assigned To'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"AssignedTo")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =false
+                Update: =DataCardValue42_1.SelectedItems
+                Width: =Parent.Width
+                X: =5
+                Y: =396
+                ZIndex: =1
+
+                DataCardKey43_1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =10
+                    ZIndex: =1
+
+                DataCardValue42_1 As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultSelectedItems: =Parent.Default
+                    DisplayFields: =["DisplayName","Email","Picture"]
+                    DisplayMode: =Parent.DisplayMode
+                    Items: =Choices([@DigitalWBR_Actionitems].'Assigned To')
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: =Choices(DigitalWBR_Actionitems.'Assigned To',DataCardValue42_1.SearchText)
+                    Template: =ListItemTemplate.Person
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 80
+                    X: =10
+                    Y: =DataCardKey43_1.Y + DataCardKey43_1.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage41_1 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue42_1.Y + DataCardValue42_1.Height
+                    ZIndex: =3
+
+                StarVisible41_1 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey43_1.Height
+                    PaddingBottom: =DataCardKey43_1.PaddingBottom
+                    PaddingLeft: =DataCardKey43_1.PaddingLeft
+                    PaddingRight: =DataCardKey43_1.PaddingRight
+                    PaddingTop: =DataCardKey43_1.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey43_1.Y
+                    ZIndex: =4
+
+            ActionDueOn_DataCard1_59 As typedDataCard.dateEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="ActionDueOn"
+                Default: =ThisItem.ActionDueOn
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="ActionDueOn"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =55
+                Required: =false
+                Update: =DataCardValue8_59.SelectedDate
+                Width: |+
+                    =Parent.Width
+                    
+                    
+                    
+                    
+                    
+                X: =0
+                Y: =624
+                ZIndex: =1
+
+                DataCardKey8_59 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: |
+                        =Parent.Width - 30
+                    Wrap: =false
+                    X: =10
+                    ZIndex: =1
+
+                DataCardValue8_59 As datepicker:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultDate: =If( Form_ActionSummery_ISQTD_1.Mode= FormMode.Edit , Parent.Default, Today())
+                    DisplayMode: =Parent.DisplayMode
+                    EndYear: =Year(Today())+100
+                    IsEditable: =true
+                    PaddingBottom: =0
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    Size: =12
+                    StartYear: =1899
+                    Tooltip: =Parent.DisplayName
+                    Width: |+
+                        =Parent.Width-80
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    X: =10
+                    Y: =DataCardKey8_59.Y+DataCardKey8_59.Height
+                    ZIndex: =2
+
+                ErrorMessage8_59 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue8_59.Y + DataCardValue8_59.Height
+                    ZIndex: =3
+
+                StarVisible8_59 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey8_59.Height
+                    PaddingBottom: =DataCardKey8_59.PaddingBottom
+                    PaddingLeft: =DataCardKey8_59.PaddingLeft
+                    PaddingRight: =DataCardKey8_59.PaddingRight
+                    PaddingTop: =DataCardKey8_59.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey8_59.Y
+                    ZIndex: =4
+
+            Status_DataCard3_44 As typedDataCard.comboBoxEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Status"
+                Default: =ThisItem.Status
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Status"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =72
+                Required: =true
+                Update: =DataCardValue13_44.Selected
+                Width: |+
+                    =Parent.Width
+                    
+                    
+                    
+                    
+                    
+                WidthFit: =false
+                X: =2
+                Y: =629
+                ZIndex: =25
+
+                DataCardKey13_44 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue13_44 As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultSelectedItems: =Parent.Default
+                    DisplayFields: =["Value"]
+                    DisplayMode: =Parent.DisplayMode
+                    IsSearchable: =false
+                    Items: =Choices([@DigitalWBR_Actionitems].Status)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectMultiple: =false
+                    Size: =12
+                    Tooltip: =Parent.DisplayName
+                    Width: |+
+                        =Parent.Width-80
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    X: =10
+                    Y: =25
+                    ZIndex: =2
+
+                ErrorMessage13_44 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue13_44.Y + DataCardValue13_44.Height
+                    ZIndex: =3
+
+                StarVisible13_44 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey13_44.Height
+                    PaddingBottom: =DataCardKey13_44.PaddingBottom
+                    PaddingLeft: =DataCardKey13_44.PaddingLeft
+                    PaddingRight: =DataCardKey13_44.PaddingRight
+                    PaddingTop: =DataCardKey13_44.PaddingTop
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey13_44.Y
+                    ZIndex: =4
+
+        Button_Delete_40 As button:
+            BorderThickness: =1
+            Font: =Font.'Lato Light'
+            Height: =31
+            OnSelect: |+
+                =Remove(DigitalWBR_Actionitems,Gallery_Actionitems_isqtd_1.Selected);UpdateContext({ActionEdit: false});
+                
+                
+                
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =14
+            Text: ="Delete"
+            Visible: |
+                =ActionEdit && Actions
+            Width: =116
+            X: =1726
+            Y: |+
+                =Form_ActionSummery_ISQTD_1.Y+Form_ActionSummery_ISQTD_1.Height-40
+                
+                
+                
+                
+            ZIndex: =44
+
+        Button_Submit_40 As button:
+            BorderThickness: =1
+            Font: =Font.'Lato Light'
+            Height: =31
+            OnSelect: |+
+                =SubmitForm(Form_ActionSummery_ISQTD_1);UpdateContext({ActionEdit: false});Refresh(DigitalWBR_Actionitems)
+                
+                
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =14
+            Text: ="Submit"
+            Visible: |
+                =ActionEdit && Actions
+            Width: =116
+            X: =1560
+            Y: |+
+                =Form_ActionSummery_ISQTD_1.Y+Form_ActionSummery_ISQTD_1.Height-40
+                
+                
+                
+                
+            ZIndex: =45
+
+        Button_Cancel_40 As button:
+            BorderThickness: =1
+            Font: =Font.'Lato Light'
+            Height: =31
+            OnSelect: |+
+                =UpdateContext({ActionEdit: false});
+                
+                
+                
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Cancel"
+            Visible: |
+                =ActionEdit && Actions && If(Form_ActionSummery_ISQTD_1.Mode=FormMode.New,true,false)
+            Width: =Button_Delete_40.Width
+            X: =Button_Delete_40.X
+            Y: |+
+                =Form_ActionSummery_ISQTD_1.Y+Form_ActionSummery_ISQTD_1.Height-40
+                
+                
+                
+                
+            ZIndex: =46
+
+    Icon_Fin_15 As icon.Information:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =25
+        Icon: =Icon.Help
+        OnSelect: |-
+            =Launch("http://aka.ms/3simplesteps")
+        Tooltip: ="Access Info"
+        Width: =25
+        X: =1872
+        Y: =17
+        ZIndex: =50
+
+    Group3_1 As group:
+        Height: =5
+        Width: =5
+        X: =120
+        Y: =120
+        ZIndex: =50
+
+        Button_Act_S_1 As button:
+            Text: ="Button"
+            Visible: =false
+            X: =1748
+            Y: =140
+            ZIndex: =47
+
+        RectangleTab2_1 As label:
+            Text: ="Text"
+            Visible: =false
+            X: =1446
+            Y: =143
+            ZIndex: =48
+
+        RectangleTab2_S_1 As label:
+            Text: ="Text"
+            Visible: =false
+            X: =1452
+            Y: =174
+            ZIndex: =49
+
+    Button2_3 As button:
+        OnSelect: |+
+            =Set(_Screen,"ISDQtrPerformance");Set(_SubScreen,"Overview");
+            ClearCollect(Lessons,
+            //{num:1, icon: Basel_Home, 			name:"Digital WBR", 		screen: 'Digital WBR', 			screen_name:"Digital WBR" , Icon: Icon.Home}, 
+            {num:2, icon: Basel_Home, 			name:"IS QTD Performance", 		screen: 'L00_Strategy & Planning', 			screen_name:"L01_ISDQtrPerformance" , Icon: Icon.TrendingUpwards},
+             
+            {num:3, icon: Basel_Compose, 		name: "Healthcare", 						screen: L08_Healthcare_1, screen_name: "L08_Healthcare", Icon: Icon.Hospital },
+            {num:4, icon: Basel_Compose, 		name: "Retail & Consumer", 			screen: L04_RetailConsumerGoods_1, screen_name: "L04_RetailConsumerGoods", Icon: Icon.Transportation },
+            {num:5, icon: Basel_Compose, 		name: "Media & Comm", 			screen: L07_MediaCommunications_1, screen_name: "L07_MediaCommunications", Icon: Icon.Video},
+            {num:6, icon: Basel_Compose, 		name: "Government", 						screen: L09_Government_1, screen_name: "L09_Government", Icon: Icon.OfficeBuilding },
+            {num:7, icon: Basel_Home, 			name: "Manufacturing", 						screen: L05_Manufacture_1, 			screen_name:"L05_Manufacture" , Icon: Icon.Manufacture}, 
+            {num:8, icon: Basel_Compose, 		name: "Auto,Mobility,Transpt", 		screen: L06_AutomotiveMobilityTranspt_, screen_name: "L06_AutomotiveMobilityTranspt", Icon: Icon.Cars},
+            {num:9, icon: Basel_Compose, 		name: "Financial Services", 			screen: L01_Finance, screen_name: "L01_Finance", Icon: Icon.Money},
+            {num:10, icon: Basel_Compose, 		name: "Energy & Sustainability", 			screen: L02_EnergySustainability_1, screen_name: "L02_EnergySustainability", Icon: Icon.LightningBolt},
+            {num:11, icon: Basel_Compose, 		name: "Defense & Intelligence", 			screen: L03_DefenseIntelligence, screen_name: "L03_DefenseIntelligence", Icon: Icon.Airplane },
+            {num:12, icon: Basel_Compose, 		name: "Education", 							screen: L10_Education_, screen_name: "L10_Education", Icon: Icon.ComputerDesktop },
+            
+            {num:13, icon: Basel_Search, 		name: "Partner", 	screen: L06_Partner, screen_name: "L06_Partner", Icon: Icon.LogJournal},
+            {num:14, icon: Basel_Search, 		name: "Actions Items Review", 	screen: L06_ActionReviewPage, screen_name: "L06_ActionReviewPage", Icon: Icon.Flag}
+            
+            );
+            Set(_CurrentLesson, 20);
+            Set(_ThisScreen,2);
+            Set(_CurrentLesson, 20); // unlock all exercises
+            Set(_Separator,If(Left(Text(0.1,"[$-en-us]#.0"),1)=".",",",";")); 
+            
+            
+            Set(_Results1, true);
+            Set(_Results2, false); 
+            Set(_Results3, false); 
+            Set(_Results4, false);
+            Set(_Results5, false); 
+            Set(_Results6, false);
+            Set(_Results7, false);
+            Set(_Results8, false); 
+            Set(_Results9, false);
+            Set(_Results10, false); 
+            Set(_Results11, false);
+            Set(_Results12, false);
+            Set(_Results13, false);
+            Set(_Results14, false);
+            Set(_Results15, false); 
+            Set(_Results16, false);
+            Set(_Results17, false);
+            Set(_Results18, false);
+            Set(_Results19, false);
+            Set(CollapseRM,true);
+            Set(IsShowResourcesTab, false);
+            Set(_EditMode, false);
+            
+            Set(_Screen,"ISDQtrPerformance");
+            Set(_SubScreen,"Overview");
+            
+            ClearCollect (RectNumbers,{Num:1},{Num:2},{Num:12} ,{Num:15},{Num:16},{Num:17},{Num:18});
+            
+            Set(
+                SliderWidth,
+                50
+            );
+            Set(
+                SliderHeight,
+                50  
+            );
+            Set(
+                SliderXPos,
+                1480
+                
+            );
+            Set(
+                SliderYPos,
+                900
+            );
+            
+            Set(gblIsItemSelected,false);
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        Text: ="Button"
+        Visible: =false
+        X: =1163
+        Y: =68
+        ZIndex: =51
+
+    bannerTitle As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =55
+        Size: =20
+        Text: ="Strategy & Growth"
+        Width: =250
+        X: =1600
+        Y: =2
+        ZIndex: =52
+
+    GroupBackground_55 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =54
+
+        RectangleBackground_55 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleBackground_55.Fill
+            Fill: =RGBA(241, 241, 241, 1)
+            FocusedBorderColor: =RectangleBackground_55.BorderColor
+            Height: =911
+            HoverFill: =RectangleBackground_55.Fill
+            PressedFill: =RectangleBackground_55.Fill
+            Width: =1920
+            X: =0.00
+            Y: |
+                =0
+            ZIndex: =1
+
+        WelcomeScreenTitleBackground_ISD_1 As rectangle:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            DisabledFill: =WelcomeScreenTitleBackground_ISD_1.Fill
+            Fill: =RGBA(9, 33, 98, 1)
+            FocusedBorderColor: =WelcomeScreenTitleBackground_ISD_1.BorderColor
+            Height: =55
+            HoverFill: =WelcomeScreenTitleBackground_ISD_1.Fill
+            PressedFill: =WelcomeScreenTitleBackground_ISD_1.Fill
+            Width: =1920
+            X: =0.00
+            ZIndex: =6
+
+        WelcomeScreenTitle_S_1 As label:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =WelcomeScreenTitle_S_1.BorderColor
+            Font: =Font.'Segoe UI'
+            Height: =55
+            HoverBorderColor: =WelcomeScreenTitle_S_1.BorderColor
+            HoverColor: =WelcomeScreenTitle_S_1.Color
+            HoverFill: =WelcomeScreenTitle_S_1.Fill
+            LineHeight: =0
+            PaddingRight: =7.03
+            PressedBorderColor: =WelcomeScreenTitle_S_1.BorderColor
+            PressedColor: =WelcomeScreenTitle_S_1.Color
+            PressedFill: =WelcomeScreenTitle_S_1.Fill
+            Size: =23
+            Text: ="Industry Pivot - Enhancing IS Insights & Experience"
+            Width: =1500
+            X: =300
+            ZIndex: =7
+

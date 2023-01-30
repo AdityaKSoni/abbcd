@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "9197f90b-5b4a-4aed-a52a-fc34489e4b0c",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "DigitalWBR_SLRecordsExport",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

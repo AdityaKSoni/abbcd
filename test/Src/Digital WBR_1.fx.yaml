@@ -1,0 +1,649 @@
+"'Digital WBR_1' As screen":
+    Fill: =RGBA(241, 241, 241, 1)
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: |
+        =//Collect(Lessons, {Image: DL.Image})
+    Orientation: =If('Digital WBR_1'.Width < 'Digital WBR_1'.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= 'Digital WBR_1'.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    CanvasMain_1 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(241, 241, 241, 1)
+        Height: =911
+        Width: =1200+If(IsExpand,270)
+        X: |-
+            =If(!IsExpand, GalleryLessons_1.X+GalleryLessons_1.Width
+            , RectangleBorder2_1.X+1)
+        ZIndex: =8
+
+        DataCardMain_1 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =900
+            Width: =CanvasMain_1.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            ButtonNext_3 As button:
+                BorderColor: =ColorFade(ButtonNext_3.Fill, -15%)
+                BorderThickness: =1
+                Fill: =RGBA(39, 113, 194, 1)
+                FocusedBorderColor: =ButtonNext_3.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                HoverBorderColor: =ColorFade(ButtonNext_3.BorderColor, 20%)
+                HoverColor: =ButtonNext_3.Color
+                HoverFill: =ColorFade(ButtonNext_3.Fill, 20%)
+                OnSelect: |+
+                    =Set(_ThisScreen, LookUp(Lessons, screen_name=App.ActiveScreen.Name, num));
+                    Set(_NextScreen, _ThisScreen+1);
+                    If(_CurrentLesson<_NextScreen, Set(_CurrentLesson,_NextScreen));
+                    Navigate(LookUp(Lessons, num=_NextScreen,screen), ScreenTransition.None);
+                    //Set(_Title,"Industry Solution Weekly Business Review");
+                    //Set(_Leftpanesize,300);
+                    //Set(_TitleColor,"RGBA(43, 67, 119, 1)");
+                    
+                    
+                    
+                PaddingRight: =7.03
+                PaddingTop: =7.03
+                PressedBorderColor: =ButtonNext_3.Fill
+                PressedColor: =ButtonNext_3.Fill
+                PressedFill: =ButtonNext_3.Color
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =20
+                Text: ="Start the Review"
+                VerticalAlign: =VerticalAlign.Bottom
+                Width: =224.89
+                X: =537
+                Y: =705
+                ZIndex: =3
+
+            GroupControlTitle_1 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =4
+
+                DescriptionLabel_1 As label:
+                    Color: =RGBA(0, 0, 0, 1)
+                    FocusedBorderColor: =DescriptionLabel_1.BorderColor
+                    Font: =Font.'Segoe UI'
+                    Height: =158
+                    HoverBorderColor: =DescriptionLabel_1.BorderColor
+                    HoverColor: =DescriptionLabel_1.Color
+                    HoverFill: =DescriptionLabel_1.Fill
+                    PaddingRight: =7.03
+                    PaddingTop: =7.03
+                    PressedBorderColor: =DescriptionLabel_1.BorderColor
+                    PressedColor: =DescriptionLabel_1.Color
+                    PressedFill: =DescriptionLabel_1.Fill
+                    Size: =19.68
+                    Text: =
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =1280
+                    X: =DataCardMain_1.X
+                    Y: =85
+                    ZIndex: =1
+
+                PageTitle_1 As label:
+                    Color: =RGBA(0, 0, 0, 1)
+                    FocusedBorderColor: =PageTitle_1.BorderColor
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =63
+                    HoverBorderColor: =PageTitle_1.BorderColor
+                    HoverColor: =PageTitle_1.Color
+                    HoverFill: =PageTitle_1.Fill
+                    PaddingRight: =7.03
+                    PaddingTop: =7.03
+                    PressedBorderColor: =PageTitle_1.BorderColor
+                    PressedColor: =PageTitle_1.Color
+                    PressedFill: =PageTitle_1.Fill
+                    Size: =29.52
+                    Text: ="Enterprise & Industry Review"
+                    Visible: =false
+                    Width: =1280
+                    X: =DataCardMain_1.X
+                    Y: =13
+                    ZIndex: =2
+
+    GroupBackground_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =8
+
+        ScreenTitleBackground_1 As rectangle:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            DisabledFill: =ScreenTitleBackground_1.Fill
+            Fill: =RGBA(0, 134, 208, 1)
+            FocusedBorderColor: =ScreenTitleBackground_1.BorderColor
+            Height: =70
+            HoverFill: =ScreenTitleBackground_1.Fill
+            PressedFill: =ScreenTitleBackground_1.Fill
+            Width: =1920.00
+            X: =0.00
+            ZIndex: =5
+
+        ScreenTitle_1 As label:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =ScreenTitle_1.BorderColor
+            Font: =Font.'Segoe UI'
+            Height: =70
+            HoverBorderColor: =ScreenTitle_1.BorderColor
+            HoverColor: =ScreenTitle_1.Color
+            HoverFill: =ScreenTitle_1.Fill
+            LineHeight: =0
+            PaddingLeft: =10
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =ScreenTitle_1.BorderColor
+            PressedColor: =ScreenTitle_1.Color
+            PressedFill: =ScreenTitle_1.Fill
+            Size: =25.30
+            Text: |
+                ="  Industry Solution Weekly Business Review"
+            Width: =1620
+            X: =300
+            ZIndex: =6
+
+        ImagePowerAppsLogo_1 As image:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            FocusedBorderColor: =ImagePowerAppsLogo_1.BorderColor
+            Height: =40
+            HoverBorderColor: =ColorFade(ImagePowerAppsLogo_1.BorderColor, 20%)
+            HoverFill: =ColorFade(ImagePowerAppsLogo_1.Fill, 20%)
+            Image: =ModernAnalyticsInsights_Logo_rev
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =ColorFade(ImagePowerAppsLogo_1.BorderColor, -20%)
+            PressedFill: =ColorFade(ImagePowerAppsLogo_1.Fill, -20%)
+            Width: =134
+            Y: =14
+            ZIndex: =7
+
+    DWBR_1 As image:
+        Height: =581
+        Image: =DigitalWBR
+        Width: =1185
+        X: |
+            =CanvasMain_1.X
+        Y: =162
+        ZIndex: =17
+
+    ddAreaName_1 As dropdown:
+        BorderColor: =RGBA(230, 230, 230, 1)
+        BorderThickness: =1
+        Default: ="WW"
+        Height: =39
+        Items: ='[dbo].[AppArea]'
+        Visible: |
+            =false
+        Width: =266
+        X: =1535
+        Y: =262
+        ZIndex: =18
+
+    RectangleTab1_26 As rectangle:
+        BorderStyle: =BorderStyle.None
+        DisabledFill: =RectangleTab1_26.Fill
+        Fill: =RGBA(116, 39, 116, 1)
+        FocusedBorderColor: =RectangleTab1_26.BorderColor
+        Height: =3
+        HoverFill: =RectangleTab1_26.Fill
+        OnSelect: |
+            =false
+        PressedFill: =RectangleTab1_26.Fill
+        Visible: =!IsShowResourcesTab
+        Width: =102
+        X: =1726
+        Y: =220
+        ZIndex: =19
+
+    ddMonth_1 As dropdown:
+        BorderColor: =RGBA(230, 230, 230, 1)
+        BorderThickness: =1
+        Default: =First(Filter(FiscalPeriods_DigitalWBR,Default=1)).field_FiscalMonth
+        Height: =39
+        Items: =Distinct(FiscalPeriods_DigitalWBR,field_FiscalMonth)
+        Visible: |
+            =false
+        Width: =266
+        X: =1535
+        Y: =328
+        ZIndex: =21
+
+    "'LeftMenu-Summary_1' As group":
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =21
+
+        "GalleryLessons_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            AccessibleLabel: ="List of available lessons"
+            DisabledBorderColor: =GalleryLessons_1.BorderColor
+            DisabledFill: =GalleryLessons_1.Fill
+            Height: =911
+            HoverBorderColor: =GalleryLessons_1.BorderColor
+            HoverFill: =GalleryLessons_1.Fill
+            Items: =Filter(Lessons, num >= 0 && num <= 20)
+            Layout: =Layout.Vertical
+            LoadingSpinnerColor: =GalleryLessons_1.BorderColor
+            OnSelect: |
+                =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                Set(_EditMode,false);
+                Set(IsExpand,true);
+                If(IsShowResourcesTab=false,true,false);
+                Set(_Results1, true);
+                Set(_Results2, false); 
+                Set(_Results3, false); 
+                Set(_Results4, false);
+                Set(_Results5, false); 
+                Set(_Results6, false);
+                Set(_Results7, false);
+                Set(_Results8, false); 
+                Set(_SubScreen,"Overview" );
+            PressedBorderColor: =GalleryLessons_1.BorderColor
+            PressedFill: =GalleryLessons_1.Fill
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =300
+            ZIndex: =1
+
+            RectangleCurrentSelected_20 As rectangle:
+                DisabledFill: =RectangleCurrentSelected_20.Fill
+                Fill: =RGBA(220, 220, 220, 1)
+                FocusedBorderColor: =RectangleCurrentSelected_20.BorderColor
+                Height: =40
+                HoverFill: =RectangleCurrentSelected_20.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,true);
+                    If(IsShowResourcesTab=false,true,false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_SubScreen,"Overview" );
+                PressedFill: =RectangleCurrentSelected_20.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =GalleryLessons_1.Width
+                ZIndex: =2
+
+            RectangleSelected_20 As rectangle:
+                DisabledFill: =RectangleSelected_20.Fill
+                Fill: =RGBA(116, 39, 116, 1)
+                FocusedBorderColor: =RectangleSelected_20.BorderColor
+                Height: =20
+                HoverFill: =RectangleSelected_20.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,true);
+                    If(IsShowResourcesTab=false,true,false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_SubScreen,"Overview" );
+                PressedFill: =RectangleSelected_20.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =5.62
+                X: =1
+                Y: =11
+                ZIndex: =3
+
+            LabelName_20 As label:
+                Color: =RGBA(51, 51, 51, 1)
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =LabelName_20.BorderColor
+                Font: =Font.'Segoe UI'
+                HoverBorderColor: =LabelName_20.BorderColor
+                HoverColor: =LabelName_20.Color
+                HoverFill: =LabelName_20.Fill
+                LineHeight: =0
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,true);
+                    If(IsShowResourcesTab=false,true,false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_SubScreen,"Overview" );
+                PaddingRight: =7.03
+                PaddingTop: =7.03
+                PressedBorderColor: =LabelName_20.BorderColor
+                PressedColor: =LabelName_20.Color
+                PressedFill: =LabelName_20.Fill
+                Size: =14.06
+                Text: =ThisItem.name
+                Tooltip: =ThisItem.name
+                Width: |
+                    =GalleryLessons_1.Width-RectangleBorder2_1.X
+                X: =38
+                ZIndex: =5
+
+            Icon2_1 As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =Image_1.Height
+                Icon: =ThisItem.Icon
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,true);
+                    If(IsShowResourcesTab=false,true,false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_SubScreen,"Overview" );
+                Tooltip: =ThisItem.name
+                Width: =Image_1.Width
+                X: =Image_1.X
+                Y: =Image_1.Y
+                ZIndex: =7
+
+            Rectangle2_1 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Visible: |
+                    =If(ThisItem.num in (RectNumbers.Num), true, false)
+                Width: =GalleryLessons_1.Width
+                X: |
+                    =0
+                Y: =39
+                ZIndex: =8
+
+            Image_1 As image:
+                AccessibleLabel: ="Navigate to " & ThisItem.name & " screen"
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =Image_1.BorderColor
+                Height: =16
+                HoverBorderColor: =ColorFade(Image_1.BorderColor, 20%)
+                HoverFill: =ColorFade(Image_1.Fill, 20%)
+                Image: =ThisItem.icon
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,true);
+                    If(IsShowResourcesTab=false,true,false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_SubScreen,"Overview" );
+                PaddingRight: =0.00
+                PaddingTop: =0.00
+                PressedBorderColor: =ColorFade(Image_1.BorderColor, -20%)
+                PressedFill: =ColorFade(Image_1.Fill, -20%)
+                TabIndex: =If(ThisItem.num>_CurrentLesson, -1,0)
+                Tooltip: =ThisItem.name
+                Visible: =false
+                Width: =22.49
+                X: =16
+                Y: =15
+                ZIndex: =9
+
+        iconHamburgerMenu_1 As icon.Hamburger:
+            AccessibleLabel: ="expand or compact the menu"
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledFill: =iconHamburgerMenu_1.Fill
+            FocusedBorderColor: =iconHamburgerMenu_1.BorderColor
+            Height: =24
+            HoverBorderColor: =ColorFade(iconHamburgerMenu_1.BorderColor, 20%)
+            HoverColor: =ColorFade(iconHamburgerMenu_1.Color, 20%)
+            HoverFill: =iconHamburgerMenu_1.Fill
+            Icon: =Icon.Hamburger
+            OnSelect: =Set(IsExpand, !IsExpand)
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =ColorFade(iconHamburgerMenu_1.BorderColor, -20%)
+            PressedColor: =ColorFade(iconHamburgerMenu_1.Color, -20%)
+            PressedFill: =iconHamburgerMenu_1.Fill
+            TabIndex: =0
+            Width: =17
+            X: =15
+            Y: =70
+            ZIndex: =2
+
+        RectangleBorder2_1 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder2_1.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder2_1.BorderColor
+            Height: =911
+            HoverFill: =RectangleBorder2_1.Fill
+            PressedFill: =RectangleBorder2_1.Fill
+            Visible: =IsExpand
+            Width: =1
+            X: =40
+            ZIndex: =3
+
+        RectangleBorder1_1 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder1_1.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder1_1.BorderColor
+            Height: =911
+            HoverFill: =RectangleBorder1_1.Fill
+            PressedFill: =RectangleBorder1_1.Fill
+            Visible: =!IsExpand
+            Width: =1
+            X: =GalleryLessons_1.X+GalleryLessons_1.Width
+            ZIndex: =4
+
+    GroupDetailsPanel_11 As group:
+        Height: =5
+        Width: =5
+        X: =-906
+        Y: =-20
+        ZIndex: =28
+
+        RectangleDetailsBackground_11 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0.16)
+            BorderThickness: =1
+            DisabledFill: =RectangleDetailsBackground_11.Fill
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =RectangleDetailsBackground_11.BorderColor
+            Height: =911
+            HoverFill: =RectangleDetailsBackground_11.Fill
+            PressedFill: =RectangleDetailsBackground_11.Fill
+            Width: =421
+            X: =1496.93
+            ZIndex: =9
+
+        LabelDetalisTitle_11 As label:
+            Align: =Align.Center
+            FocusedBorderColor: =LabelDetalisTitle_11.BorderColor
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            HoverBorderColor: =LabelDetalisTitle_11.BorderColor
+            HoverColor: =LabelDetalisTitle_11.Color
+            HoverFill: =LabelDetalisTitle_11.Fill
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =LabelDetalisTitle_11.BorderColor
+            PressedColor: =LabelDetalisTitle_11.Color
+            PressedFill: =LabelDetalisTitle_11.Fill
+            Size: =21.08
+            Text: ="Digital WBR"
+            Width: =233
+            X: =1568
+            Y: =92
+            ZIndex: =10
+
+        LabelDetailsSteps_11 As label:
+            Color: =If(IsShowResourcesTab, RGBA(102,102,102,1), RGBA(51,51,51,1))
+            FocusedBorderColor: =LabelDetailsSteps_11.BorderColor
+            FocusedBorderThickness: |
+                =1
+            Font: =Font.'Segoe UI'
+            FontWeight: =If(!IsShowResourcesTab,FontWeight.Bold, FontWeight.Normal)
+            Height: =55
+            HoverBorderColor: =LabelDetailsSteps_11.BorderColor
+            HoverColor: =LabelDetailsSteps_11.Color
+            HoverFill: =LabelDetailsSteps_11.Fill
+            OnSelect: |-
+                =UpdateContext({IsShowResourcesTab: false})
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =LabelDetailsSteps_11.BorderColor
+            PressedColor: =LabelDetailsSteps_11.Color
+            PressedFill: =LabelDetailsSteps_11.Fill
+            Size: =14.76
+            TabIndex: =0
+            Text: ="Instruction"
+            Width: =119
+            X: =1723
+            Y: =162
+            ZIndex: =11
+
+        LabelDetailsResources_11 As label:
+            Align: =Align.Center
+            Color: =If(IsShowResourcesTab, RGBA(51,51,51,1), RGBA(102,102,102,1))
+            FocusedBorderColor: =LabelDetailsResources_11.BorderColor
+            FocusedBorderThickness: |
+                =1
+            Font: =Font.'Segoe UI'
+            FontWeight: =If(IsShowResourcesTab,FontWeight.Bold, FontWeight.Normal)
+            Height: =58
+            HoverBorderColor: =LabelDetailsResources_11.BorderColor
+            HoverColor: =LabelDetailsResources_11.Color
+            HoverFill: =LabelDetailsResources_11.Fill
+            OnSelect: |-
+                =UpdateContext({IsShowResourcesTab: true})
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =LabelDetailsResources_11.BorderColor
+            PressedColor: =LabelDetailsResources_11.Color
+            PressedFill: =LabelDetailsResources_11.Fill
+            Size: =14.76
+            TabIndex: =0
+            Text: ="Resources"
+            Width: =122
+            X: =1554
+            Y: =162
+            ZIndex: =12
+
+        RectangleTab1_11 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleTab1_11.Fill
+            Fill: =RGBA(116, 39, 116, 1)
+            FocusedBorderColor: =RectangleTab1_11.BorderColor
+            Height: =3
+            HoverFill: =RectangleTab1_11.Fill
+            OnSelect: |
+                =false
+            PressedFill: =RectangleTab1_11.Fill
+            Visible: |
+                =IsShowResourcesTab
+            Width: =102
+            X: =1565
+            Y: =218
+            ZIndex: =13
+
+        RectangleTab2_11 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleTab2_11.Fill
+            Fill: =RGBA(116, 39, 116, 1)
+            FocusedBorderColor: =RectangleTab2_11.BorderColor
+            Height: =3
+            HoverFill: =RectangleTab2_11.Fill
+            PressedFill: =RectangleTab2_11.Fill
+            Visible: =IsShowResourcesTab
+            Width: =106
+            X: =1561
+            Y: =218
+            ZIndex: =14
+
+        HtmlResources_11 As htmlViewer:
+            Font: =Font.'Segoe UI'
+            Height: =711
+            HoverBorderColor: =HtmlResources_11.BorderColor
+            HtmlText: =Resources.HtmlText
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =HtmlResources_11.BorderColor
+            Size: =15.46
+            Visible: =IsShowResourcesTab
+            Width: =410
+            X: =1500
+            Y: =200
+            ZIndex: =15
+
+        HtmlSteps_11 As htmlViewer:
+            Font: =Font.'Segoe UI'
+            Height: =859
+            HoverBorderColor: =HtmlSteps_11.BorderColor
+            HtmlText: |-
+                ="
+                <div style='color: #444444; padding: 1em 2em 0 1em; width: 100%; overflow: hidden;'>
+                
+                  
+                    <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >1</div>
+                    <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                        <strong> WBR Prep</strong>: Navigate to <strong>Teams Channel -> Digital WBR </strong> App to get Business Insights and Prep for your Narratives <br /><br />
+                    </div>
+                    <div style='clear: both'></div>
+                  
+                    <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >2</div>
+                    <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                       <strong>During WBR</strong>: Launch <a href=""http://aka.ms/DigitalWBR"">WBR App</a> to Drive Your Narrative  and Assign Follow Up Actions
+                    </div>
+                    <div style='clear: both'></div> <br>
+                    <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >3</div>
+                    <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                       <strong>After WBR</strong>: Review Actions and Track Status for continuity between revnews and highlight the progress</div>
+                    <div style='clear: both'></div>
+                
+                </div>
+                  "
+            PaddingRight: =7.03
+            PaddingTop: =7.03
+            PressedBorderColor: =HtmlSteps_11.BorderColor
+            Size: =15.46
+            Visible: =!IsShowResourcesTab
+            Width: =412
+            X: =1498.33
+            Y: =52
+            ZIndex: =16
+

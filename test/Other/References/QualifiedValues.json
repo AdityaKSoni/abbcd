@@ -1,0 +1,53 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_poc_insights_rob_forms",
+      "Namespace": "POC_Insights_ROBS (Forms)",
+      "Values": {
+        "Information": "4b9d6ba5-a55c-4b64-b3e7-c18456ce5a7c"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_reporting_appdigitaleureka_overview_forms",
+      "Namespace": "Reporting_AppDigitalEureka_Overviews (Forms)",
+      "Values": {
+        "Information": "b2c94ca5-b13c-4dbf-80aa-db537f88359d"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_reporting_sl_overview_forms",
+      "Namespace": "Reporting_SL_Overviews (Forms)",
+      "Values": {
+        "Information": "11027855-e299-4f02-bb9c-c4317407ffd3"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_reporting_appdigitalwbr_overview_forms",
+      "Namespace": "Reporting_AppDigitalWBR_Overviews (Forms)",
+      "Values": {
+        "Information": "2e62a621-6747-40af-8c4c-a705250e7ea5"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_profilestesting_forms",
+      "Namespace": "ProfilesTestings (Forms)",
+      "Values": {
+        "Information": "7423c8ca-400e-490e-a3d7-daa292cf4ea9"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_industry180profiles_forms",
+      "Namespace": "Industry180Profiles (Forms)",
+      "Values": {
+        "Information": "932e79ca-6b45-44e8-9c3f-87ecff5ed597"
+      }
+    },
+    {
+      "Kind": "b3bc9c0c-076d-ed2c-94cb-b9b16773db0e_crdd7_industry180roles_forms",
+      "Namespace": "Industry180Roles (Forms)",
+      "Values": {
+        "Information": "6ed4f29e-871c-4170-9c4a-e6d9f66ed008"
+      }
+    }
+  ]
+}

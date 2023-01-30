@@ -1,0 +1,7 @@
+"'L99_Outlook-Pipeline' As screen":
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =
+    Orientation: =If('L99_Outlook-Pipeline'.Width < 'L99_Outlook-Pipeline'.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= 'L99_Outlook-Pipeline'.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+

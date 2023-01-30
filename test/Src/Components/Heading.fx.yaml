@@ -1,0 +1,98 @@
+Heading As CanvasComponent:
+    cpIconScreen: ="Text"
+    cpScreenName: ="Text"
+    DefProperty: =varDef
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =60
+    Width: =1920
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    conHeader As groupContainer.manualLayoutContainer:
+        Height: =60
+        Width: =1920
+        ZIndex: =1
+
+        recHeader As rectangle:
+            Fill: =RGBA(9, 33, 98, 1)
+            Height: =60
+            Width: =1920
+            ZIndex: =1
+
+        ImageHeader As image:
+            Height: =50
+            Image: =ModernAnalyticsInsights_Logo_rev
+            Width: =152
+            X: =20
+            Y: =5
+            ZIndex: =2
+
+        lblHeader As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =60
+            PaddingLeft: =35
+            PaddingTop: =0
+            Size: =24
+            Text: ="Industry Insights"
+            Width: =276
+            X: =686
+            ZIndex: =3
+
+        IconInfo As icon.Information:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =25
+            Icon: =Icon.Lock
+            OnSelect: |-
+                =Launch("http://aka.ms/3simplesteps")
+            Tooltip: ="Access Info"
+            Width: =25
+            X: =1872
+            Y: =17
+            ZIndex: =4
+
+        lblScreenName As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =50
+            PaddingTop: =0
+            Size: =20
+            Text: =Heading.cpScreenName
+            Width: =430
+            X: =1390
+            Y: =5
+            ZIndex: =5
+
+        IconScreen As icon.Add:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =30
+            Icon: =Heading.cpIconScreen
+            Width: =30
+            X: =1350
+            Y: =15
+            ZIndex: =6
+
+        Icon2 As icon.Add:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =26
+            Icon: =Icon.DocumentWithContent
+            OnSelect: =Set(varDef,true);
+            Tooltip: ="Feedback"
+            Width: =26
+            X: =1827
+            Y: =17
+            ZIndex: =7
+
+        Icon7 As icon.Support:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =26
+            Icon: =Icon.Support
+            OnSelect: |-
+                =Launch("https://microsoft.sharepoint.com/teams/AnswersHub/SitePages/RaiseAnAnswersHubSupportRequest.aspx")
+            Tooltip: ="Support"
+            Width: =26
+            X: =1782
+            Y: =17
+            ZIndex: =8
+

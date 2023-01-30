@@ -1,0 +1,3078 @@
+L01_ISCorp As screen:
+    Height: |
+        =Max(App.Height, App.DesignHeight)
+    OnVisible: |+
+        =Set(_Results1,true);
+        Select(btn_IsCore_CustomerJourney);
+        Set(_Screen,"ISCorp");
+        
+        If(_EditMode=false,
+        UpdateContext({IsShowResourcesTab: false});
+        UpdateContext({Actions: false});
+        UpdateContext({ActionEdit: false}); );
+        Set(_Screen,"ISCorp");
+        Set(_Edit1,false);
+        Set(_Edit2,false);
+        Set(_Edit3,false);
+        Set(_ISDResults1,false);
+        Set(_CTResults1,false);
+        Set(_CIResults1,false);
+        Set(_CSEResults1,false);
+        Set(_SPTResults1,false);
+        Set(_CTOResults1,false);
+        Set(_SLResults1,false);
+        
+        If(_Screen="ISCorp",
+        ClearCollect(SubLessons,
+        {subNum: 1, name:"CT"},
+        {subNum: 2, name:"CI"},
+        {subNum: 3, name:"CSE"},
+        {subNum: 4, name:"SPT"},
+        {subNum: 5, name:"CTO"},
+        {subNum: 6, name:"Service Lines"},
+        {subNum: 7, name:"ISD"}
+        ));
+        Set(enableSubNav,false);
+        
+        
+        
+        
+    Orientation: =If(L01_ISCorp.Width < L01_ISCorp.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= L01_ISCorp.Width)
+    Width: |
+        =Max(App.Width, App.DesignWidth)
+
+    RectangleBackground_54 As rectangle:
+        BorderStyle: =BorderStyle.None
+        DisabledFill: =RectangleBackground_54.Fill
+        Fill: =RGBA(241, 241, 241, 1)
+        FocusedBorderColor: =RectangleBackground_54.BorderColor
+        Height: =1080
+        HoverFill: =RectangleBackground_54.Fill
+        PressedFill: =RectangleBackground_54.Fill
+        Width: =1920
+        X: =0.00
+        Y: |
+            =0
+        ZIndex: =1
+
+    TaskNum_54 As label:
+        Align: =Right
+        BorderColor: =RGBA(130, 144, 156, 1)
+        Color: =RGBA(62, 96, 170, 1)
+        DisabledColor: =ColorFade(RGBA(47, 41, 43, 1),90%)
+        DisplayMode: =DisplayMode.Disabled
+        FocusedBorderColor: =TaskNum_54.BorderColor
+        Height: =264
+        HoverBorderColor: =TaskNum_54.BorderColor
+        HoverColor: =TaskNum_54.Color
+        HoverFill: =TaskNum_54.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =TaskNum_54.BorderColor
+        PressedColor: =TaskNum_54.Color
+        PressedFill: =TaskNum_54.Fill
+        Size: =210.83
+        Text: =LookUp(Lessons,screen = App.ActiveScreen,num)
+        Width: =317.66
+        X: =1602.34
+        Y: =504
+        ZIndex: =9
+
+    CanvasMain_ISD_2 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(241,241,241,1)
+        Height: =1010
+        NumberOfColumns: =2
+        Width: |+
+            =1100 + If(
+                IsExpand && !_EditMode && CollapseRM,
+                730,
+                If(
+                    !IsExpand && !_EditMode && CollapseRM,
+                    550,
+                    If(
+                        !IsExpand && !_EditMode && !CollapseRM,
+                        270,
+                        If(
+                            IsExpand && !_EditMode && !CollapseRM,
+                            450,450
+                            
+                        )
+                    )
+                )
+            )
+            
+            
+            
+            
+        X: =If(!IsExpand, GalleryLessons_54.X+GalleryLessons_54.Width, RectangleBorder2_54.X+1)
+        Y: =60
+        ZIndex: =10
+
+        DataCardMain_ISD_2 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =980
+            Width: =CanvasMain_ISD_2.Width
+            WidthFit: =false
+            X: =0
+            Y: =CanvasMain_ISD_2.Y
+            ZIndex: =1
+
+            Image10_2 As image:
+                Height: =764
+                Image: |+
+                    ="https://microsoft.sharepoint.com/teams/SIRob/Shared%20Documents/DigitalWBR_Excels/wbr-agenda.png"
+                    
+                Visible: =_Results8
+                Width: =1606
+                X: =2
+                Y: =40
+                ZIndex: =3
+
+            Label1 As label:
+                Fill: =RGBA(241, 241, 241, 1)
+                Height: =35
+                Text: =""
+                Width: =1640
+                Y: =845
+                ZIndex: =5
+
+            topNavISD As groupContainer.manualLayoutContainer:
+                Height: =40
+                Visible: =varTopNavISD
+                Width: =1700
+                X: =5
+                ZIndex: =23
+
+                Rectangle5_1 As rectangle:
+                    Fill: =RGBA(241, 241, 241, 1)
+                    Height: =40
+                    Width: =1700
+                    ZIndex: =1
+
+                btnIPExecSummary_2 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_ISDResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_ISDResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,true);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="FY23 ISD ROB"
+                    Visible: =_ISDResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =2
+
+                btnCTExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_CTResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_CTResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,true);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: =_CTResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =3
+
+                btnCIExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_CIResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_CIResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,true);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: =_CIResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =4
+
+                btCSEExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_CSEResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_CSEResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,true);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_CSEResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =5
+
+                btnSPTExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_SPTResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_SPTResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,true);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_SPTResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =6
+
+                btnCTOExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_CTOResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_CTOResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,true);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_CTOResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =7
+
+                btnSLExecSummary As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_SLResults1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_SLResults1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,false);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,true);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_SLResults1
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =8
+
+            topNavISCore As groupContainer.manualLayoutContainer:
+                Height: =40
+                Visible: =varTopNav
+                Width: =1700
+                ZIndex: =24
+
+                Rectangle5 As rectangle:
+                    Fill: =RGBA(241, 241, 241, 1)
+                    Height: =40
+                    Width: =1700
+                    ZIndex: =1
+
+                btn_IsCore_CustomerJourney As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results1,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results1,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, true);
+                        Set(_Results2, false);
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Customer Journey"
+                    Width: =180
+                    X: =5
+                    Y: =5
+                    ZIndex: =2
+
+                btn_IsCore_CT As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results2,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results2,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, true);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="CT"
+                    Width: =180
+                    X: =btn_IsCore_CustomerJourney.X+btn_IsCore_CustomerJourney.Width+15
+                    Y: =5
+                    ZIndex: =3
+
+                btn_IsCore_CI As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results3,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results3,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, true); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="CI"
+                    Width: =180
+                    X: =btn_IsCore_CT.X+btn_IsCore_CT.Width+15
+                    Y: =5
+                    ZIndex: =4
+
+                btn_IsCore_CSE As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results4,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results4,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, true);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="CSE"
+                    Width: =180
+                    X: =btn_IsCore_CI.X+btn_IsCore_CI.Width+15
+                    Y: =5
+                    ZIndex: =5
+
+                btn_IsCore_CTO As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results5,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results5,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, true); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="CTO"
+                    Width: =180
+                    X: =btn_IsCore_CSE.X+btn_IsCore_CSE.Width+15
+                    Y: =5
+                    ZIndex: =6
+
+                btn_IsCore_SL As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results6,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results6,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, true);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="SL"
+                    Width: =180
+                    X: =btn_IsCore_CTO.X+btn_IsCore_CTO.Width+15
+                    Y: =5
+                    ZIndex: =7
+
+                btn_IsCore_ISD As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results7,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results7,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |+
+                        =Set(_Results1, false);
+                        Set(_Results2, false);
+                        Set(_ISDResults1,false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, true);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11,false);
+                        Set(_Results12, false);
+                        //Set(_IPExecSummary,true);
+                        Set(varTopNav, true);
+                        Set(varTopNavISD,false);
+                        
+                        Set(_ISDResults1,false); 
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        Set(_SubScreen,"Overview");
+                        UpdateContext({IsShowResourcesTab: false}); 
+                        UpdateContext({Actions: false}); 
+                        Set (_EditMode, false);
+                        UpdateContext({ActionEdit: false});
+                        UpdateContext({Comments: false});
+                        Set(_Edit1,false);
+                        Set(_Edit2,false);
+                        Set(_Edit3,false);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="ISD"
+                    Width: =180
+                    X: =btn_IsCore_SL.X+btn_IsCore_SL.Width+15
+                    Y: =5
+                    ZIndex: =8
+
+            Group_LinkSummary As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =25
+
+                btnIPExecSummary_3 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results7,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results7,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,true);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Summary Details"
+                    Visible: =_Results7
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =16
+
+                btnCTExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results2,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results2,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,true);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: =_Results2
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =17
+
+                btnCIExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results3,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results3,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,true);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: =_Results3
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =18
+
+                btCSEExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results4
+                        ,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results4,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,true);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_Results4
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =19
+
+                btnSPTExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results5,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results5,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,true);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_Results5
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =20
+
+                btnCTOExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results6,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results6,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,true);
+                        Set(_SLResults1,false);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: |
+                        =_Results6
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =21
+
+                btnSLExecSummary_1 As button:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =0.5
+                    Color: |
+                        =If(_Results6,White,RGBA(0, 0, 0, 1))
+                    Fill: =If(_Results6,RGBA(0, 134, 208, 1),RGBA(255, 255, 255, 1))
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =Normal
+                    Height: =35
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 134, 208, 1)
+                    OnSelect: |-
+                        =Set(enableSubNav,true);
+                        
+                        //Set(CollapseRM,false);
+                        //Set(IsShowResourcesTab, false);
+                        //Set(_EditMode, false);
+                        //Set(IsExpand,false);
+                        
+                        Set(_ISDResults1,false);
+                        Set(_CTResults1,false);
+                        Set(_CIResults1,false);
+                        Set(_CSEResults1,false);
+                        Set(_SPTResults1,false);
+                        Set(_CTOResults1,false);
+                        Set(_SLResults1,true);
+                        
+                        
+                        Set(varTopNav, false);
+                        
+                        Set(varTopNavISD,true);
+                        //Set(varTopNavCT,false);
+                        //Set(varTopNavCI,false);
+                        //Set(varTopNavCSE,false);
+                        //Set(varTopNavSPT,false);
+                        //Set(varTopNavCTO,true);
+                        //Set(varTopNavSL,false);
+                        
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(0, 134, 208, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10.5
+                    Text: ="Executive Summary"
+                    Visible: =_Results6
+                    Width: =180
+                    X: =1074
+                    Y: =66
+                    ZIndex: =22
+
+            Group_PowerBI As group:
+                Height: =5
+                Width: =5
+                X: =260
+                Y: =260
+                ZIndex: =29
+
+                PowerBI_ISD As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =0
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_ISDResults1
+                    TileUrl: |-
+                        ="https://msit.powerbi.com/reportEmbed?reportId=0a2b5905-5232-4a96-a856-df726b7fd151&autoAuth=true&pageName=ReportSection9b729a166d7f3fa44cab"
+                    Visible: =_ISDResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =2
+
+                PowerBI_CT As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_CTResults1
+                    TileUrl: |-
+                        ="https://msit.powerbi.com/reportEmbed?reportId=1f92cdda-a5d0-432a-b965-43db498f62e0&autoAuth=true&pageName=ReportSection0a3575e81cdc0f2a4d04"
+                    Visible: =_CTResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =11
+
+                PowerBI_CI As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_CIResults1
+                    TileUrl: |-
+                        ="https://msit.powerbi.com/reportEmbed?reportId=687a67cd-6094-4e96-a7a5-658be96e4ac2&autoAuth=true&pageName=ReportSectiona4a7f4e8560226541f0c"
+                    Visible: =_CIResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =12
+
+                PowerBI_CSE As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_CSEResults1
+                    Visible: =_CSEResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =13
+
+                PowerBI_CTO As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_CTOResults1
+                    Visible: =_CTOResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =14
+
+                PowerBI_SL As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_SLResults1
+                    Visible: =_SLResults1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =15
+
+            Group_PowerBI_ISCore As group:
+                Height: =5
+                Width: =5
+                X: =260
+                Y: =260
+                ZIndex: =29
+
+                PowerBI_IsCore_CustomerJourney As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =0
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results1
+                    TileUrl: |-
+                        =//"https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSectiondd00a3faa7ba96ba0b88"
+                        "https://msit.powerbi.com/reportEmbed?reportId=bd0e418c-2edf-4bf0-b79b-22e0e294a178&autoAuth=true&pageName=ReportSection9e30af461142572211"
+                    Visible: =_Results1
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =1
+
+                PowerBI_IsCore_CT As powerbi:
+                    AllowNewAPI: =true
+                    BorderThickness: =0
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results2
+                    TileUrl: |-
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSectiondb88cbf2ad0b9070de22"
+                    Visible: =_Results2
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =4
+
+                PowerBI_IsCore_CI As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results3
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSection0b491b0623070304e0c6"
+                        
+                    Visible: =_Results3
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =6
+
+                PowerBI_IsCore_CSE As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results4
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSectione2aa5b04e21b88bc2c8e"
+                        
+                    Visible: =_Results4
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =7
+
+                PowerBI_IsCore_CTO As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results5
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSection5d7097b589137ac5d455"
+                        
+                    Visible: =_Results5
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =8
+
+                PowerBI_IsCore_SL As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results6
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSection033b4e55b3c4e6040080"
+                        
+                    Visible: =_Results6
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =9
+
+                PowerBI_IsCore_ISD As powerbi:
+                    AllowNewAPI: =true
+                    Height: |
+                        =DataCardMain_ISD_2.Height-100
+                    LoadPowerBIContent: =_Results7
+                    TileUrl: |+
+                        ="https://msit.powerbi.com/reportEmbed?reportId=2e875be8-ec61-42ba-8cb2-d83666463411&autoAuth=true&pageName=ReportSectionbc5af4f22dc44b346dbe"
+                        
+                    Visible: =_Results7
+                    Width: |
+                        =DataCardMain_ISD_2.Width-10
+                    X: |
+                        =DataCardMain_ISD_2.X
+                    Y: =DataCardMain_ISD_2.Y
+                    ZIndex: =10
+
+    Label_Collapse_35 As label:
+        Height: =34
+        Text: |
+            ="CollapseRM" &CollapseRM
+        Visible: =false
+        Width: =204
+        X: =866
+        Y: =140
+        ZIndex: =31
+
+    Label_IsExpand_35 As label:
+        Text: |-
+            ="Expand :"&IsExpand
+        Visible: =false
+        X: =1117
+        Y: =110
+        ZIndex: =32
+
+    Label_IsEdit_35 As label:
+        Text: |+
+            ="ISExpand :"& IsExpand
+            
+        Visible: =false
+        X: =1058
+        Y: =164
+        ZIndex: =33
+
+    Label3_2 As label:
+        Text: =_Results1
+        Visible: =false
+        X: =426
+        Y: =860
+        ZIndex: =36
+
+    Label6_2 As label:
+        Text: |
+            =
+        Visible: =false
+        X: =1255
+        Y: =127
+        ZIndex: =39
+
+    LeftNavigation_IsCorp As LeftNavigation:
+        _CurrentLessonProperty: =_CurrentLesson
+        Height: =871
+        Visible: =false
+        Y: =40
+        ZIndex: =50
+
+    Group16 As group:
+        Height: =5
+        Width: =5
+        X: =120
+        Y: =120
+        ZIndex: =50
+
+        Gallery5 As gallery.variableTemplateHeightGallery:
+            Height: =911
+            Items: =SortByColumns(Filter(Lessons, num >= 0 && num <= 20),"num",Ascending)
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =220
+            Y: =100
+            ZIndex: =2
+
+            RectangleCurrentSelected_55 As rectangle:
+                DisabledFill: =RectangleCurrentSelected_55.Fill
+                Fill: =RGBA(220, 220, 220, 1)
+                FocusedBorderColor: =RectangleCurrentSelected_55.BorderColor
+                Height: =40
+                HoverFill: =RectangleCurrentSelected_55.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(_EditMode,false);Set(IsExpand,true);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                PressedFill: =RectangleCurrentSelected_55.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =210
+                ZIndex: =1
+
+            RectangleSelected_55 As rectangle:
+                DisabledFill: =RectangleSelected_55.Fill
+                Fill: =RGBA(116, 39, 116, 1)
+                FocusedBorderColor: =RectangleSelected_55.BorderColor
+                Height: =20
+                HoverFill: =RectangleSelected_55.Fill
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PressedFill: =RectangleSelected_55.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =5.62
+                X: =1
+                Y: =11
+                ZIndex: =2
+
+            LabelName_55 As label:
+                Color: =RGBA(51, 51, 51, 1)
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =LabelName_55.BorderColor
+                Font: =Font.'Segoe UI'
+                HoverBorderColor: =LabelName_55.BorderColor
+                HoverColor: =LabelName_55.Color
+                HoverFill: =LabelName_55.Fill
+                LineHeight: =0
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PaddingRight: =7.03
+                PaddingTop: =7.03
+                PressedBorderColor: =LabelName_55.BorderColor
+                PressedColor: =LabelName_55.Color
+                PressedFill: =LabelName_55.Fill
+                Size: =12
+                Text: =ThisItem.name
+                Tooltip: =ThisItem.name
+                Width: =(GalleryLessons_54.X+GalleryLessons_54.Width)-RectangleBorder2_54.X
+                X: =38
+                ZIndex: =3
+
+            ImageLessonIcon_48 As image:
+                AccessibleLabel: ="Navigate to " & ThisItem.name & " screen"
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =ImageLessonIcon_48.BorderColor
+                Height: =16
+                HoverBorderColor: =ColorFade(ImageLessonIcon_48.BorderColor, 20%)
+                HoverFill: =ColorFade(ImageLessonIcon_48.Fill, 20%)
+                Image: =ThisItem.icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                PaddingRight: =0.00
+                PaddingTop: =0.00
+                PressedBorderColor: =ColorFade(ImageLessonIcon_48.BorderColor, -20%)
+                PressedFill: =ColorFade(ImageLessonIcon_48.Fill, -20%)
+                TabIndex: =If(ThisItem.num>_CurrentLesson, -1,0)
+                Tooltip: =ThisItem.name
+                Visible: =false
+                Width: =22.49
+                X: =12
+                Y: =13
+                ZIndex: =4
+
+            Icon2_41 As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =16
+                Icon: =ThisItem.Icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(IsExpand,false);
+                    
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false); 
+                    Set(_Results11, false); 
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_SubScreen,"Overview");
+                    
+                    
+                Tooltip: =ThisItem.name
+                Width: =22.49
+                X: =12
+                Y: =13
+                ZIndex: =5
+
+            Rectangle2_22 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Visible: |
+                    =If(ThisItem.num in (RectNumbers.Num), true, false)
+                Width: =210
+                X: |
+                    =0
+                Y: =39
+                ZIndex: =6
+
+            "subNavGallery As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+                Default: ={}
+                Height: =If(CountRows(subNavGallery.AllItems)>0,CountRows(subNavGallery.AllItems)*30,0)
+                Items: =If(ThisItem.num=14,SubLessons)
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =30 //Min(870, Self.Height - 60)
+                Width: =200
+                X: =20
+                Y: =45
+                ZIndex: =7
+
+                colorRec As rectangle:
+                    BorderColor: =RGBA(213, 25, 32, 1)
+                    Fill: =If(ThisItem.IsSelected && enableSubNav,RGBA(193, 204, 228, 100),RGBA(0,0,0,0))
+                    Height: =30
+                    OnSelect: |-
+                        =Select(Parent);
+                        
+                        If(subNavTitle.Text="ISD",Set(_ISDResults1,true);,Set(_ISDResults1,false););
+                        If(subNavTitle.Text="CT",Set(_CTResults1,true);,Set(_CTResults1,false););
+                        If(subNavTitle.Text="CI",Set(_CIResults1,true);,Set(_CIResults1,false););
+                        If(subNavTitle.Text="CSE",Set(_CSEResults1,true);,Set(_CSEResults1,false););
+                        If(subNavTitle.Text="SPT",Set(_SPTResults1,true);,Set(_SPTResults1,false););
+                        If(subNavTitle.Text="CTO",Set(_CTOResults1,true);,Set(_CTOResults1,false););
+                        If(subNavTitle.Text="Service Lines",Set(_SLResults1,true);,Set(_SLResults1,false););
+                        
+                        
+                        Set(enableSubNav,true);
+                        Set(varTopNavISD,true);
+                        Set(varTopNav,false);
+                        Set(CollapseRM,true);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        //Set(_ISDResults1,true);
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    Width: =160
+                    X: =25
+                    ZIndex: =1
+
+                sideSubRectangleSelected As rectangle:
+                    Height: =20
+                    OnSelect: |-
+                        =Select(Parent);
+                        If(subNavTitle.Text="ISD",Set(_ISDResults1,true);,Set(_ISDResults1,false););
+                        If(subNavTitle.Text="CT",Set(_CTResults1,true);,Set(_CTResults1,false););
+                        If(subNavTitle.Text="CI",Set(_CIResults1,true);,Set(_CIResults1,false););
+                        If(subNavTitle.Text="CSE",Set(_CSEResults1,true);,Set(_CSEResults1,false););
+                        If(subNavTitle.Text="SPT",Set(_SPTResults1,true);,Set(_SPTResults1,false););
+                        If(subNavTitle.Text="CTO",Set(_CTOResults1,true);,Set(_CTOResults1,false););
+                        If(subNavTitle.Text="Service Lines",Set(_SLResults1,true);,Set(_SLResults1,false););	
+                        
+                        Set(varTopNavISD,true);Set(varTopNav,false);
+                        Set(enableSubNav,true);
+                        Set(enableSubNav,true);
+                        
+                        Set(CollapseRM,true);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        //Set(_ISDResults1,true);
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    Width: =5.62
+                    X: =25
+                    Y: =5
+                    ZIndex: =2
+
+                subNavTitle As label:
+                    Font: =Font.'Segoe UI'
+                    Height: =25
+                    OnSelect: |-
+                        =If(subNavTitle.Text="ISD",Set(_ISDResults1,true);,Set(_ISDResults1,false););
+                        If(subNavTitle.Text="CT",Set(_CTResults1,true);,Set(_CTResults1,false););
+                        If(subNavTitle.Text="CI",Set(_CIResults1,true);,Set(_CIResults1,false););
+                        If(subNavTitle.Text="CSE",Set(_CSEResults1,true);,Set(_CSEResults1,false););
+                        If(subNavTitle.Text="SPT",Set(_SPTResults1,true);,Set(_SPTResults1,false););
+                        If(subNavTitle.Text="CTO",Set(_CTOResults1,true);,Set(_CTOResults1,false););
+                        If(subNavTitle.Text="Service Lines",Set(_SLResults1,true);,Set(_SLResults1,false););	
+                        Set(enableSubNav,true);
+                        Set(varTopNavISD,true);
+                        Set(varTopNav,false);
+                        Set(CollapseRM,true);
+                        Set(IsShowResourcesTab, false);
+                        Set(_EditMode, false);
+                        Set(IsExpand,false);
+                        //Set(_ISDResults1,true);
+                        Set(_Results1, false);
+                        Set(_Results2, false); 
+                        Set(_Results3, false); 
+                        Set(_Results4, false);
+                        Set(_Results5, false); 
+                        Set(_Results6, false);
+                        Set(_Results7, false);
+                        Set(_Results8, false); 
+                        Set(_Results9, false);
+                        Set(_Results10, false);
+                        Set(_Results11, false);
+                        Set(_Results12, false);
+                        Set(_Results13, false);
+                        Set(_Results14, false);
+                        Set(_SubScreen,"Overview");
+                    PaddingBottom: =0
+                    PaddingTop: =10
+                    Size: =11
+                    Text: =ThisItem.name
+                    X: =30
+                    ZIndex: =3
+
+        "GalleryLessons_54 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            AccessibleLabel: ="List of available lessons"
+            DisabledBorderColor: =GalleryLessons_54.BorderColor
+            DisabledFill: =GalleryLessons_54.Fill
+            Height: =911
+            HoverBorderColor: =GalleryLessons_54.BorderColor
+            HoverFill: =GalleryLessons_54.Fill
+            Items: =Filter(Lessons, num >= 0 && num <= 20)
+            Layout: =Layout.Vertical
+            LoadingSpinnerColor: =GalleryLessons_54.BorderColor
+            OnSelect: |+
+                =Set(_Results1, true);
+                Set(_Results2, false); 
+                Set(_Results3, false); 
+                Set(_Results4, false);
+                Set(_Results5, false); 
+                Set(_Results6, false);
+                Set(_Results7, false);
+                Set(_Results8, false); 
+                Set(_Results9, false);
+                Set(_Results10, false);
+                Set(_Results11, false);
+                Set(_Results12, false);
+                Set(_Results13, false);
+                Set(_Results14, false);
+                
+                Set(_SubScreen,"Overview");
+                Set(CollapseRM,true);
+                If(_Results1,Select(btn_IsCore_CustomerJourney););
+                
+                
+            PressedBorderColor: =GalleryLessons_54.BorderColor
+            PressedFill: =GalleryLessons_54.Fill
+            TemplatePadding: =0
+            TemplateSize: =40
+            Visible: =false
+            Width: =220
+            Y: =100
+            ZIndex: =3
+
+        iconHamburgerMenu_54 As icon.Hamburger:
+            AccessibleLabel: ="expand or compact the menu"
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledFill: =iconHamburgerMenu_54.Fill
+            FocusedBorderColor: =iconHamburgerMenu_54.BorderColor
+            Height: =24
+            HoverBorderColor: =ColorFade(iconHamburgerMenu_54.BorderColor, 20%)
+            HoverColor: =ColorFade(iconHamburgerMenu_54.Color, 20%)
+            HoverFill: =iconHamburgerMenu_54.Fill
+            Icon: =Icon.Hamburger
+            OnSelect: |+
+                =Set(IsExpand, !IsExpand);
+                //Set(CollapseRM,false);Set (_EditMode, false); UpdateContext({IsShowResourcesTab: false});
+                
+                
+                
+                
+                
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =ColorFade(iconHamburgerMenu_54.BorderColor, -20%)
+            PressedColor: =ColorFade(iconHamburgerMenu_54.Color, -20%)
+            PressedFill: =iconHamburgerMenu_54.Fill
+            TabIndex: =0
+            Width: =17
+            X: =15
+            Y: =70
+            ZIndex: =4
+
+        RectangleBorder2_54 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder2_54.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder2_54.BorderColor
+            Height: =CanvasMain_ISD_2.Height+25
+            HoverFill: =RectangleBorder2_54.Fill
+            PressedFill: =RectangleBorder2_54.Fill
+            Visible: =false
+            Width: =1
+            X: =40
+            Y: =60
+            ZIndex: =5
+
+        RectangleBorder1_54 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder1_54.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder1_54.BorderColor
+            Height: =CanvasMain_ISD_2.Height+25
+            HoverFill: =RectangleBorder1_54.Fill
+            PressedFill: =RectangleBorder1_54.Fill
+            Width: =1
+            X: =GalleryLessons_54.X+GalleryLessons_54.Width-2
+            Y: =60
+            ZIndex: =6
+
+    Heading_ISCorp As Heading:
+        cpScreenName: ="IS Core"
+        ZIndex: =51
+
+    RightNav_IsCorp As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(204, 204, 204, 1)
+        BorderThickness: =1
+        Height: =900
+        Width: =If(CollapseRM,50,330)
+        X: =If(CollapseRM,1870,1590)
+        Y: =60
+        ZIndex: =52
+
+        bgRec_Finance_2 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =900
+            Width: =RightNav_IsCorp.Width
+            ZIndex: =1
+
+        ICExpandFinance_2 As icon.ChevronLeft:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =30
+            Icon: =Icon.ChevronLeft
+            OnSelect: =Set(CollapseRM,false);Set(rightNavInsights,true);Set(rightNavDef,false);Set(rightNavActionsShare,false);
+            Visible: =CollapseRM
+            Width: =30
+            X: =If(!CollapseRM, 362.5, 10)
+            Y: =20
+            ZIndex: =2
+
+        ICCollapseFinance_2 As icon.ChevronRight:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =30
+            Icon: =Icon.ChevronRight
+            OnSelect: =Set(CollapseRM,true);Set(rightNavInsights,false);Set(rightNavDef,false);Set(rightNavActionsShare,false);
+            Visible: =!CollapseRM
+            Width: =30
+            X: =If(!CollapseRM, 290, 12.5)
+            Y: =20
+            ZIndex: =3
+
+        CollapseHeadingFinance_2 As htmlViewer:
+            Font: =Font.'Segoe UI'
+            Height: =240
+            HtmlText: |-
+                ="<div 
+                style='
+                text-align:center;
+                position: absolute;
+                left: "&-Round((Self.Height-Self.Width)/2,0)&"px;
+                top: "&Round((Self.Height-Self.Width)/2,0)&"px;
+                transform: rotate(90deg);
+                width: "&Self.Height&"px;
+                height: "&Self.Width&"px;
+                
+                '>
+                Insights & Actions
+                </div>"
+            Size: =15
+            Visible: =If(!CollapseRM,false,true)
+            Width: =30
+            X: =If(!CollapseRM, 362.5, 10)
+            Y: =60
+            ZIndex: =4
+
+        ExpandHeadingFinance_2 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            Size: =15
+            Text: ="Insights & Actions"
+            Width: =247
+            X: =36
+            Y: =20
+            ZIndex: =5
+
+        btnAIInsightsFinance_2 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rightNavInsights,true);Set(rightNavDef,false);Set(rightNavActionsShare,false);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =12
+            Text: ="AI Insights"
+            Visible: =!CollapseRM
+            Width: =90
+            X: =10
+            Y: =80
+            ZIndex: =6
+
+        btnDefinitionsFinance_2 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rightNavInsights,false);Set(rightNavDef,true);Set(rightNavActionsShare,false);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =12
+            Text: ="Definitions"
+            Visible: =!CollapseRM
+            Width: =90
+            X: =120
+            Y: =80
+            ZIndex: =7
+
+        btnActionsShareFinance_2 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Set(rightNavInsights,false);Set(rightNavDef,false);Set(rightNavActionsShare,true);Set(varShareActions,false);Set(varConActions,false);
+                
+                If(_Results1,UpdateContext({urlDB:"IP",shareDBName:Button_Results6_IP.Text}));
+                If(_Results21,UpdateContext({urlDB:"TAM",shareDBName:Button_Results31_TAM.Text}));
+                If(_Results22,UpdateContext({urlDB:"FRA",shareDBName:Button_Results21_FRA.Text}));
+                If(_Results23,UpdateContext({urlDB:"Compete",shareDBName:Button_Results32_Compete.Text}));
+                If(_Results31,UpdateContext({urlDB:"MarketShare",shareDBName:Button_Results33_MarketShare.Text}));
+                If(_Results32,UpdateContext({urlDB:"FinanPerf",shareDBName:Button_Results22_FinalPerf.Text}));
+                If(_Results33,UpdateContext({urlDB:"IndustryVTB",shareDBName:Button_Results23_FinalPerf2.Text}));
+                If(_Results41,UpdateContext({urlDB:"IndustryCloud",shareDBName:Button_Results41_IndustryCloud.Text}));
+                If(_Results42,UpdateContext({urlDB:"SalesPlay",shareDBName:Button_Results42_SalesPlay.Text}));
+                If(_Results51,UpdateContext({urlDB:"PLSummary",shareDBName:Button_Results51_PLSummary.Text}));
+                If(_Results52,UpdateContext({urlDB:"AccountPlan",shareDBName:Button_Results52_AccountPlan.Text}));
+                If(_Results6,UpdateContext({urlDB:"IndustryView",shareDBName:Button_Results1_LP.Text}));
+                If(_Results71,UpdateContext({urlDB:"P10Diff",shareDBName:Button_Results71_Diff.Text}));
+                If(_Results72,UpdateContext({urlDB:"P10CloudExl",shareDBName:Button_Results72_CloudExcel.Text}));
+                If(_Results8,UpdateContext({urlDB:"Overview",shareDBName:Button_Results8_Overview.Text}));
+                UpdateContext({varURL:"https://apps.powerapps.com/play/85f51c24-0541-43f0-a873-9a7a19552084?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&source=portal&hidenavbar=true&Industry="&_Screen&"&Dashboard="&urlDB});
+                UpdateContext({varShare: true});Reset(txtOptionalMessageFinance_2);Set(shareUserError,false);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =12
+            Text: ="Actions"
+            Visible: =!CollapseRM
+            Width: =90
+            X: =230
+            Y: =80
+            ZIndex: =8
+
+        recAIInsightsFinance_2 As rectangle:
+            Height: =5
+            Visible: =rightNavInsights && !CollapseRM
+            Width: =85
+            X: =15
+            Y: =115
+            ZIndex: =9
+
+        recDefinitionsFinance_2 As rectangle:
+            Height: =5
+            Visible: =rightNavDef && !CollapseRM
+            Width: =85
+            X: =125
+            Y: =115
+            ZIndex: =10
+
+        recActionsShareFinance_2 As rectangle:
+            Height: =5
+            Visible: =rightNavActionsShare && !CollapseRM
+            Width: =70
+            X: =240
+            Y: =115
+            ZIndex: =11
+
+        conAIInsightsFinance_2 As groupContainer.manualLayoutContainer:
+            Height: =764
+            Visible: =rightNavInsights && !CollapseRM
+            Width: =330
+            Y: =136
+            ZIndex: =12
+
+            "Gallery3_1 As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+                Height: =700
+                Items: =Filter(POC_Insights_ROBS,!(Industry=""||Industry="Nonprofit & IGO"||Industry="Others"))
+                Layout: =Layout.Vertical
+                TemplatePadding: =4
+                TemplateSize: =Min(870, Self.Height - 60)
+                Width: =330
+                ZIndex: =2
+
+                Title3_1 As label:
+                    Align: =Align.Center
+                    Fill: =RGBA(230, 230, 230, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Bold
+                    Height: =25
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =14
+                    Text: =ThisItem.Industry
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =305
+                    X: =10
+                    Y: =2
+                    ZIndex: =2
+
+                HtmlText5_1 As htmlViewer:
+                    AutoHeight: =true
+                    Font: =Font.'Segoe UI'
+                    HtmlText: =ThisItem.Insights
+                    OnSelect: =Select(Parent)
+                    Size: =12
+                    Width: =305
+                    X: =10
+                    Y: =26
+                    ZIndex: =5
+
+        conActionsShareFin_2 As groupContainer.manualLayoutContainer:
+            Height: =764
+            Visible: =rightNavActionsShare && !CollapseRM
+            Width: =330
+            Y: =136
+            ZIndex: =15
+
+            conActionsHeadingFinance_2 As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(128, 128, 128, 1)
+                Height: =40
+                Width: =310
+                X: =10
+                Y: =contShareFinance_2.Y+contShareFinance_2.Height+10
+                ZIndex: =1
+
+                collapseActionsFinance_2 As icon.ChevronRight:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =25
+                    Icon: =Icon.ChevronRight
+                    OnSelect: =Set(varConActions,true);Set(varShareActions,false);
+                    Visible: =!varConActions
+                    Width: =25
+                    X: =7.5
+                    Y: =7.5
+                    ZIndex: =1
+
+                expandActionsFinance_2 As icon.ChevronDown:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =25
+                    Icon: =Icon.ChevronDown
+                    OnSelect: =Set(varConActions,false);
+                    Visible: =varConActions
+                    Width: =25
+                    X: =7.5
+                    Y: =7.5
+                    ZIndex: =2
+
+                lblActionsFinance_2 As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.'Segoe UI'
+                    Size: =12
+                    Text: ="Actions"
+                    X: =40
+                    ZIndex: =3
+
+            conActionsFinance_2 As groupContainer.manualLayoutContainer:
+                Height: =If(varConActions,600,0)
+                Width: =330
+                Y: =conActionsHeadingFinance_2.Y+conActionsHeadingFinance_2.Height
+                ZIndex: =2
+
+                "Gallery_Actionitems_Finance_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                    Height: =600
+                    Items: |+
+                        =Sort(Filter(DigitalWBR_Actionitems ,Screen=_Screen && SubScreen="Overview" ),Modified,Descending)
+                        
+                        
+                        
+                    Layout: =Layout.Vertical
+                    OnSelect: |+
+                        =UpdateContext({ActionEdit: true});
+                        
+                        
+                        
+                    TemplatePadding: =0
+                    TemplateSize: =200
+                    Visible: =varConActions
+                    Width: =310
+                    ZIndex: =1
+
+                    txtActionItemsTitleFinance_3 As label:
+                        Font: =Font.'Segoe UI'
+                        Height: =118
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =10
+                        PaddingRight: =0
+                        PaddingTop: =10
+                        Size: =12
+                        Text: =ThisItem.Title
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =false
+                        Width: =308
+                        ZIndex: =2
+
+                    lblActionItemsStatusFinance_3 As label:
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        Italic: =true
+                        OnSelect: =Select(Parent)
+                        Size: =12
+                        Text: =ThisItem.Status.Value
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Gallery_Actionitems_Finance_2.TemplateWidth-150
+                        Y: =158
+                        ZIndex: =3
+
+                    lblActionItemsSeparatorFinance_3 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    lblActionItemsDueOnFinance_3 As label:
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        Italic: =true
+                        OnSelect: =Select(Parent)
+                        Size: =12
+                        Text: |-
+                            ="Due On: " & ThisItem.ActionDueOn
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Gallery_Actionitems_Finance_2.TemplateWidth-160
+                        X: =160
+                        Y: =158
+                        ZIndex: =6
+
+                    lblActionItemsDueInFinance_3 As label:
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        Size: =12
+                        Text: |-
+                            ="Due in: " & If(DateDiff(Now(),ThisItem.ActionDueOn) < 0, "Past Due", DateDiff(Now(),ThisItem.ActionDueOn) & " Days")
+                        Width: =Gallery_Actionitems_Finance_2.TemplateWidth-160
+                        X: =160
+                        Y: =118
+                        ZIndex: =8
+
+                    lblActionItemsAssignedToFinance_3 As label:
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        Size: =12
+                        Text: |
+                            =Concat(ThisItem.'Assigned To'.DisplayName, DisplayName & ",")
+                        Width: |
+                            =Gallery_Actionitems_Finance_2.TemplateWidth-150
+                        Y: =118
+                        ZIndex: =9
+
+                    txtHTMLActionItemsTitleFinance_3 As htmlViewer:
+                        Font: =Font.'Segoe UI'
+                        Height: =118
+                        HtmlText: =ThisItem.Title
+                        OnSelect: =Select(Parent)
+                        Size: =12
+                        Width: =308
+                        ZIndex: =10
+
+            contShareHeadingFinance_2 As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(128, 128, 128, 1)
+                Height: =40
+                Width: =310
+                X: =10
+                ZIndex: =3
+
+                collapseShareFinance_2 As icon.ChevronRight:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =25
+                    Icon: =Icon.ChevronRight
+                    OnSelect: |-
+                        =Set(varShareActions,true);Set(varConActions,false);Set(varURL,"https://apps.powerapps.com/play/85f51c24-0541-43f0-a873-9a7a19552084?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&Industry");Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);
+                    Visible: =!varShareActions
+                    Width: =25
+                    X: =7.5
+                    Y: =7.5
+                    ZIndex: =1
+
+                expandShareFinance_2 As icon.ChevronDown:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =25
+                    Icon: =Icon.ChevronDown
+                    OnSelect: =Set(varShareActions,false);
+                    Visible: =varShareActions
+                    Width: =25
+                    X: =7.5
+                    Y: =7.5
+                    ZIndex: =2
+
+                lblShareFinance_2 As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.'Segoe UI'
+                    Size: =12
+                    Text: ="Share"
+                    X: =40
+                    ZIndex: =3
+
+            contShareFinance_2 As groupContainer.manualLayoutContainer:
+                Height: =If(varShareActions,410,0)
+                Width: =310
+                X: =10
+                Y: =contShareHeadingFinance_2.Y+contShareHeadingFinance_2.Height
+                ZIndex: =4
+
+                conShareFinance_2 As groupContainer.manualLayoutContainer:
+                    BorderColor: =RGBA(128, 128, 128, 1)
+                    BorderThickness: =1
+                    Height: =400
+                    Visible: =varShareActions
+                    Width: =309
+                    ZIndex: =1
+
+                    backRecFinance_2 As rectangle:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =400
+                        Width: =309
+                        ZIndex: =1
+
+                    bacHeadingRecFinance_2 As rectangle:
+                        Fill: =RGBA(237, 237, 237, 1)
+                        Height: =90
+                        Width: =309
+                        ZIndex: =2
+
+                    lblSendLinkFinance_2 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Bold
+                        Size: =12
+                        Text: ="Send Link"
+                        Width: =309
+                        ZIndex: =3
+
+                    lblIDTitleFinance_2 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        Height: =20
+                        Size: =12
+                        Text: ="Industry 180 - IsCorp"
+                        Width: =309
+                        Y: =35
+                        ZIndex: =4
+
+                    lblDashboardTitleFinance_2 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        Height: =20
+                        Size: =12
+                        Text: =shareDBName
+                        Width: =309
+                        Y: =55
+                        ZIndex: =5
+
+                    cbSelectUserFinance_2 As combobox:
+                        DisplayFields: =["DisplayName","Email"]
+                        Font: =Font.'Segoe UI'
+                        InputTextPlaceholder: ="Select User"
+                        Items: |-
+                            =Choices([@DigitalWBR_Actionitems].'Assigned To')
+                            //Office365Users.SearchUserV2({searchTerm:cbSelectUser.SearchText,top:10}).value
+                        SearchFields: =["DisplayName"]
+                        SearchItems: =Choices(DigitalWBR_Actionitems.'Assigned To',cbSelectUserFinance_2.SearchText)
+                        Size: =12
+                        Template: =ListItemTemplate.Person
+                        Width: =280
+                        X: =20
+                        Y: =125
+                        ZIndex: =6
+
+                    txtOptionalMessageFinance_2 As text:
+                        BorderThickness: =0
+                        Default: =""
+                        Font: =Font.'Segoe UI'
+                        Height: =100
+                        HintText: ="Add a message (Optional)"
+                        Mode: =TextMode.MultiLine
+                        Size: =12
+                        Tooltip: ="Add a message (Optional)"
+                        Width: =280
+                        X: =20
+                        Y: =lblShareErrorFin_2.Y+lblShareErrorFin_2.Height+10
+                        ZIndex: =7
+
+                    GrpMailFinance_2 As group:
+                        Height: =5
+                        Width: =5
+                        X: =40
+                        Y: =40
+                        ZIndex: =10
+
+                        CircleMailFinance_2 As circle:
+                            BorderThickness: =1
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =50
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUserFinance_2.SelectedItems)||IsBlank(cbSelectUserFinance_2.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUserFinance_2.SelectedItems.Email,Text(Email) & ";"));
+                                
+                                If(IsBlank(txtOptionalMessageFinance_2.Text),Office365Outlook.SendEmailV2(varEmail,User().FullName&" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"),
+                                Office365Outlook.SendEmailV2(varEmail,User().FullName &" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessageFinance_2.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>")
+                                );
+                                UpdateContext({varShare: false});Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);Set(varShareActions,false);)
+                            Width: =50
+                            X: =250
+                            Y: =325
+                            ZIndex: =8
+
+                        IconMailFinance_2 As icon.Mail:
+                            Height: =30
+                            Icon: =Icon.Mail
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUserFinance_2.SelectedItems)||IsBlank(cbSelectUserFinance_2.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUserFinance_2.SelectedItems.Email,Text(Email) & ";"));
+                                
+                                If(IsBlank(txtOptionalMessageFinance_2.Text),Office365Outlook.SendEmailV2(varEmail,User().FullName&" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"),
+                                Office365Outlook.SendEmailV2(varEmail,User().FullName &" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessageFinance_2.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>")
+                                );
+                                UpdateContext({varShare: false});Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);Set(varShareActions,false);)
+                            Width: =30
+                            X: =260
+                            Y: =335
+                            ZIndex: =9
+
+                    lblShareErrorFin_2 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =If(shareUserError,25,0)
+                        Size: =12
+                        Text: ="Please select atleast 1 user"
+                        Width: =cbSelectUserFinance_2.Width
+                        X: =cbSelectUserFinance_2.X
+                        Y: =cbSelectUserFinance_2.Y+cbSelectUserFinance_2.Height
+                        ZIndex: =14
+
+                    GrpTeamsFinance_2 As group:
+                        Height: =5
+                        Width: =5
+                        X: =40
+                        Y: =40
+                        ZIndex: =14
+
+                        CircleTeamsFinance_2 As circle:
+                            BorderThickness: =1
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =50
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUserFinance_2.SelectedItems)||IsBlank(cbSelectUserFinance_2.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUserFinance_2.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessageFinance_2.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessageFinance_2.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                UpdateContext({varShare: false});Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);Set(varShareActions,false);)
+                            Width: =50
+                            X: =175
+                            Y: =325
+                            ZIndex: =11
+
+                        ImageTeamsFinance_2 As image:
+                            Height: =30
+                            Image: =Teams
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUserFinance_2.SelectedItems)||IsBlank(cbSelectUserFinance_2.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUserFinance_2.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessageFinance_2.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessageFinance_2.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                UpdateContext({varShare: false});Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);Set(varShareActions,false);)
+                            Width: =30
+                            X: =185
+                            Y: =335
+                            ZIndex: =12
+
+                        IconTeamsTransparentFinance_2 As icon.Add:
+                            Color: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(0, 0, 0, 0)
+                            FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                            FocusedBorderThickness: =0
+                            Height: =30
+                            HoverBorderColor: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 0)
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Icon: =Icon.Add
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUserFinance_2.SelectedItems)||IsBlank(cbSelectUserFinance_2.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUserFinance_2.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessageFinance_2.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - "&shareDBName&" Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessageFinance_2.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                UpdateContext({varShare: false});Reset(cbSelectUserFinance_2);Reset(txtOptionalMessageFinance_2);Set(varShareActions,false);)
+                            PressedBorderColor: =RGBA(0, 0, 0, 0)
+                            PressedColor: =RGBA(0, 0, 0, 0)
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            Width: =30
+                            X: =185
+                            Y: =335
+                            ZIndex: =13
+
+        conDefinitions_3 As groupContainer.manualLayoutContainer:
+            Height: =764
+            Visible: =rightNavDef && !CollapseRM
+            Width: =330
+            Y: =136
+            ZIndex: =16
+
+            "galFinanceDefinitions_2 As gallery.'BrowseLayout_Flexible_NewsFeed_ver4.0'":
+                Height: =620
+                Items: |
+                    =If(IsBlank(SearchDefinitions_3.Text),
+                    SortByColumns(Filter('MG.MAI_MetricGovernance',ReportName="Industry Performance"),"MetricName",Ascending),
+                    SortByColumns(Filter('MG.MAI_MetricGovernance',(ReportName="Industry Performance")&&(SearchDefinitions_3.Text in MetricName || SearchDefinitions_3.Text in MetricDefinition)),"MetricName",Ascending))
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =83
+                Width: =310
+                X: =10
+                Y: =70
+                ZIndex: =1
+
+                lblMetricDefinition_3 As label:
+                    AutoHeight: =true
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    PaddingRight: =25
+                    Size: =12
+                    Text: =ThisItem.MetricDefinition
+                    Visible: |-
+                        =Switch(varSearchDefID,0,If(IsBlank(SearchDefinitions_3.Text),false,true),ThisItem.RowId,true)
+                        //If(IsBlank(SearchDefinitions.Text),false,true)
+                        //Switch(varSearchDefID,0,false,ThisItem.RowId,true)
+                        //If(varSearchDefID=ThisItem.RowId,true,false)
+                    Width: =310
+                    Y: =btnMetricName_3.Y+btnMetricName_3.Height
+                    ZIndex: =1
+
+                lblMetricName_3 As label:
+                    AutoHeight: =true
+                    BorderThickness: =2
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingRight: =25
+                    Size: =12
+                    Text: =ThisItem.MetricName
+                    Width: =310
+                    ZIndex: =2
+
+                btnMetricName_3 As button:
+                    Align: =Align.Left
+                    BorderThickness: =1
+                    Color: =RGBA(0, 0, 0, 1)
+                    Fill: =RGBA(230, 230, 230, 1)
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =lblMetricName_3.Height
+                    OnSelect: |-
+                        =If(varSearchDefID=ThisItem.RowId,UpdateContext({varSearchDefID: 0}),UpdateContext({varSearchDefID: ThisItem.RowId}))
+                    PaddingRight: =25
+                    PressedColor: =Self.Color
+                    PressedFill: =ColorFade(Self.Fill, 20%)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =12
+                    Text: =ThisItem.MetricName
+                    Width: =310
+                    ZIndex: =3
+
+            SearchDefinitions_3 As text:
+                BorderColor: =RGBA(153, 153, 153, 1)
+                Default: =""
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =35
+                HoverBorderColor: =RGBA(179, 179, 179, 1)
+                HoverFill: =
+                PaddingRight: =35
+                Size: =12
+                Width: =310
+                X: =10
+                Y: =20
+                ZIndex: =2
+
+            IconSearchFin_2 As icon.Search:
+                BorderColor: =RGBA(128, 128, 128, 1)
+                Color: =RGBA(153, 153, 153, 1)
+                Height: =25
+                Icon: =Icon.Search
+                Visible: =If(IsBlank(SearchDefinitions_3.Text),true,false)
+                Width: =25
+                X: =285
+                Y: =25
+                ZIndex: =3
+
+            IconSearchFinCancel_2 As icon.Cancel:
+                BorderColor: =RGBA(128, 128, 128, 1)
+                Color: =RGBA(128, 128, 128, 1)
+                Height: =25
+                Icon: =Icon.Cancel
+                OnSelect: =Reset(SearchDefinitions_3)
+                Visible: =If(IsBlank(SearchDefinitions_3.Text),false,true)
+                Width: =25
+                X: =285
+                Y: =25
+                ZIndex: =4
+
+    Label2 As label:
+        Text: =_Results1 & subNavTitle.Text
+        Visible: =false
+        X: =691
+        Y: =65
+        ZIndex: =53
+

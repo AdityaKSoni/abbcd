@@ -1,0 +1,121 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_industry180profileses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_industry180profiles",
+    "MaxGetRowsCount": 2000,
+    "Name": "Industry180Profiles",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_active": "Active",
+      "crdd7_industry180profiles_AsyncOperations": "System Jobs",
+      "crdd7_industry180profiles_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_industry180profiles_DuplicateBaseRecord": "Duplicate Records (crdd7_industry180profiles_DuplicateBaseRecord)",
+      "crdd7_industry180profiles_DuplicateMatchingRecord": "Duplicate Records (crdd7_industry180profiles_DuplicateMatchingRecord)",
+      "crdd7_industry180profiles_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_industry180profiles_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_industry180profiles_ProcessSession": "Process Sessions",
+      "crdd7_industry180profiles_SyncErrors": "Sync Errors",
+      "crdd7_industry180profilesid": "Industry180Profiles",
+      "crdd7_name": "Name",
+      "crdd7_role": "Role",
+      "crdd7_rolecategory": "Role Category",
+      "crdd7_useremail": "UserEmail",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Industry180Profiles",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Industry180Profiles (Views)",
+    "Name": "_crdd7_industry180profiles_views",
+    "RelatedEntityName": "Industry180Profiles",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4d9a4eb4-ba56-4cee-b952-3b0c892bb11d": "Industry180Profiles Lookup View",
+      "66a4f9be-92bb-4a7f-bb80-03dd67dfa0ca": "Active Industry180Profiles",
+      "9e75df47-9331-48c7-a970-1db9ca4ae042": "Inactive Industry180Profiles",
+      "bb85ad3e-8ebe-4634-8c73-bccd703fc623": "Industry180Profiles Associated View",
+      "c8b4b27a-7625-4ea8-98e8-ee76baebf2c9": "Industry180Profiles Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Active (Industry180Profiles)",
+    "Name": "crdd7_industry180profiles_crdd7_active",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "crdd7_active",
+        "OptionSetReferenceEntityName": "Industry180Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "crdd7_active",
+    "RelatedEntityName": "Industry180Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Industry180Profiles)",
+    "Name": "crdd7_industry180profiles_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Industry180Profiles"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Industry180Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Industry180Profiles)",
+    "Name": "crdd7_industry180profiles_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Industry180Profiles"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Industry180Profiles",
+    "Type": "OptionSetInfo"
+  }
+]

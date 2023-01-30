@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_poc_insights_robs",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_poc_insights_rob",
+    "MaxGetRowsCount": 2000,
+    "Name": "POC_Insights_ROBS",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_areaname": "Industry",
+      "crdd7_insights": "Insights",
+      "crdd7_poc_insights_rob_AsyncOperations": "System Jobs",
+      "crdd7_poc_insights_rob_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_poc_insights_rob_DuplicateBaseRecord": "Duplicate Records (crdd7_poc_insights_rob_DuplicateBaseRecord)",
+      "crdd7_poc_insights_rob_DuplicateMatchingRecord": "Duplicate Records (crdd7_poc_insights_rob_DuplicateMatchingRecord)",
+      "crdd7_poc_insights_rob_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_poc_insights_rob_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_poc_insights_rob_ProcessSession": "Process Sessions",
+      "crdd7_poc_insights_rob_SyncErrors": "Sync Errors",
+      "crdd7_poc_insights_robid": "POC_Insights_ROB",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "POC_Insights_ROBS",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "POC_Insights_ROBS (Views)",
+    "Name": "_crdd7_poc_insights_rob_views",
+    "RelatedEntityName": "POC_Insights_ROBS",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "06573fe3-a427-46f8-b14d-ef8bebbfcf59": "POC_Insights_ROB Associated View",
+      "721193d8-3e78-4c60-b2b8-9d0f7997aea3": "POC_Insights_ROB Advanced Find View",
+      "73de605d-1649-422c-8231-47397f590a9a": "POC_Insights_ROB Lookup View",
+      "c22141c4-ba57-4e67-b2ae-b5c831e583ca": "Active POC_Insights_ROBS",
+      "d0b80701-0f46-4378-85d6-081a5e789948": "Inactive POC_Insights_ROBS"
+    }
+  },
+  {
+    "DisplayName": "Status (POC_Insights_ROBS)",
+    "Name": "crdd7_poc_insights_rob_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "POC_Insights_ROBS"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "POC_Insights_ROBS",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (POC_Insights_ROBS)",
+    "Name": "crdd7_poc_insights_rob_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "POC_Insights_ROBS"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "POC_Insights_ROBS",
+    "Type": "OptionSetInfo"
+  }
+]

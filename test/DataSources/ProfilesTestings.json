@@ -1,0 +1,170 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_profilestestings",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_profilestesting",
+    "MaxGetRowsCount": 2000,
+    "Name": "ProfilesTestings",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_area": "Area",
+      "crdd7_profilename": "ProfileName",
+      "crdd7_profilestatus": "ProfileStatus",
+      "crdd7_profilestesting_AsyncOperations": "System Jobs",
+      "crdd7_profilestesting_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_profilestesting_DuplicateBaseRecord": "Duplicate Records (crdd7_profilestesting_DuplicateBaseRecord)",
+      "crdd7_profilestesting_DuplicateMatchingRecord": "Duplicate Records (crdd7_profilestesting_DuplicateMatchingRecord)",
+      "crdd7_profilestesting_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_profilestesting_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_profilestesting_ProcessSession": "Process Sessions",
+      "crdd7_profilestesting_SyncErrors": "Sync Errors",
+      "crdd7_profilestestingid": "ProfilesTesting",
+      "crdd7_role": "Role",
+      "crdd7_rolecategory": "RoleCategory",
+      "crdd7_useremail": "UserEmail",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "ProfilesTestings",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "ProfilesTestings (Views)",
+    "Name": "_crdd7_profilestesting_views",
+    "RelatedEntityName": "ProfilesTestings",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2daa6953-bf60-411a-b4ec-01711a047e46": "ProfilesTesting Advanced Find View",
+      "79dd78b3-69f8-4080-94cb-b0b0c96357bf": "Active ProfilesTestings",
+      "805df7e0-c28e-470d-8c44-dd62d0bf1ad7": "Inactive ProfilesTestings",
+      "96b16695-536e-49a4-9f5f-51dc07d1b9d1": "ProfilesTesting Lookup View",
+      "e8ff031d-33a7-4514-8eb3-19ca90e1b347": "ProfilesTesting Associated View"
+    }
+  },
+  {
+    "DisplayName": "Area (ProfilesTestings)",
+    "Name": "crdd7_profilestesting_crdd7_area",
+    "OptionSetInfoNameMapping": {
+      "1": "ANZ",
+      "2": "APAC",
+      "3": "Canada",
+      "4": "Corp HQ",
+      "5": "France",
+      "6": "Germany",
+      "7": "India",
+      "8": "United States"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "crdd7_area",
+        "OptionSetReferenceEntityName": "ProfilesTestings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "crdd7_area",
+    "RelatedEntityName": "ProfilesTestings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ProfileStatus (ProfilesTestings)",
+    "Name": "crdd7_profilestesting_crdd7_profilestatus",
+    "OptionSetInfoNameMapping": {
+      "797630000": "Active",
+      "797630001": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "crdd7_profilestatus",
+        "OptionSetReferenceEntityName": "ProfilesTestings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "crdd7_profilestatus",
+    "RelatedEntityName": "ProfilesTestings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "RoleCategory (ProfilesTestings)",
+    "Name": "crdd7_profilestesting_crdd7_rolecategory",
+    "OptionSetInfoNameMapping": {
+      "1": "Admins",
+      "2": "Finance",
+      "3": "Manager",
+      "4": "Leader"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "crdd7_rolecategory",
+        "OptionSetReferenceEntityName": "ProfilesTestings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "crdd7_rolecategory",
+    "RelatedEntityName": "ProfilesTestings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (ProfilesTestings)",
+    "Name": "crdd7_profilestesting_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "ProfilesTestings"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "ProfilesTestings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (ProfilesTestings)",
+    "Name": "crdd7_profilestesting_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "ProfilesTestings"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "ProfilesTestings",
+    "Type": "OptionSetInfo"
+  }
+]

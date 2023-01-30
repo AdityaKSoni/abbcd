@@ -1,0 +1,603 @@
+RightNavigation As CanvasComponent:
+    _csISScreen: =
+    _csISSubScreen: =
+    csSetCollapseRM: =
+    DigitalWBRDS: =
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =900
+    MenuWidth: =If(!varRightNav,50,400)
+    Width: =RightNavigation.MenuWidth
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    MainNavScreen As groupContainer.manualLayoutContainer:
+        Height: =900
+        Width: =If(!varRightNav,50,400)
+        X: =If(!varRightNav,0,0)
+        ZIndex: =2
+
+        bgRec As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =900
+            Width: =MainNavScreen.Width
+            ZIndex: =1
+
+        ICExpand As icon.ChevronLeft:
+            Height: =25
+            Icon: =Icon.ChevronLeft
+            OnSelect: =Set(varRightNav,true);Set(rightNavInsights,true);
+            Visible: =!varRightNav
+            Width: =25
+            X: =If(!varRightNav, 12.5, 362.5)
+            Y: =12
+            ZIndex: =2
+
+        ICCollapse As icon.ChevronRight:
+            Height: =25
+            Icon: =Icon.ChevronRight
+            OnSelect: =Set(varRightNav,false);Set(rightNavInsights,false);Set(rightNavDef,false);Set(rightNavActionsShare,false);
+            Visible: =varRightNav
+            Width: =25
+            X: =If(!varRightNav, 12.5, 362.5)
+            Y: =12
+            ZIndex: =3
+
+        CollapseHeading As htmlViewer:
+            Font: =Font.'Segoe UI'
+            Height: =240
+            HtmlText: |-
+                ="<div 
+                style='
+                text-align:center;
+                position: absolute;
+                left: "&-Round((Self.Height-Self.Width)/2,0)&"px;
+                top: "&Round((Self.Height-Self.Width)/2,0)&"px;
+                transform: rotate(90deg);
+                width: "&Self.Height&"px;
+                height: "&Self.Width&"px;
+                
+                '>
+                Insights & Actions
+                </div>"
+            Size: =20
+            Visible: =If(varRightNav,false,true)
+            Width: =40
+            X: =If(!varRightNav,5,355)
+            Y: =60
+            ZIndex: =4
+
+        ExpandHeading As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            Size: =20
+            Text: ="Insights & Actions"
+            Width: =290
+            X: =40
+            Y: =20
+            ZIndex: =5
+
+        btnAIInsights As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rightNavInsights,true);Set(rightNavDef,false);Set(rightNavActionsShare,false);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =14
+            Text: ="AI Insights"
+            Visible: =varRightNav
+            Width: =100
+            X: =10
+            Y: =80
+            ZIndex: =6
+
+        btnDefinitions As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rightNavInsights,false);Set(rightNavDef,true);Set(rightNavActionsShare,false);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =14
+            Text: ="Definitions"
+            Visible: =varRightNav
+            Width: =110
+            X: =120
+            Y: =80
+            ZIndex: =7
+
+        btnActionsShare As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rightNavInsights,false);Set(rightNavDef,false);Set(rightNavActionsShare,true);
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            Size: =14
+            Text: ="Actions & Share"
+            Visible: =varRightNav
+            Width: =150
+            X: =240
+            Y: =80
+            ZIndex: =8
+
+        recAIInsights As rectangle:
+            Height: =5
+            Visible: =rightNavInsights && varRightNav
+            Width: =btnAIInsights.Width-2
+            X: =btnAIInsights.X+2
+            Y: =115
+            ZIndex: =9
+
+        recDefinitions As rectangle:
+            Height: =5
+            Visible: =rightNavDef
+            Width: =btnDefinitions.Width-4
+            X: =btnDefinitions.X+4
+            Y: =115
+            ZIndex: =10
+
+        recActionsShare As rectangle:
+            Height: =5
+            Visible: =rightNavActionsShare
+            Width: =btnActionsShare.Width-4
+            X: =btnActionsShare.X+4
+            Y: =115
+            ZIndex: =11
+
+        conAIInsights As groupContainer.manualLayoutContainer:
+            Height: =764
+            Visible: =rightNavInsights && varRightNav
+            Width: =400
+            Y: =136
+            ZIndex: =12
+
+            lblInsightsHeading As label:
+                Align: =Align.Center
+                Fill: =RGBA(230, 230, 230, 1)
+                Font: =Font.'Segoe UI'
+                Height: =30
+                Text: ="Insights & Comments"
+                Width: =380
+                X: =10
+                ZIndex: =1
+
+            HtmlText4 As htmlViewer:
+                Height: =623
+                HtmlText: |-
+                    =LookUp(Digital_WBR_Comments,SheetOrPage = RightNavigation._csISScreen && SubScreen = RightNavigation._csISSubScreen).Comments
+                    /*
+                    Filter(
+                        SortByColumns(
+                            DigitalW,
+                            "Modified",
+                            Descending
+                        ),
+                        field_SheetOrPage = _Screen && SubScreen = _SubScreen 
+                    )*/
+                Width: =380
+                X: =10
+                Y: =41
+                ZIndex: =2
+
+        conActionsShare As groupContainer.manualLayoutContainer:
+            Height: =764
+            Visible: =rightNavActionsShare && varRightNav
+            Width: =400
+            Y: =136
+            ZIndex: =15
+
+            conActionsHeading As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(128, 128, 128, 1)
+                Height: =40
+                Width: =380
+                X: =10
+                ZIndex: =1
+
+                collapseActions As icon.ChevronRight:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.ChevronRight
+                    OnSelect: =Set(varConActions,true);Set(varShareActions,false);
+                    Visible: =!varConActions
+                    Width: =30
+                    X: =5
+                    Y: =5
+                    ZIndex: =1
+
+                expandActions As icon.ChevronDown:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.ChevronDown
+                    OnSelect: =Set(varConActions,false);
+                    Visible: =varConActions
+                    Width: =30
+                    X: =5
+                    Y: =5
+                    ZIndex: =2
+
+                lblActions As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.'Segoe UI'
+                    Size: =15
+                    Text: ="Actions"
+                    X: =40
+                    ZIndex: =3
+
+            conActions As groupContainer.manualLayoutContainer:
+                Height: =If(varConActions,600,0)
+                Width: =380
+                X: =10
+                Y: =conActionsHeading.Y+conActionsHeading.Height
+                ZIndex: =2
+
+                "Gallery_Actionitems_Fin_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                    Height: =600
+                    Items: |+
+                        =Sort(Filter(DigitalWBR_Actionitems ,Screen=_Screen && SubScreen=_SubScreen ),Modified,Descending)
+                        
+                        
+                        
+                    Layout: =Layout.Vertical
+                    OnSelect: |+
+                        =UpdateContext({ActionEdit: true});EditForm(Form_ActionSummery_33);
+                        
+                        
+                        
+                    TemplatePadding: =0
+                    TemplateSize: =209
+                    Transition: =Transition.Pop
+                    Visible: =varConActions
+                    Width: =380
+                    ZIndex: =1
+
+                    Title3_45 As label:
+                        Font: =Font.'Segoe UI'
+                        Height: =146
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =10
+                        PaddingRight: =0
+                        PaddingTop: =10
+                        Size: =12
+                        Text: =ThisItem.Title
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                        ZIndex: =2
+
+                    lblProgress_45 As label:
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Bold
+                        Height: =25
+                        Italic: =true
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.Status.Value
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Gallery_Actionitems_Fin_1.TemplateWidth
+                        Y: =180
+                        ZIndex: =3
+
+                    Separator3_45 As rectangle:
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =5
+
+                    Subtitle3_46 As label:
+                        Align: =Align.Right
+                        Font: =Font.'Segoe UI'
+                        Height: =35
+                        Italic: =true
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =13
+                        Text: |-
+                            ="Due On: " & ThisItem.ActionDueOn
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Gallery_Actionitems_Fin_1.TemplateWidth
+                        Y: =174
+                        ZIndex: =6
+
+                    txtAction_45 As rectangle:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =118
+                        OnSelect: |
+                            =Select(Parent);Set(ActionEdit, true);EditForm(Form_ActionSummery_33);
+                        Width: =Parent.Width
+                        ZIndex: =7
+
+                    lblDueDays_45 As label:
+                        Align: =Align.Right
+                        Font: =Font.'Segoe UI'
+                        Height: =55
+                        OnSelect: =Select(Parent)
+                        Text: |-
+                            ="Due in: " & If(DateDiff(Now(),ThisItem.ActionDueOn) < 0, "Past Due", DateDiff(Now(),ThisItem.ActionDueOn) & " Days")
+                        Width: =Gallery_Actionitems_Fin_1.TemplateWidth
+                        Y: =118
+                        ZIndex: =8
+
+                    Label4_42 As label:
+                        Height: =56
+                        OnSelect: =Select(Parent)
+                        Text: |
+                            =Concat(ThisItem.'Assigned To'.DisplayName, DisplayName & ",")
+                        Width: |
+                            =Gallery_Actionitems_Fin_1.TemplateWidth-150
+                        Y: =118
+                        ZIndex: =9
+
+            contShareHeading As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(128, 128, 128, 1)
+                Height: =40
+                Width: =380
+                X: =10
+                Y: =conActions.Y+conActions.Height+10
+                ZIndex: =3
+
+                collapseShare As icon.ChevronRight:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.ChevronRight
+                    OnSelect: |-
+                        =Set(varShareActions,true);Set(varConActions,false);Set(varURL,"https://apps.powerapps.com/play/85f51c24-0541-43f0-a873-9a7a19552084?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&Industry");
+                    Visible: =!varShareActions
+                    Width: =30
+                    X: =5
+                    Y: =5
+                    ZIndex: =1
+
+                expandShare As icon.ChevronDown:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.ChevronDown
+                    OnSelect: =Set(varShareActions,false);
+                    Visible: =varShareActions
+                    Width: =30
+                    X: =5
+                    Y: =5
+                    ZIndex: =2
+
+                lblShare As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.'Segoe UI'
+                    Size: =15
+                    Text: ="Share"
+                    X: =40
+                    ZIndex: =3
+
+            contShare As groupContainer.manualLayoutContainer:
+                Height: =If(varShareActions,600,0)
+                Width: =380
+                X: =10
+                Y: =contShareHeading.Y+contShareHeading.Height
+                ZIndex: =4
+
+                conShare_1 As groupContainer.manualLayoutContainer:
+                    BorderColor: =RGBA(128, 128, 128, 1)
+                    BorderThickness: =1
+                    Height: =400
+                    Visible: =varShareActions
+                    Width: =379
+                    ZIndex: =1
+
+                    backRec_1 As rectangle:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =400
+                        Width: =380
+                        ZIndex: =1
+
+                    bacHeadingRec_1 As rectangle:
+                        Fill: =RGBA(237, 237, 237, 1)
+                        Height: =90
+                        Width: =380
+                        ZIndex: =2
+
+                    lblSendLink_1 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Size: =15
+                        Text: ="Send Link"
+                        Width: =400
+                        ZIndex: =3
+
+                    lblIDTitle_1 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        Height: =20
+                        Text: ="Industry 180 - Financial Services"
+                        Width: =400
+                        Y: =35
+                        ZIndex: =4
+
+                    lblDashboardTitle_1 As label:
+                        Align: =Align.Center
+                        Font: =Font.'Segoe UI'
+                        Height: =20
+                        Text: ="Industry Dashboard"
+                        Width: =400
+                        Y: =55
+                        ZIndex: =5
+
+                    cbSelectUser_1 As combobox:
+                        DisplayFields: =["DisplayName","Email"]
+                        Font: =Font.'Segoe UI'
+                        InputTextPlaceholder: ="Select User"
+                        Items: |-
+                            =Choices([@DigitalWBR_Actionitems].'Assigned To')
+                            //Office365Users.SearchUserV2({searchTerm:cbSelectUser.SearchText,top:10}).value
+                        SearchFields: =["DisplayName"]
+                        SearchItems: =Choices(DigitalWBR_Actionitems.'Assigned To',cbSelectUser_1.SearchText)
+                        Template: =ListItemTemplate.Person
+                        Width: =340
+                        X: =20
+                        Y: =125
+                        ZIndex: =6
+
+                    txtOptionalMessage_1 As text:
+                        BorderThickness: =0
+                        Default: =""
+                        Font: =Font.'Segoe UI'
+                        Height: =100
+                        HintText: ="Add a message (Optional)"
+                        Mode: =TextMode.MultiLine
+                        Tooltip: ="Add a message (Optional)"
+                        Width: =340
+                        X: =20
+                        Y: =lblShareError_1.Y+lblShareError_1.Height+10
+                        ZIndex: =7
+
+                    cancelShare_1 As icon.Cancel:
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =30
+                        Icon: =Icon.Cancel
+                        OnSelect: =Reset(cbSelectUser_1);Reset(txtOptionalMessage_1);
+                        Width: =30
+                        X: =340
+                        Y: =20
+                        ZIndex: =10
+
+                    GrpMail_1 As group:
+                        Height: =5
+                        Width: =5
+                        X: =40
+                        Y: =40
+                        ZIndex: =10
+
+                        CircleMail_1 As circle:
+                            BorderThickness: =1
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =50
+                            OnSelect: =
+                            Width: =50
+                            X: =300
+                            Y: =325
+                            ZIndex: =8
+
+                        IconMail_1 As icon.Mail:
+                            Height: =30
+                            Icon: =Icon.Mail
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUser_1.SelectedItems)||IsBlank(cbSelectUser_1.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUser_1.SelectedItems.Email,Text(Email) & ";"));
+                                
+                                If(IsBlank(txtOptionalMessage_1.Text),Office365Outlook.SendEmailV2(varEmail,User().FullName&" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"),
+                                Office365Outlook.SendEmailV2(varEmail,User().FullName &" has shared a dashboard with you","<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessage_1.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>")
+                                );
+                                Reset(cbSelectUser_1);)
+                            Width: =30
+                            X: =310
+                            Y: =335
+                            ZIndex: =9
+
+                    lblShareError_1 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =If(shareUserError,25,0)
+                        Size: =12
+                        Text: ="Please select atleast 1 user"
+                        Width: =cbSelectUser_1.Width
+                        X: =cbSelectUser_1.X
+                        Y: =cbSelectUser_1.Y+cbSelectUser_1.Height
+                        ZIndex: =14
+
+                    GrpTeams_1 As group:
+                        Height: =5
+                        Width: =5
+                        X: =40
+                        Y: =40
+                        ZIndex: =14
+
+                        CircleTeams_1 As circle:
+                            BorderThickness: =1
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =50
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUser_1.SelectedItems)||IsBlank(cbSelectUser_1.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUser_1.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessage_1.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessage_1.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                Reset(cbSelectUser_1);)
+                            Width: =50
+                            X: =225
+                            Y: =325
+                            ZIndex: =11
+
+                        ImageTeams_1 As image:
+                            Height: =30
+                            Image: =Teams
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUser_1.SelectedItems)||IsBlank(cbSelectUser_1.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUser_1.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessage_1.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessage_1.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                Reset(cbSelectUser_1);)
+                            Width: =30
+                            X: =235
+                            Y: =335
+                            ZIndex: =12
+
+                        IconTeamsTransparent_1 As icon.Add:
+                            Color: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(0, 0, 0, 0)
+                            FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                            FocusedBorderThickness: =0
+                            Height: =30
+                            HoverBorderColor: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 0)
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Icon: =Icon.Add
+                            OnSelect: |-
+                                =If((IsEmpty(cbSelectUser_1.SelectedItems)||IsBlank(cbSelectUser_1.Selected.Email)),Set(shareUserError,true),
+                                Set(shareUserError,false);
+                                Set(varEmail,Concat(cbSelectUser_1.SelectedItems.Email,Text(Email) & ";"));
+                                'Industry180-TeamsMsg'.Run(varEmail,
+                                If(IsBlank(txtOptionalMessage_1.Text),
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>",
+                                "<span style=""font-weight:bold"">Industry 180 - Financial Services - Dashboard has been shared with you by "&User().FullName&"</span><br><span style=""font-style:italic"">"&txtOptionalMessage_1.Text&"</span><br><a href="&varURL&"><span style=""font-size:15px"">Click here</span></a>"));
+                                Reset(cbSelectUser_1);)
+                            PressedBorderColor: =RGBA(0, 0, 0, 0)
+                            PressedColor: =RGBA(0, 0, 0, 0)
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            Width: =30
+                            X: =235
+                            Y: =335
+                            ZIndex: =13
+

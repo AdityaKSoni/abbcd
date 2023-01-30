@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "1d9d988d-328f-483e-a4a7-0bc450169bf9",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "SendMessageToUser",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

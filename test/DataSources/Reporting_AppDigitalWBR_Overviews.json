@@ -1,0 +1,103 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_reporting_appdigitalwbr_overviews",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_reporting_appdigitalwbr_overview",
+    "MaxGetRowsCount": 2000,
+    "Name": "Reporting_AppDigitalWBR_Overviews",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_accounttopparentdimensionindustry": "Industry",
+      "crdd7_index": "Index",
+      "crdd7_name": "Name",
+      "crdd7_overviewedlpqualifedpipelinexazure": "[Overview EDLP Qualifed Pipeline x/Azure $]",
+      "crdd7_overviewfrayoy": "[OverView FRA YoY%]",
+      "crdd7_overviewfraytd": "[OverView FRA YTD $]",
+      "crdd7_overviewh2attainment": "[Overview H2 Attainment %]",
+      "crdd7_overviewh2target": "[Overview H2 Target]",
+      "crdd7_overviewmaccpipeline": "[Overview MACC Pipeline $]",
+      "crdd7_reporting_appdigitalwbr_overview_AsyncOperations": "System Jobs",
+      "crdd7_reporting_appdigitalwbr_overview_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_reporting_appdigitalwbr_overview_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_reporting_appdigitalwbr_overview_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_reporting_appdigitalwbr_overview_ProcessSession": "Process Sessions",
+      "crdd7_reporting_appdigitalwbr_overview_SyncErrors": "Sync Errors",
+      "crdd7_reporting_appdigitalwbr_overviewid": "Reporting_AppDigitalWBR_Overview",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Reporting_AppDigitalWBR_Overviews",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Reporting_AppDigitalWBR_Overviews (Views)",
+    "Name": "_crdd7_reporting_appdigitalwbr_overview_views",
+    "RelatedEntityName": "Reporting_AppDigitalWBR_Overviews",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0df91124-a7d8-452f-84af-928ce520155f": "Reporting_AppDigitalWBR_Overview Lookup View",
+      "34ee690b-ebbd-438d-a624-7c118832f8de": "Inactive Reporting_AppDigitalWBR_Overviews",
+      "8b0a4168-15aa-4d54-baec-279151ebc176": "Active Reporting_AppDigitalWBR_Overviews",
+      "afb51853-1364-4e7e-8eef-9d59931f712d": "Reporting_AppDigitalWBR_Overview Associated View",
+      "f592d46a-c66b-4e09-9579-9b0adeb1c31e": "Reporting_AppDigitalWBR_Overview Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (Reporting_AppDigitalWBR_Overviews)",
+    "Name": "crdd7_reporting_appdigitalwbr_overview_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Reporting_AppDigitalWBR_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Reporting_AppDigitalWBR_Overviews",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Reporting_AppDigitalWBR_Overviews)",
+    "Name": "crdd7_reporting_appdigitalwbr_overview_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Reporting_AppDigitalWBR_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Reporting_AppDigitalWBR_Overviews",
+    "Type": "OptionSetInfo"
+  }
+]

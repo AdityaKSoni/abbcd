@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_reporting_sl_overviews",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_reporting_sl_overview",
+    "MaxGetRowsCount": 2000,
+    "Name": "Reporting_SL_Overviews",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_customers": "Customers",
+      "crdd7_deals": "Deals",
+      "crdd7_estimatedconsumption": "EstimatedConsumption",
+      "crdd7_estimatedrevenue": "EstimatedRevenue",
+      "crdd7_name": "Name",
+      "crdd7_reporting_sl_overview_AsyncOperations": "System Jobs",
+      "crdd7_reporting_sl_overview_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_reporting_sl_overview_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_reporting_sl_overview_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_reporting_sl_overview_ProcessSession": "Process Sessions",
+      "crdd7_reporting_sl_overview_SyncErrors": "Sync Errors",
+      "crdd7_reporting_sl_overviewid": "Reporting_SL_Overview",
+      "crdd7_sl": "SL",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Reporting_SL_Overviews",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Reporting_SL_Overviews (Views)",
+    "Name": "_crdd7_reporting_sl_overview_views",
+    "RelatedEntityName": "Reporting_SL_Overviews",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "36f85e02-489c-486d-8a2d-14d09a76bbc4": "Active Reporting_SL_Overviews",
+      "51e7889d-9949-44d0-8c3b-a0bb98accc4d": "Reporting_SL_Overview Lookup View",
+      "8eb2a6a8-35b9-4990-9b72-10ccdc10840c": "Reporting_SL_Overview Advanced Find View",
+      "b6e6dc2f-281e-4548-9fc4-a14417dd2b50": "Reporting_SL_Overview Associated View",
+      "d58212e4-0c24-4420-aafb-2a823c5a075b": "Inactive Reporting_SL_Overviews"
+    }
+  },
+  {
+    "DisplayName": "Status (Reporting_SL_Overviews)",
+    "Name": "crdd7_reporting_sl_overview_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Reporting_SL_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Reporting_SL_Overviews",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Reporting_SL_Overviews)",
+    "Name": "crdd7_reporting_sl_overview_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Reporting_SL_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Reporting_SL_Overviews",
+    "Type": "OptionSetInfo"
+  }
+]

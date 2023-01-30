@@ -1,0 +1,2414 @@
+L06_ActionReviewPage As screen:
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: |+
+        =Set(IsExpand, false);UpdateContext({ScreenName:"Overview"});
+        Set(_Screen,"ActionReviewPage");
+        
+        
+        
+        
+        
+    Orientation: =If(L06_ActionReviewPage.Width < L06_ActionReviewPage.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= L06_ActionReviewPage.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    TaskNum_5 As label:
+        Align: =Right
+        BorderColor: =RGBA(130, 144, 156, 1)
+        Color: =RGBA(62, 96, 170, 1)
+        DisabledColor: =ColorFade(RGBA(47, 41, 43, 1),90%)
+        DisplayMode: =DisplayMode.Disabled
+        FocusedBorderColor: =TaskNum_5.BorderColor
+        Height: =264
+        HoverBorderColor: =TaskNum_5.BorderColor
+        HoverColor: =TaskNum_5.Color
+        HoverFill: =TaskNum_5.Fill
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =TaskNum_5.BorderColor
+        PressedColor: =TaskNum_5.Color
+        PressedFill: =TaskNum_5.Fill
+        Size: =210.83
+        Text: =LookUp(Lessons,screen = App.ActiveScreen,num)
+        Width: =317.66
+        X: =1602.34
+        Y: =504
+        ZIndex: =8
+
+    CanvasMain_ARP As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(241,241,241,1)
+        Height: =1000
+        NumberOfColumns: =2
+        Width: |+
+            =If(!IsExpand,App.Width-(RectangleBorder1_5.X+2), App.Width-(RectangleBorder2_5.X+ 2))
+            
+            
+            
+            
+            
+            
+        X: |+
+            =If(!IsExpand,RectangleBorder1_5.X+1, RectangleBorder2_5.X+ 1)
+            
+            
+            
+            
+            
+        Y: =70
+        ZIndex: =9
+
+        DataCardMain_ARP As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =CanvasMain_ARP.Height
+            Width: =CanvasMain_ARP.Width
+            WidthFit: =false
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Button_ExcelExport As button:
+                Color: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =ExcelExportImage.Height
+                HoverBorderColor: =RGBA(204, 231, 246, 1)
+                OnSelect: |+
+                    =Clear(DigitalWBR_ActionsReview);
+                    ForAll(
+                        Gallery_Action_Review.AllItems,
+                        Collect(
+                            DigitalWBR_ActionsReview,
+                            {
+                                Id : ThisRecord.ID,
+                                ActionName: ThisRecord.Title,
+                                Status: ThisRecord.Status.Text,
+                                CreatedDate:  ThisRecord.Created,
+                                DueDate : ThisRecord.ActionDueOn,
+                                Industry : ThisRecord.ScreenName ,
+                                Page : ThisRecord.SubScreen,
+                                'Assigned To': ThisRecord.'Assigned To'.DisplayName,
+                                Manager: ThisRecord.'Action Manager'.DisplayName,
+                                'Business Impact' : ThisRecord.'Business Impact',
+                                'Desired Outcome': ThisRecord.'Desired Outcome'
+                            }
+                        )
+                    );
+                    Set(
+                        VarActionReviewFilelink,
+                        DigitalWBR_ActionPageExport.Run(
+                            JSON(
+                                DigitalWBR_ActionsReview,
+                                JSONFormat.IncludeBinaryData
+                            )
+                        ).filelink
+                    );
+                    Launch(VarActionReviewFilelink);
+                    Notify("Please allow POP-UP Window in your browser tab",NotificationType.Information)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                PressedBorderColor: =RGBA(0, 134, 208, 1)
+                Text: ="X"
+                Width: |
+                    =ExcelExportImage.Width
+                X: |
+                    =ExcelExportImage.X
+                Y: |
+                    =ExcelExportImage.Y
+                ZIndex: =7
+
+            Form_ARP As form:
+                AcceptsFocus: =false
+                DataSource: =DigitalWBR_Actionitems
+                Fill: =RGBA(204, 228, 246, 1)
+                Height: |+
+                    =Gallery_Action_Review.Height
+                    
+                    
+                    
+                Item: |+
+                    =First(Filter(DigitalWBR_Actionitems, ID = First(_SelectedARP).ID))
+                    
+                    
+                    
+                    
+                    
+                    
+                NumberOfColumns: =4
+                Visible: |
+                    =_EditARP
+                Width: |+
+                    =Gallery_Action_Review.Width
+                    
+                X: |+
+                    =Gallery_Action_Review.X
+                    
+                Y: |+
+                    =Gallery_Action_Review.Y
+                    
+                ZIndex: =18
+
+                "'Assigned To_DataCard1' As typedDataCard.comboBoxMultiSelectEditCard":
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="AssignedTo"
+                    Default: =ThisItem.'Assigned To'
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"AssignedTo")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    Required: =false
+                    Update: =DataCardValue3.SelectedItems
+                    Width: =425
+                    X: =1
+                    Y: =0
+                    ZIndex: =1
+
+                    DataCardKey3 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue3 As combobox:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultSelectedItems: =Parent.Default
+                        DisplayFields: =["DisplayName","Email","Picture"]
+                        DisplayMode: =Parent.DisplayMode
+                        Items: =Choices([@DigitalWBR_Actionitems].'Assigned To')
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        SearchFields: =["DisplayName"]
+                        SearchItems: =Choices(DigitalWBR_Actionitems.'Assigned To',DataCardValue3.SearchText)
+                        Template: =ListItemTemplate.Person
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage3 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue3.Y + DataCardValue3.Height
+                        ZIndex: =3
+
+                    StarVisible3 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey3.Height
+                        PaddingBottom: =DataCardKey3.PaddingBottom
+                        PaddingLeft: =DataCardKey3.PaddingLeft
+                        PaddingRight: =DataCardKey3.PaddingRight
+                        PaddingTop: =DataCardKey3.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey3.Y
+                        ZIndex: =4
+
+                StatusUpdate_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="StatusUpdate"
+                    Default: =ThisItem.StatusUpdate
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"StatusUpdate")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "StatusUpdate")
+                    Required: =false
+                    Update: =DataCardValue15.Text
+                    Width: |
+                        =(Parent.Width/2)-10
+                    X: =0
+                    Y: =2
+                    ZIndex: =1
+
+                    DataCardKey14 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: ="Status Update"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue15 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =195
+                        MaxLength: =Parent.MaxLength
+                        Mode: =TextMode.MultiLine
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey14.Y + DataCardKey14.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage14 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue15.Y + DataCardValue15.Height
+                        ZIndex: =3
+
+                    StarVisible14 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey14.Height
+                        PaddingBottom: =DataCardKey14.PaddingBottom
+                        PaddingLeft: =DataCardKey14.PaddingLeft
+                        PaddingRight: =DataCardKey14.PaddingRight
+                        PaddingTop: =DataCardKey14.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey14.Y
+                        ZIndex: =4
+
+                ClosureComments_DataCard3 As typedDataCard.richTextEditorEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="ClosureComments"
+                    Default: =ThisItem.ClosureComments
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"ClosureComments")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =40
+                    Required: =false
+                    Update: =TextInput1.Text
+                    Width: |
+                        =(Parent.Width/2)-10
+                    X: =2
+                    Y: =2
+                    ZIndex: =1
+
+                    DataCardKey28 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: ="Closure Comments"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    ErrorMessage25 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: |
+                            =TextInput1.Y + TextInput1.Height
+                        ZIndex: =3
+
+                    StarVisible25 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey28.Height
+                        PaddingBottom: =DataCardKey28.PaddingBottom
+                        PaddingLeft: =DataCardKey28.PaddingLeft
+                        PaddingRight: =DataCardKey28.PaddingRight
+                        PaddingTop: =DataCardKey28.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey28.Y
+                        ZIndex: =4
+
+                    TextInput1 As text:
+                        Default: =Parent.Default
+                        Height: =199
+                        Mode: =TextMode.MultiLine
+                        Width: |
+                            =Parent.Width - 60
+                        X: =30
+                        Y: =40
+                        ZIndex: =5
+
+                Title_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Title"
+                    Default: =ThisItem.Title
+                    DisplayMode: =DisplayMode.Edit
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"Title")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "Title")
+                    Required: =false
+                    Update: =DataCardValue1.Text
+                    Width: =425
+                    X: =0
+                    Y: =0
+                    ZIndex: =19
+
+                    DataCardKey1 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |+
+                            ="Action Item"
+                            
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue1 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: |
+                            =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage1 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue1.Y + DataCardValue1.Height
+                        ZIndex: =3
+
+                    StarVisible1 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey1.Height
+                        PaddingBottom: =DataCardKey1.PaddingBottom
+                        PaddingLeft: =DataCardKey1.PaddingLeft
+                        PaddingRight: =DataCardKey1.PaddingRight
+                        PaddingTop: =DataCardKey1.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey1.Y
+                        ZIndex: =4
+
+                Status_DataCard1 As typedDataCard.comboBoxEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Status"
+                    Default: =ThisItem.Status
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"Status")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =100
+                    Required: =true
+                    Update: =DataCardValue2.Selected
+                    Width: =425
+                    X: =2
+                    Y: =0
+                    ZIndex: =19
+
+                    DataCardKey2 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue2 As combobox:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultSelectedItems: =Parent.Default
+                        DisplayFields: =["Value"]
+                        DisplayMode: =Parent.DisplayMode
+                        IsSearchable: =false
+                        Items: =Choices([@DigitalWBR_Actionitems].Status)
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectMultiple: =false
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage2 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue2.Y + DataCardValue2.Height
+                        ZIndex: =3
+
+                    StarVisible2 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey2.Height
+                        PaddingBottom: =DataCardKey2.PaddingBottom
+                        PaddingLeft: =DataCardKey2.PaddingLeft
+                        PaddingRight: =DataCardKey2.PaddingRight
+                        PaddingTop: =DataCardKey2.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey2.Y
+                        ZIndex: =4
+
+                ActionDueOn_DataCard1 As typedDataCard.dateEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="ActionDueOn"
+                    Default: =ThisItem.ActionDueOn
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"ActionDueOn")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =100
+                    Required: =false
+                    Update: =DataCardValue6.SelectedDate
+                    Width: =425
+                    X: =3
+                    Y: =0
+                    ZIndex: =19
+
+                    DataCardKey6 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue6 As datepicker:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultDate: =Parent.Default
+                        DisplayMode: =Parent.DisplayMode
+                        EndYear: =Year(Today())+100
+                        IsEditable: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        StartYear: =1899
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey6.Y + DataCardKey6.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage6 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue6.Y + DataCardValue6.Height
+                        ZIndex: =3
+
+                    StarVisible6 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey6.Height
+                        PaddingBottom: =DataCardKey6.PaddingBottom
+                        PaddingLeft: =DataCardKey6.PaddingLeft
+                        PaddingRight: =DataCardKey6.PaddingRight
+                        PaddingTop: =DataCardKey6.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey6.Y
+                        ZIndex: =4
+
+                SubScreen_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="SubScreen"
+                    Default: =ThisItem.SubScreen
+                    DisplayMode: =DisplayMode.Edit
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"SubScreen")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =100
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "SubScreen")
+                    Required: =false
+                    Update: =DataCardValue13.Text
+                    Visible: =true
+                    Width: =425
+                    X: =0
+                    Y: =1
+                    ZIndex: =19
+
+                    DataCardKey12 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: ="Page"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue13 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey12.Y + DataCardKey12.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage12 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue13.Y + DataCardValue13.Height
+                        ZIndex: =3
+
+                    StarVisible12 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey12.Height
+                        PaddingBottom: =DataCardKey12.PaddingBottom
+                        PaddingLeft: =DataCardKey12.PaddingLeft
+                        PaddingRight: =DataCardKey12.PaddingRight
+                        PaddingTop: =DataCardKey12.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey12.Y
+                        ZIndex: =4
+
+                Screen_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Screen"
+                    Default: =ThisItem.Screen
+                    DisplayMode: =DisplayMode.Edit
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"Screen")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =100
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "Screen")
+                    Required: =false
+                    Update: =DataCardValue9.Text
+                    Visible: =true
+                    Width: =425
+                    X: =1
+                    Y: =1
+                    ZIndex: =19
+
+                    DataCardKey8 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |
+                            ="Industry"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue9 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey8.Y + DataCardKey8.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage8 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue9.Y + DataCardValue9.Height
+                        ZIndex: =3
+
+                    StarVisible8 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey8.Height
+                        PaddingBottom: =DataCardKey8.PaddingBottom
+                        PaddingLeft: =DataCardKey8.PaddingLeft
+                        PaddingRight: =DataCardKey8.PaddingRight
+                        PaddingTop: =DataCardKey8.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey8.Y
+                        ZIndex: =4
+
+                ActionClosedOn_DataCard1 As typedDataCard.dateEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="ActionClosedOn"
+                    Default: =ThisItem.ActionClosedOn
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"ActionClosedOn")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =200
+                    Required: =false
+                    Update: =DataCardValue5.SelectedDate
+                    Visible: =false
+                    Width: =425
+                    X: =2
+                    Y: =1
+                    ZIndex: =19
+
+                    DataCardKey5 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue5 As datepicker:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultDate: =Parent.Default
+                        DisplayMode: =Parent.DisplayMode
+                        EndYear: =Year(Today())+100
+                        IsEditable: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        StartYear: =1899
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage5 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue5.Y + DataCardValue5.Height
+                        ZIndex: =3
+
+                    StarVisible5 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey5.Height
+                        PaddingBottom: =DataCardKey5.PaddingBottom
+                        PaddingLeft: =DataCardKey5.PaddingLeft
+                        PaddingRight: =DataCardKey5.PaddingRight
+                        PaddingTop: =DataCardKey5.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey5.Y
+                        ZIndex: =4
+
+                FiscalMonth_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="FiscalMonth"
+                    Default: =ThisItem.FiscalMonth
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"FiscalMonth")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =200
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "FiscalMonth")
+                    Required: =false
+                    Update: =DataCardValue10.Text
+                    Visible: =false
+                    Width: =425
+                    X: =3
+                    Y: =1
+                    ZIndex: =19
+
+                    DataCardKey9 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue10 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey9.Y + DataCardKey9.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage9 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue10.Y + DataCardValue10.Height
+                        ZIndex: =3
+
+                    StarVisible9 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey9.Height
+                        PaddingBottom: =DataCardKey9.PaddingBottom
+                        PaddingLeft: =DataCardKey9.PaddingLeft
+                        PaddingRight: =DataCardKey9.PaddingRight
+                        PaddingTop: =DataCardKey9.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey9.Y
+                        ZIndex: =4
+
+                AreaName_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="AreaName"
+                    Default: =ThisItem.AreaName
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"AreaName")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =200
+                    MaxLength: =DataSourceInfo([@DigitalWBR_Actionitems], DataSourceInfo.MaxLength, "AreaName")
+                    Required: =false
+                    Update: =DataCardValue12.Text
+                    Visible: =false
+                    Width: =425
+                    X: =1
+                    Y: =2
+                    ZIndex: =19
+
+                    DataCardKey11 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue12 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =134
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =375
+                        X: =30
+                        Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage11 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue12.Y + DataCardValue12.Height
+                        ZIndex: =3
+
+                    StarVisible11 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey11.Height
+                        PaddingBottom: =DataCardKey11.PaddingBottom
+                        PaddingLeft: =DataCardKey11.PaddingLeft
+                        PaddingRight: =DataCardKey11.PaddingRight
+                        PaddingTop: =DataCardKey11.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey11.Y
+                        ZIndex: =4
+
+                ActionOpenedOn_DataCard1 As typedDataCard.dateEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="ActionOpened"
+                    Default: =ThisItem.ActionOpenedOn
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"ActionOpened")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =200
+                    Required: =false
+                    Update: =DataCardValue4.SelectedDate
+                    Visible: =false
+                    Width: =425
+                    X: =3
+                    Y: =2
+                    ZIndex: =19
+
+                    DataCardKey4 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue4 As datepicker:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultDate: =Parent.Default
+                        DisplayMode: =Parent.DisplayMode
+                        EndYear: =Year(Today())+100
+                        IsEditable: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        StartYear: =1899
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage4 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue4.Y + DataCardValue4.Height
+                        ZIndex: =3
+
+                    StarVisible4 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey4.Height
+                        PaddingBottom: =DataCardKey4.PaddingBottom
+                        PaddingLeft: =DataCardKey4.PaddingLeft
+                        PaddingRight: =DataCardKey4.PaddingRight
+                        PaddingTop: =DataCardKey4.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey4.Y
+                        ZIndex: =4
+
+                Deadline_DataCard1 As typedDataCard.dateEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Deadline"
+                    Default: =ThisItem.Deadline
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"Deadline")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    Required: =false
+                    Update: =DataCardValue20.SelectedDate
+                    Visible: =false
+                    Width: =425
+                    X: =0
+                    Y: =3
+                    ZIndex: =19
+
+                    DataCardKey19 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue20 As datepicker:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        DefaultDate: =Parent.Default
+                        DisplayMode: =Parent.DisplayMode
+                        EndYear: =Year(Today())+100
+                        IsEditable: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        StartYear: =1899
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey19.Y + DataCardKey19.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage19 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue20.Y + DataCardValue20.Height
+                        ZIndex: =3
+
+                    StarVisible19 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey19.Height
+                        PaddingBottom: =DataCardKey19.PaddingBottom
+                        PaddingLeft: =DataCardKey19.PaddingLeft
+                        PaddingRight: =DataCardKey19.PaddingRight
+                        PaddingTop: =DataCardKey19.PaddingTop
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey19.Y
+                        ZIndex: =4
+
+                ScreenName_DataCard1 As typedDataCard.textualViewCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="ScreenName"
+                    Default: =ThisItem.ScreenName
+                    DisplayMode: =DisplayMode.View
+                    DisplayName: =DataSourceInfo([@DigitalWBR_Actionitems],DataSourceInfo.DisplayName,"ScreenName")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =40
+                    Required: =false
+                    Visible: =false
+                    Width: =425
+                    X: =1
+                    Y: =3
+                    ZIndex: =19
+
+                    DataCardKey20 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue21 As label:
+                        AutoHeight: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =27
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Default
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey20.Y + DataCardKey20.Height + 5
+                        ZIndex: =2
+
+            DC_Lookup_Status As combobox:
+                BorderColor: =
+                DefaultSelectedItems: =Filter(Choices([@DigitalWBR_Actionitems].Status),Value="Open")
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                Height: =30
+                IsSearchable: =false
+                Items: =Choices([@DigitalWBR_Actionitems].Status)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                SearchFields: =["Value"]
+                SearchItems: =[]
+                SelectMultiple: =false
+                Size: =11
+                Tooltip: =
+                Visible: |+
+                    =!_EditARP
+                    
+                Width: =150
+                X: |+
+                    =Gallery_Action_Review.X+Gallery_Action_Review.Width-400
+                    
+                    
+                    
+                    
+                    
+                    
+                Y: =15
+                ZIndex: =21
+
+            Group_Icons_ARP As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =21
+
+                Icon_Submit As icon.Save:
+                    Height: =40
+                    Icon: =Icon.Save
+                    OnSelect: |+
+                        =Set(_Edit_Accform,false);
+                        SubmitForm(Form_ARP);
+                        NewForm(Form_ARP);
+                        Set(_EditARP,false);
+                        
+                        
+                        
+                    Visible: =_EditARP
+                    Width: =40
+                    X: |
+                        =Icon_Cancel.X+Icon_Cancel.Width+30
+                    Y: =30
+                    ZIndex: =19
+
+                Icon_Cancel As icon.Save:
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Height: =40
+                    Icon: =Icon.CancelBadge
+                    OnSelect: |+
+                        =Set(_EditARP,false);
+                        
+                        
+                    Visible: |
+                        =_EditARP
+                    Width: =40
+                    X: =1226
+                    Y: =30
+                    ZIndex: =20
+
+            Addition As icon.ChevronRight:
+                AccessibleLabel: =Self.Tooltip
+                Color: =RGBA(62, 96, 170, 1)
+                Height: =40
+                Icon: =Icon.Add
+                OnSelect: |-
+                    =Navigate(Form_ARP);NewForm(Form_ARP);
+                    Set(_EditARP,true)
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                TabIndex: =0
+                Tooltip: ="Add Action Item"
+                Visible: |
+                    =!_EditARP
+                Width: =40
+                X: |+
+                    =Gallery_Action_Review.X+Gallery_Action_Review.Width-200
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                Y: |+
+                    =DataCardMain_ARP.Y+10
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                ZIndex: =22
+
+            Icon3 As icon.Filter:
+                Height: =32
+                Icon: =Icon.Filter
+                Visible: |+
+                    =!_EditARP
+                    
+                    
+                Width: =32
+                X: |+
+                    =DC_Lookup_Industry.X-40
+                    
+                    
+                Y: =15
+                ZIndex: =23
+
+            Grp_ActionReview As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =23
+
+                TextSearchBox_ARP As text:
+                    Align: =Left
+                    Default: =""
+                    Font: =Font.'Segoe UI'
+                    HintText: |
+                        ="Search Action item"
+                    PaddingLeft: =70
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Visible: |
+                        =!_EditARP
+                    Width: |+
+                        =500
+                        
+                        
+                    X: |+
+                        =DataCardMain_Media.X
+                        
+                    Y: |+
+                        =DataCardMain_ARP.Y+10
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =1
+
+                SearchIcon2_14 As icon.Search:
+                    Height: =Self.Width
+                    Icon: =Icon.Search
+                    PaddingBottom: =8
+                    PaddingLeft: =8
+                    PaddingRight: =8
+                    PaddingTop: =8
+                    Tooltip: ="Search"
+                    Visible: |
+                        =!_EditARP
+                    Width: =TextSearchBox_ARP.Height
+                    X: |+
+                        =DataCardMain_Media.X+10
+                        
+                        
+                    Y: |+
+                        =DataCardMain_ARP.Y+10
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =2
+
+                RectSeparator2_14 As rectangle:
+                    Height: =1
+                    Visible: |
+                        =!_EditARP
+                    Width: |
+                        =Gallery_Action_Review.Width
+                    X: |
+                        =DataCardMain_Media.X
+                    Y: |+
+                        =Gallery_Action_Review.Y-1
+                        
+                        
+                        
+                        
+                    ZIndex: =3
+
+                Refresh As icon.ChevronRight:
+                    AccessibleLabel: =Self.Tooltip
+                    Color: =RGBA(62, 96, 170, 1)
+                    Height: =40
+                    Icon: =Icon.Reload
+                    OnSelect: |+
+                        =Refresh(DigitalWBR_Actionitems)
+                        
+                        
+                    PaddingBottom: =5
+                    PaddingLeft: =8
+                    PaddingRight: =5
+                    PaddingTop: =8
+                    TabIndex: =0
+                    Tooltip: ="Reload"
+                    Visible: |
+                        =!_EditARP
+                    Width: =40
+                    X: |+
+                        =Gallery_Action_Review.X+Gallery_Action_Review.Width-150
+                        
+                        
+                        
+                    Y: |+
+                        =DataCardMain_ARP.Y+10
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =4
+
+                "Gallery_Action_Review As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                    Fill: =RGBA(204, 228, 246, 1)
+                    Height: |+
+                        =DataCardMain_ARP.Height-200
+                        
+                    Items: |-
+                        =SortByColumns(
+                            If(Len(TextSearchBox_ARP.Text) > 0 &&  !IsBlank(DC_Lookup_Industry.Selected) ,
+                                Search(
+                                   Filter( DigitalWBR_Actionitems, Status.Value=DC_Lookup_Status.Selected.Value && Screen=Trim(DC_Lookup_Industry.Selected.Result)	) 	   ,
+                                    TextSearchBox_ARP.Text,
+                                    "Title"
+                                ),
+                            If(Len(TextSearchBox_ARP.Text) > 0 ,
+                                Search(
+                                   Filter( DigitalWBR_Actionitems, Status.Value=DC_Lookup_Status.Selected.Value ) 
+                        		   ,
+                                    TextSearchBox_ARP.Text,
+                                    "Title"
+                                ),
+                            If(  !IsBlank(DC_Lookup_Industry.Selected)  ,
+                                   Filter( DigitalWBR_Actionitems, Status.Value=DC_Lookup_Status.Selected.Value && Screen=Trim(DC_Lookup_Industry.Selected.Result)	) ,
+                        
+                                Filter( DigitalWBR_Actionitems, Status.Value=DC_Lookup_Status.Selected.Value)
+                            ))),
+                            "Modified",
+                            Descending
+                        )
+                    Layout: =Layout.Vertical
+                    ShowNavigation: =true
+                    TemplatePadding: =0
+                    TemplateSize: =80
+                    Visible: |
+                        =!_EditARP
+                    Width: |
+                        =DataCardMain_ARP.Width
+                    X: |
+                        =DataCardMain_ARP.X
+                    Y: |+
+                        =Label_ActName.Y+Label_ActName.Height+3
+                        
+                        
+                    ZIndex: =5
+
+                    Separator5_27 As rectangle:
+                        Fill: |
+                            =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =2
+
+                    Icon1 As icon.Edit:
+                        Height: =20
+                        Icon: =Icon.Edit
+                        OnSelect: |+
+                            =Select(Parent);
+                            ClearCollect(_SelectedARP, Gallery_Action_Review.Selected );
+                            Set(_EditARP,true);
+                            Navigate(Form_ARP);EditForm(Form_ARP)
+                            
+                            
+                            
+                        Width: =20
+                        X: =11
+                        Y: =30
+                        ZIndex: =19
+
+                    Group_Columns As group:
+                        Height: =5
+                        Width: =5
+                        X: =40
+                        Y: =40
+                        ZIndex: =19
+
+                        ActionName As label:
+                            Color: =RGBA(0, 0, 0, 1)
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =2
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: =ThisItem.Title
+                            Tooltip: =ThisItem.Title
+                            Width: |
+                                =250
+                            X: |
+                                =numbers.X+numbers.Width+6
+                            Y: =3
+                            ZIndex: =9
+
+                        Status As label:
+                            Align: =Align.Center
+                            Color: =RGBA(0, 0, 0, 1)
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |
+                                =ThisItem.Status.Value
+                            Width: =67
+                            Wrap: =false
+                            X: |+
+                                =ActionName.X + ActionName.Width + 7
+                                
+                                
+                            Y: =3
+                            ZIndex: =10
+
+                        Industry As label:
+                            Color: =RGBA(0, 0, 0, 1)
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =2
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |+
+                                =ThisItem.Screen
+                                
+                                
+                                
+                                
+                            X: |+
+                                =StatusUpdate.X+StatusUpdate.Width + 6
+                                
+                            Y: =3
+                            ZIndex: =11
+
+                        Page As label:
+                            Font: =Font.'Segoe UI'
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |+
+                                =ThisItem.SubScreen
+                                
+                            Tooltip: |+
+                                =ThisItem.SubScreen
+                                
+                            Width: =100
+                            X: |+
+                                =Industry.X+Industry.Width + 6
+                                
+                                
+                            Y: =3
+                            ZIndex: =12
+
+                        Deadline As label:
+                            Align: =Align.Center
+                            Color: =RGBA(0, 0, 0, 1)
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |
+                                =ThisItem.Deadline
+                            Width: =80
+                            X: |+
+                                =Page.X+Page.Width + 6
+                                
+                                
+                            Y: =3
+                            ZIndex: =13
+
+                        Assignedto As label:
+                            Font: =Font.'Segoe UI'
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |
+                                =Concat(ThisItem.'Assigned To'.DisplayName, DisplayName & ",")
+                            Tooltip: |
+                                =Concat(ThisItem.'Assigned To'.DisplayName, DisplayName & ",")
+                            X: |+
+                                =Deadline.X+Deadline.Width + 6
+                                
+                                
+                                
+                            Y: =3
+                            ZIndex: =14
+
+                        numbers As label:
+                            Align: =Align.Right
+                            Font: =Font.'Segoe UI'
+                            Height: =70
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: |+
+                                =ThisItem.ID
+                                
+                            Width: =30
+                            Wrap: =false
+                            X: =30
+                            Y: =3
+                            ZIndex: =18
+
+                    HtmlText2 As htmlViewer:
+                        Height: =76
+                        HtmlText: =ThisItem.ClosureComments
+                        OnSelect: =Select(Parent)
+                        Width: =Label_Manager.Width
+                        X: |+
+                            =Assignedto.X+Assignedto.Width + 6
+                            
+                        Y: =3
+                        ZIndex: =20
+
+                    StatusUpdate As label:
+                        Color: =RGBA(0, 0, 0, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =70
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =2
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: |+
+                            =ThisItem.StatusUpdate
+                            
+                            
+                            
+                            
+                            
+                        Width: =Label_Status_Update.Width
+                        X: |
+                            =Status.X+Status.Width + 6
+                        Y: =3
+                        ZIndex: =21
+
+                ExcelExportImage As image:
+                    Height: =30
+                    Image: =ExcelExport
+                    OnSelect: |+
+                        =Clear(DigitalWBR_ActionsReview);
+                        ForAll(
+                            Gallery_Action_Review.AllItems,
+                            Collect(
+                                DigitalWBR_ActionsReview,
+                                {
+                                    Id : ThisRecord.ID,
+                                    ActionName: ThisRecord.Title,
+                                    Status: ThisRecord.Status.Text,
+                                    CreatedDate:  ThisRecord.Created,
+                                    DueDate : ThisRecord.ActionDueOn,
+                                    Industry : ThisRecord.ScreenName ,
+                                    Page : ThisRecord.SubScreen,
+                                    'Assigned To': ThisRecord.'Assigned To'.DisplayName,
+                                    Manager: ThisRecord.'Action Manager'.DisplayName,
+                                    'Business Impact' : ThisRecord.'Business Impact',
+                                    'Desired Outcome': ThisRecord.'Desired Outcome'
+                                }
+                            )
+                        );
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    Tooltip: ="Export to Excel"
+                    Visible: |
+                        =!_EditARP
+                    Width: =30
+                    X: |+
+                        =Gallery_Action_Review.X+Gallery_Action_Review.Width-80
+                        
+                        
+                        
+                        
+                    Y: |+
+                        =DataCardMain_ARP.Y+15
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    ZIndex: =6
+
+            Icon_Delete As icon.Save:
+                Height: =40
+                Icon: =Icon.Trash
+                OnSelect: |+
+                    =RemoveIf(DigitalWBR_Actionitems,ID = First(_SelectedARP).ID);Set(_EditARP,false);
+                    
+                    
+                    
+                    
+                    
+                Visible: =_EditARP
+                Width: =40
+                X: |
+                    =Icon_Submit.X+Icon_Submit.Width+30
+                Y: =30
+                ZIndex: =24
+
+            DC_Lookup_Industry As combobox:
+                BorderColor: =
+                DefaultSelectedItems: =
+                DisplayFields: =
+                DisplayMode: =Parent.DisplayMode
+                Height: =30
+                InputTextPlaceholder: ="Find industries"
+                IsSearchable: =false
+                Items: =Distinct(DigitalWBR_Actionitems,Trim(Screen))
+                NoSelectionText: ="Find industries"
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                SearchFields: =["Result"]
+                SearchItems: =[]
+                SelectMultiple: =false
+                Size: =11
+                Tooltip: =
+                Visible: |+
+                    =!_EditARP
+                    
+                Width: =230
+                X: |+
+                    =Gallery_Action_Review.X+Gallery_Action_Review.Width-650
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                Y: =15
+                ZIndex: =26
+
+            Grp_Labels_ABR As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =26
+
+                Label_ActName As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Action Name"
+                    Visible: |
+                        =!_EditARP
+                    Width: =250
+                    X: |
+                        =Label_Numbers.X+Label_Numbers.Width+6
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =8
+
+                Label_Status As label:
+                    Align: =Align.Center
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Status"
+                    Visible: |
+                        =!_EditARP
+                    Width: =67
+                    X: |
+                        =Label_ActName.X+Label_ActName.Width+5
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =9
+
+                Label_Industry As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Industry"
+                    Visible: |
+                        =!_EditARP
+                    X: |+
+                        =Label_Status_Update.X+Label_Status_Update.Width+5
+                        
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =10
+
+                Label_Page As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Page"
+                    Visible: |
+                        =!_EditARP
+                    Width: =100
+                    X: |+
+                        =Label_Industry.X+Label_Industry.Width+5
+                        
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =11
+
+                Label_Deadline As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Due Date"
+                    Visible: |
+                        =!_EditARP
+                    Width: =90
+                    X: |
+                        =Label_Page.X+Label_Page.Width+5
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =12
+
+                Label_Assignedto As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Assigned To"
+                    Visible: |
+                        =!_EditARP
+                    X: |
+                        =Label_Deadline.X+Label_Deadline.Width+5
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =13
+
+                Label_Manager As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Closing Comments"
+                    Visible: |
+                        =!_EditARP
+                    Width: =450
+                    X: |+
+                        =Label_Assignedto.X+Label_Assignedto.Width+5
+                        
+                        
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =14
+
+                Label_Numbers As label:
+                    Align: =Align.Right
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    PaddingLeft: =8
+                    Size: =15
+                    Text: |-
+                        ="#"
+                    Visible: |
+                        =!_EditARP
+                    Width: =60
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =17
+
+                Label_Status_Update As label:
+                    Align: =Align.Center
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(62, 96, 170, 1)
+                    Height: =30
+                    Text: ="Status Update"
+                    Visible: |
+                        =!_EditARP
+                    Width: =300
+                    X: |+
+                        =Label_Status.X+Label_Status.Width+5
+                        
+                    Y: |
+                        =TextSearchBox_ARP.Y+TextSearchBox_ARP.Height
+                    ZIndex: =25
+
+    HtmlSteps_6 As htmlViewer:
+        AutoHeight: =true
+        Font: =Font.'Segoe UI'
+        Height: =198
+        HoverBorderColor: =HtmlSteps_6.BorderColor
+        HtmlText: |-
+            ="
+            <div style='color: #000000; padding: 1em 2em 0 1em; width: 100%; overflow: hidden;'>
+            
+              
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >1</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Make sure you're editing your app - press <strong>&lt;Esc&gt;</strong> to ensure you're in edit mode<br /><br />
+                </div>
+                <div style='clear: both'></div>
+              
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >2</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Change the fill color of the black rectangle. Use ""Color"" on the ""Properties"" panel to your right<br /><br />
+                </div>
+                <div style='clear: both'></div>
+               
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >3</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Change font size of the second label. Use <strong>Home</strong> toolbar on top of the screen -
+                    font size should be 14 or greater.<br /><br />
+                </div>
+                <div style='clear: both'></div>
+            
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >4</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Replace the image in the image container with an image from your computer. Use the <strong>Image</strong> property on the <strong>Properties</strong> panel to your right<br /><br />
+                </div>
+                <div style='clear: both'></div>
+             
+                <div style='float: left; width: 7%; font-size: 1.2em; text-align: right; font-weight: bold' >5</div>
+                <div style='float: left; width: 85%; font-size: 1.2em; padding-left: 1em'>
+                    Play your app and press ""Next""<br /><br />
+                </div>
+                <div style='clear: both'></div>
+            
+            </div>
+              "
+        PaddingRight: =7.03
+        PaddingTop: =7.03
+        PressedBorderColor: =HtmlSteps_6.BorderColor
+        Size: =15.46
+        Visible: =
+        Width: =1629.05
+        X: =282.52
+        Y: =60
+        ZIndex: =10
+
+    ImagePowerAppsLogo_6 As image:
+        BorderColor: =RGBA(51, 51, 51, 1)
+        FocusedBorderColor: =ImagePowerAppsLogo_6.BorderColor
+        Height: =ImagePowerAppsLogo.Height
+        HoverBorderColor: =ColorFade(ImagePowerAppsLogo_6.BorderColor, 20%)
+        HoverFill: =ColorFade(ImagePowerAppsLogo_6.Fill, 20%)
+        Image: =ModernAnalyticsInsights_Logo_rev
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        PressedBorderColor: =ColorFade(ImagePowerAppsLogo_6.BorderColor, -20%)
+        PressedFill: =ColorFade(ImagePowerAppsLogo_6.Fill, -20%)
+        Width: =152
+        X: =20
+        Y: =10
+        ZIndex: =11
+
+    GroupMenu_5 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =40
+        ZIndex: =23
+
+        "GalleryLessons_5 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            AccessibleLabel: ="List of available lessons"
+            DisabledBorderColor: =GalleryLessons_5.BorderColor
+            DisabledFill: =GalleryLessons_5.Fill
+            Height: =1000
+            HoverBorderColor: =GalleryLessons_5.BorderColor
+            HoverFill: =GalleryLessons_5.Fill
+            Items: =Filter(Lessons, num >= 0 && num <= 20)
+            Layout: =Layout.Vertical
+            LoadingSpinnerColor: =GalleryLessons_5.BorderColor
+            OnSelect: |+
+                =UpdateContext({IsShowResourcesTab: false});
+                Set(_SubScreen,"OverView" );
+                
+                Set(_Results1, true);
+                Set(_Results2, false); 
+                Set(_Results3, false); 
+                Set(_Results4, false);
+                Set(_Results5, false); 
+                Set(_Results6, false);
+                Set(_Results7, false);
+                Set(_Results8, false); 
+                Set(_Results9, false);
+                
+                
+                Set(CollapseRM,true);
+                Set(IsShowResourcesTab, false);
+                Set(_EditMode, false);
+                Set(_Results12, false);
+                Set(_Results11, false);
+                Set(_Results10, false);
+                Set(_Results9, false);
+                
+                
+                
+            PressedBorderColor: =GalleryLessons_5.BorderColor
+            PressedFill: =GalleryLessons_5.Fill
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =220
+            Y: =100
+            ZIndex: =2
+
+            RectangleCurrentSelected_5 As rectangle:
+                DisabledFill: =RectangleCurrentSelected_5.Fill
+                Fill: =RGBA(220, 220, 220, 1)
+                FocusedBorderColor: =RectangleCurrentSelected_5.BorderColor
+                Height: =40
+                HoverFill: =RectangleCurrentSelected_5.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                    
+                    Set(_Results1, false);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                PressedFill: =RectangleCurrentSelected_5.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =GalleryLessons_5.X+GalleryLessons_5.Width
+                ZIndex: =2
+
+            RectangleSelected_5 As rectangle:
+                DisabledFill: =RectangleSelected_5.Fill
+                Fill: =RGBA(116, 39, 116, 1)
+                FocusedBorderColor: =RectangleSelected_5.BorderColor
+                Height: =20
+                HoverFill: =RectangleSelected_5.Fill
+                OnSelect: |
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(IsExpand,false);
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                    
+                    Set(_Results1, false);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                PressedFill: =RectangleSelected_5.Fill
+                Tooltip: =ThisItem.name
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =5.62
+                X: =1
+                Y: =11
+                ZIndex: =3
+
+            LabelName_5 As label:
+                Color: =RGBA(51, 51, 51, 1)
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =LabelName_5.BorderColor
+                Font: =Font.'Segoe UI'
+                HoverBorderColor: =LabelName_5.BorderColor
+                HoverColor: =LabelName_5.Color
+                HoverFill: =LabelName_5.Fill
+                LineHeight: =0
+                OnSelect: |-
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));Set(_EditMode,false);Set(IsExpand,false);
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                PaddingRight: =7.03
+                PaddingTop: =7.03
+                PressedBorderColor: =LabelName_5.BorderColor
+                PressedColor: =LabelName_5.Color
+                PressedFill: =LabelName_5.Fill
+                Size: =12
+                Text: =ThisItem.name
+                Tooltip: =ThisItem.name
+                Width: =(GalleryLessons_5.X+GalleryLessons_5.Width)-RectangleBorder2_5.X
+                X: =38
+                ZIndex: =5
+
+            ImageLessonIcon_5 As image:
+                AccessibleLabel: ="Navigate to " & ThisItem.name & " screen"
+                DisplayMode: =If(ThisItem.num>_CurrentLesson, DisplayMode.Disabled, DisplayMode.Edit)
+                FocusedBorderColor: =ImageLessonIcon_5.BorderColor
+                Height: =16
+                HoverBorderColor: =ColorFade(ImageLessonIcon_5.BorderColor, 20%)
+                HoverFill: =ColorFade(ImageLessonIcon_5.Fill, 20%)
+                Image: =ThisItem.icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));Set(_EditMode,false);
+                    
+                    Set(IsExpand,false);
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    
+                PaddingRight: =0.00
+                PaddingTop: =0.00
+                PressedBorderColor: =ColorFade(ImageLessonIcon_5.BorderColor, -20%)
+                PressedFill: =ColorFade(ImageLessonIcon_5.Fill, -20%)
+                TabIndex: =If(ThisItem.num>_CurrentLesson, -1,0)
+                Tooltip: =ThisItem.name
+                Visible: =false
+                Width: =22.49
+                X: =12
+                Y: =13
+                ZIndex: =6
+
+            Icon2_5 As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =Image.Height
+                Icon: =ThisItem.Icon
+                OnSelect: |+
+                    =If(ThisItem.num<=_CurrentLesson, Navigate(ThisItem.screen, ScreenTransition.None));
+                    Set(_EditMode,false);
+                    Set(IsExpand,false);
+                    Set(_SubScreen,"OverView" );
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results9, false);
+                    
+                Tooltip: =ThisItem.name
+                Width: =Image.Width
+                X: =Image.X
+                Y: =Image.Y
+                ZIndex: =7
+
+            Rectangle2_18 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Visible: =If(ThisItem.num in (RectNumbers.Num), true, false)
+                Width: =GalleryLessons.Width
+                X: |
+                    =0
+                Y: =39
+                ZIndex: =8
+
+        iconHamburgerMenu_5 As icon.Hamburger:
+            AccessibleLabel: ="expand or compact the menu"
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledFill: =iconHamburgerMenu_5.Fill
+            FocusedBorderColor: =iconHamburgerMenu_5.BorderColor
+            Height: =24
+            HoverBorderColor: =ColorFade(iconHamburgerMenu_5.BorderColor, 20%)
+            HoverColor: =ColorFade(iconHamburgerMenu_5.Color, 20%)
+            HoverFill: =iconHamburgerMenu_5.Fill
+            Icon: =Icon.Hamburger
+            OnSelect: |
+                =If(IsExpand,Set(IsExpand, false);,Set(IsExpand, true));
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =ColorFade(iconHamburgerMenu_5.BorderColor, -20%)
+            PressedColor: =ColorFade(iconHamburgerMenu_5.Color, -20%)
+            PressedFill: =iconHamburgerMenu_5.Fill
+            TabIndex: =0
+            Width: =17
+            X: =15
+            Y: =78
+            ZIndex: =3
+
+        RectangleBorder2_5 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder2_5.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder2_5.BorderColor
+            Height: =CanvasMain_ARP.Height+25
+            HoverFill: =RectangleBorder2_5.Fill
+            PressedFill: =RectangleBorder2_5.Fill
+            Visible: =IsExpand
+            Width: =1
+            X: =40
+            Y: =60
+            ZIndex: =4
+
+        RectangleBorder1_5 As rectangle:
+            AccessibleLabel: ="expand or compact the menu"
+            DisabledFill: =RectangleBorder1_5.Fill
+            Fill: =RGBA(218, 218, 218, 1)
+            FocusedBorderColor: =RectangleBorder1_5.BorderColor
+            Height: =CanvasMain_ARP.Height+25
+            HoverFill: =RectangleBorder1_5.Fill
+            PressedFill: =RectangleBorder1_5.Fill
+            Visible: =!IsExpand
+            Width: =1
+            X: =GalleryLessons_5.X+GalleryLessons_5.Width-2
+            Y: =60
+            ZIndex: =5
+
+    Label_Collapse_4 As label:
+        Height: =34
+        Text: |
+            ="CollapseRM" &CollapseRM
+        Visible: =false
+        Width: =204
+        X: =885
+        Y: =60
+        ZIndex: =31
+
+    Label_IsExpand_4 As label:
+        Text: |-
+            ="Expand :"&IsExpand
+        Visible: =false
+        X: =615
+        Y: =60
+        ZIndex: =32
+
+    Label_IsEdit_4 As label:
+        Text: |-
+            ="IsEdit :"& _EditMode
+        Visible: =false
+        X: =758
+        Y: =60
+        ZIndex: =33
+
+    Icon_Fin_11 As icon.Information:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =25
+        Icon: =Icon.Help
+        OnSelect: |-
+            =Launch("http://aka.ms/3simplesteps")
+        Tooltip: ="Access Info"
+        Width: =25
+        X: =1878
+        Y: =15
+        ZIndex: =34
+
+    GroupBackground_5 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =54
+
+        RectangleBackground_6 As rectangle:
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RectangleBackground_6.Fill
+            Fill: =RGBA(241, 241, 241, 1)
+            FocusedBorderColor: =RectangleBackground_6.BorderColor
+            Height: =1080
+            HoverFill: =RectangleBackground_6.Fill
+            PressedFill: =RectangleBackground_6.Fill
+            Width: =1920
+            X: =0.00
+            ZIndex: =1
+
+        WelcomeScreenTitleBackground_5 As rectangle:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            DisabledFill: =WelcomeScreenTitleBackground_5.Fill
+            Fill: =RGBA(0, 134, 208, 1)
+            FocusedBorderColor: =WelcomeScreenTitleBackground_5.BorderColor
+            Height: =60
+            HoverFill: =WelcomeScreenTitleBackground_5.Fill
+            PressedFill: =WelcomeScreenTitleBackground_5.Fill
+            Width: =1920
+            X: =0.00
+            ZIndex: =6
+
+        WelcomeScreenTitle_5 As label:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =WelcomeScreenTitle_5.BorderColor
+            Font: =Font.'Segoe UI'
+            Height: =55
+            HoverBorderColor: =WelcomeScreenTitle_5.BorderColor
+            HoverColor: =WelcomeScreenTitle_5.Color
+            HoverFill: =WelcomeScreenTitle_5.Fill
+            LineHeight: =0
+            PaddingRight: =7.03
+            PressedBorderColor: =WelcomeScreenTitle_5.BorderColor
+            PressedColor: =WelcomeScreenTitle_5.Color
+            PressedFill: =WelcomeScreenTitle_5.Fill
+            Size: =25.30
+            Text: ="Industry Solution Weekly Business Review | Action Items Review"
+            Width: =1200
+            X: =350
+            ZIndex: =7
+

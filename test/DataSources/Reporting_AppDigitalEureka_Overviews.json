@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crdd7_reporting_appdigitaleureka_overviews",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crdd7_reporting_appdigitaleureka_overview",
+    "MaxGetRowsCount": 2000,
+    "Name": "Reporting_AppDigitalEureka_Overviews",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crdd7_accounttopparentdimensionindustry": "Industry",
+      "crdd7_eurekaaccountstage": "EurekaAccountStage",
+      "crdd7_name": "Name",
+      "crdd7_overvieweurekalevelmix": "Overview Eureka Level Mix %",
+      "crdd7_reporting_appdigitaleureka_overview_AsyncOperations": "System Jobs",
+      "crdd7_reporting_appdigitaleureka_overview_BulkDeleteFailures": "Bulk Delete Failures",
+      "crdd7_reporting_appdigitaleureka_overview_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crdd7_reporting_appdigitaleureka_overview_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crdd7_reporting_appdigitaleureka_overview_ProcessSession": "Process Sessions",
+      "crdd7_reporting_appdigitaleureka_overview_SyncErrors": "Sync Errors",
+      "crdd7_reporting_appdigitaleureka_overviewid": "Reporting_AppDigitalEureka_Overview",
+      "crdd7_reporting_eurekaaccountdetailsoveralleurekalevel": "OverallEurekaLevel",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Reporting_AppDigitalEureka_Overviews",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Reporting_AppDigitalEureka_Overviews (Views)",
+    "Name": "_crdd7_reporting_appdigitaleureka_overview_views",
+    "RelatedEntityName": "Reporting_AppDigitalEureka_Overviews",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "55341394-77bb-4715-99c7-b78b9fb98c12": "Reporting_AppDigitalEureka_Overview Lookup View",
+      "902656cf-d4b7-4da0-82c5-33980c40ba8e": "Active Reporting_AppDigitalEureka_Overviews",
+      "9adc11c0-b600-4e2c-b91d-4eaedd24ba65": "Reporting_AppDigitalEureka_Overview Advanced Find View",
+      "b3570c85-af42-47e3-826f-e01cc043d394": "Reporting_AppDigitalEureka_Overview Associated View",
+      "e1285647-8da4-41ba-8c4e-fd5d38dadb43": "Inactive Reporting_AppDigitalEureka_Overviews"
+    }
+  },
+  {
+    "DisplayName": "Status (Reporting_AppDigitalEureka_Overviews)",
+    "Name": "crdd7_reporting_appdigitaleureka_overview_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Reporting_AppDigitalEureka_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Reporting_AppDigitalEureka_Overviews",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Reporting_AppDigitalEureka_Overviews)",
+    "Name": "crdd7_reporting_appdigitaleureka_overview_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Reporting_AppDigitalEureka_Overviews"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Reporting_AppDigitalEureka_Overviews",
+    "Type": "OptionSetInfo"
+  }
+]

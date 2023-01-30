@@ -1,0 +1,298 @@
+LeftNavigation As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =920
+    LeftNavGalItems: =Filter(Lessons, num >= 0 && num <= 20)
+    Width: =220
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    conLeftNav As groupContainer.manualLayoutContainer:
+        Height: =920
+        Width: =220
+        ZIndex: =1
+
+        IconHamBurger As icon.Add:
+            Color: =RGBA(51, 51, 51, 1)
+            Height: =24
+            Icon: =Icon.Hamburger
+            Width: =17
+            X: =15
+            Y: =30
+            ZIndex: =1
+
+        LeftNavGallery As gallery.variableTemplateHeightGallery:
+            Height: =866
+            Items: =LeftNavigation.LeftNavGalItems
+            Layout: =Layout.Vertical
+            OnSelect: |-
+                =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                
+                Set(CollapseRM,true);
+                Set(IsShowResourcesTab, false);
+                Set(_EditMode, false);
+                Set(_Results12, false);
+                Set(_Results11, false);
+                Set(_Results10, false);
+                Set(_Results13, false);
+                Set(_Results14, false);
+                Set(_Results1, true);
+                Set(_Results2, false); 
+                Set(_Results3, false); 
+                Set(_Results4, false);
+                Set(_Results5, false); 
+                Set(_Results6, false);
+                Set(_Results7, false);
+                Set(_Results8, false); 
+                Set(_Results9, false);
+                Set(_Results10, false);
+                Set(_Results11, false);
+                Set(_Results12, false);
+                Set(_SubScreen,"Overview");
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =220
+            Y: =54
+            ZIndex: =2
+
+            recBackFill As rectangle:
+                Fill: =RGBA(220, 220, 220, 1)
+                Height: =40
+                OnSelect: |-
+                    =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_SubScreen,"Overview");
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =LeftNavGallery.X+LeftNavGallery.Width
+                ZIndex: =1
+
+            leftNavColorRec As rectangle:
+                Fill: =RGBA(116, 39, 116, 1)
+                Height: =20
+                OnSelect: |-
+                    =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_SubScreen,"Overview");
+                Visible: =App.ActiveScreen = ThisItem.screen
+                Width: =5.62
+                X: =1
+                Y: =11
+                ZIndex: =2
+
+            IconTransparent As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =16
+                Icon: =ThisItem.Icon
+                OnSelect: |-
+                    =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_SubScreen,"Overview");
+                Width: =22
+                X: =12
+                Y: =13
+                ZIndex: =3
+
+            lblIndustryName As label:
+                Font: =Font.'Segoe UI'
+                OnSelect: |-
+                    =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_SubScreen,"Overview");
+                Size: =12
+                Text: =ThisItem.name
+                Width: =(LeftNavGallery.X+LeftNavGallery.Width)-leftLine.X
+                X: =38
+                ZIndex: =4
+
+            recHorLine As rectangle:
+                Height: =1
+                OnSelect: |-
+                    =If(ThisItem.num<=Value(LeftNavigation._CurrentLessonProperty),Navigate(ThisItem.screen, ScreenTransition.None));
+                    
+                    Set(CollapseRM,true);
+                    Set(IsShowResourcesTab, false);
+                    Set(_EditMode, false);
+                    Set(_Results12, false);
+                    Set(_Results11, false);
+                    Set(_Results10, false);
+                    Set(_Results13, false);
+                    Set(_Results14, false);
+                    Set(_Results1, true);
+                    Set(_Results2, false); 
+                    Set(_Results3, false); 
+                    Set(_Results4, false);
+                    Set(_Results5, false); 
+                    Set(_Results6, false);
+                    Set(_Results7, false);
+                    Set(_Results8, false); 
+                    Set(_Results9, false);
+                    Set(_Results10, false);
+                    Set(_Results11, false);
+                    Set(_Results12, false);
+                    Set(_SubScreen,"Overview");
+                Visible: =If(ThisItem.num in (RectNumbers.Num), true, false)
+                Width: =220
+                Y: =40
+                ZIndex: =5
+
+            subISCorpLeftNav As gallery.variableTemplateHeightGallery:
+                Height: =If(CountRows(subISCorpLeftNav.AllItems)>0,231,0)
+                Items: =If(ThisItem.num=13,SubLessons)
+                Layout: =Layout.Vertical
+                TemplateSize: =30
+                Visible: =ThisItem.num=13
+                Width: =200
+                X: =20
+                Y: =45
+                ZIndex: =6
+
+                Rectangle6 As rectangle:
+                    Fill: =RGBA(216, 223, 238, 1)
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    Visible: =ThisItem.IsSelected
+                    Width: =160
+                    X: =20
+                    ZIndex: =1
+
+                Label15 As label:
+                    Font: =Font.'Segoe UI'
+                    Height: =20
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: =ThisItem.name
+                    Width: =160
+                    X: =30
+                    Y: =5
+                    ZIndex: =2
+
+                Rectangle7 As rectangle:
+                    Height: =20
+                    OnSelect: =Select(Parent)
+                    Width: =5.62
+                    X: =20
+                    Y: =5
+                    ZIndex: =3
+
+            IconExpand As icon.Add:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =20
+                Icon: =Icon.Add
+                OnSelect: |+
+                    =
+                    
+                Visible: =ThisItem.num=13
+                Width: =20
+                X: =190
+                Y: =10
+                ZIndex: =8
+
+            IconCollapse As icon.HorizontalLine:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =20
+                Icon: =Icon.HorizontalLine
+                OnSelect: =
+                Visible: =ThisItem.num=13
+                Width: =20
+                X: =190
+                Y: =10
+                ZIndex: =9
+
+        rightLine As rectangle:
+            Fill: =RGBA(218, 218, 218, 1)
+            Height: =911
+            Width: =1
+            X: =218
+            ZIndex: =3
+
+        leftLine As rectangle:
+            Height: =800
+            Visible: =false
+            Width: =1
+            X: =40
+            ZIndex: =4
+
