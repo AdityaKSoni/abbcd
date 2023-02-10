@@ -52,7 +52,7 @@
             "Name": "recHeader",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5601,
+            "PublishOrderIndex": 5607,
             "Rules": [
               {
                 "Category": "Design",
@@ -268,7 +268,7 @@
             "Name": "lblHeader",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5602,
+            "PublishOrderIndex": 5608,
             "Rules": [
               {
                 "Category": "Data",
@@ -545,7 +545,7 @@
             "Name": "ImageHeader",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5603,
+            "PublishOrderIndex": 5609,
             "Rules": [
               {
                 "Category": "Data",
@@ -789,7 +789,7 @@
             "Name": "lblScreenName",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5604,
+            "PublishOrderIndex": 5610,
             "Rules": [
               {
                 "Category": "Data",
@@ -1069,7 +1069,7 @@
             "Name": "IconScreen",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5605,
+            "PublishOrderIndex": 5611,
             "Rules": [
               {
                 "Category": "Design",
@@ -1304,7 +1304,7 @@
             "Name": "Icon7",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5606,
+            "PublishOrderIndex": 5612,
             "Rules": [
               {
                 "Category": "Data",
@@ -1565,7 +1565,7 @@
             "Name": "Icon2",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5607,
+            "PublishOrderIndex": 5613,
             "Rules": [
               {
                 "Category": "Data",
@@ -1826,7 +1826,7 @@
             "Name": "IconInfo",
             "Parent": "conHeader",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 5608,
+            "PublishOrderIndex": 5614,
             "Rules": [
               {
                 "Category": "Data",
@@ -2044,7 +2044,7 @@
         "Name": "conHeader",
         "Parent": "Heading",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 5600,
+        "PublishOrderIndex": 5606,
         "Rules": [
           {
             "Category": "Design",

@@ -6488,9 +6488,9 @@ L01_CrossIndustry As screen:
             Items: =["","ANZ","APAC","Canada","Central and Eastern Europe","France","Germany","Greater China","India","Japan","Korea","Latam","MEA","UK","United States","Western Europe"]
             OnChange: |
                 =If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),
-                Set(varAreaVal,"");UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                UpdateContext({varAreaVal:""});UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
                 ,
-                Set(varAreaVal," and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')");
+                UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"});
                 UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"});
                 UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"});
                 UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"});

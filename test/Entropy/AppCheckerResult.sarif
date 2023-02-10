@@ -61421,36 +61421,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "App.varAreaVal"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "App.varAreaVal",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "varAreaVal",
-                "module": "App",
-                "type": "App"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 15
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "App.DigitalMBR"
                 }
               ],
