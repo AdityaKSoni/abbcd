@@ -93,7 +93,22 @@
       }
     },
     "dataSources": [
-      "Industry180_RevPlans"
+      "Industry180_RevPlans",
+      "FiscalPeriods",
+      "DigitalWBR_Actionitems",
+      "DigitalWBR_Insights",
+      "DigitalWBR_highlight",
+      "DigitalWBR_highlight_1",
+      "Digital_WBR_Comments",
+      "DigitalWBR_IconImages",
+      "IS Growth Outlook - FRA %",
+      "FiscalPeriods_DigitalWBR",
+      "Digital_WBR_WWPS_Opportunities",
+      "Digital_WBR_Opportunities",
+      "IS Growth Outlook - TAM",
+      "IS Growth Outlook - TAM_1",
+      "Service Line Pipeline",
+      "Documents"
     ],
     "dependencies": {},
     "dependents": [],

@@ -6453,137 +6453,511 @@ L08_Healthcare As screen:
             Y: =20
             ZIndex: =14
 
-    Icon10 As icon.FilterFlat:
-        Height: =30
-        Icon: =Icon.FilterFlat
-        OnSelect: |-
-            =UpdateContext({varGFilter:!varGFilter})
-        Width: =30
-        X: =1811
-        Y: =70
-        ZIndex: =17
-
-    Container3 As groupContainer.manualLayoutContainer:
+    conGlobalFlter_1 As groupContainer.manualLayoutContainer:
         BorderColor: =RGBA(101, 128, 187, 1)
         BorderThickness: =1
         Fill: =RGBA(255, 255, 255, 1)
         Height: =809
         Visible: =varGFilter
         Width: =380
-        X: =1480
-        Y: =102
-        ZIndex: =18
+        X: =1470
+        Y: =100
+        ZIndex: =17
 
-        Label20 As label:
+        lblGFArea_1 As label:
             Font: =Font.'Segoe UI'
             Height: =35
             Size: =11
             Text: ="Area"
             X: =10
-            Y: =60
+            Y: =80
             ZIndex: =1
 
-        ComboBox1 As combobox:
+        cbGFArea_1 As combobox:
             DisplayFields: =["Value"]
-            Font: =Font.'Segoe UI'
+            Font: =Font.Arial
             Height: =35
             IsSearchable: =false
-            Items: =["","ANZ","APAC","Asia HQ","Canada","Central and Eastern Europe","CorpHQ","EMEA HQ","France","Germany","Global Delivery","Greater China","Inactive Profit Centers","India","Japan","Korea","Latam","MEA","No WW Area","Not Applicable","UK","United States","UNKNOWN","Western Europe"]
-            OnChange: |-
-                =If(IsBlank(ComboBox1.Selected.Value) || IsEmpty(ComboBox1.SelectedItems),UpdateContext({varAreaVal:""}),UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(ComboBox1.SelectedItems,Value & "','"),Len(Concat(ComboBox1.SelectedItems,Value & "','"))-3) &"')"}))
+            Items: =["","ANZ","APAC","Canada","Central and Eastern Europe","France","Germany","Greater China","India","Japan","Korea","Latam","MEA","UK","United States","Western Europe"]
+            OnChange: |
+                =If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                //UpdateContext({varAreaVal:""});
+                UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                ,
+                //UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                //If area is empty
+                If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""});UpdateContext({varNoSegmentVal:""});,
+                UpdateContext({varNoSegmentVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:"&$filter=Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                ,
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""}),
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varNoSegmentVal:""}),
+                UpdateContext({varNoSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:" and Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                );
+                //If area and segment are empty
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)),
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""});UpdateContext({varNoIndustryVal:""});,
+                UpdateContext({varNoIndustryVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""}),UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varNoIndustryVal:""}),UpdateContext({varNoIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)),
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""});UpdateContext({varProductVal:""}),
+                UpdateContext({varNoProductVal:"&$filter=Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varProductVal:""}),UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""}),UpdateContext({varNoProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)) && (IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems)),
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varNoSolutionAreaVal:""});UpdateContext({varSolutionAreaVal:""});
+                UpdateContext({varSolutionAreaVal2:""});
+                ,
+                UpdateContext({varNoSolutionAreaVal:"&$filter=Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varSolutionAreaVal:""});UpdateContext({varNoSolutionAreaVal2:""});UpdateContext({varSolutionAreaVal2:""});,
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varNoSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                );
+                
+                /*
+                If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),UpdateContext({varAreaVal:""}),UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),UpdateContext({varNoAreaVal:""}),UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),UpdateContext({varMSXIAreaVal:""}),UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),UpdateContext({varNoMSXIAreaVal:""}),UpdateContext({varNoMSXIAreaVal:"&$filter= Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFArea.Selected.Value) || IsEmpty(cbGFArea.SelectedItems),UpdateContext({varAccountPlanAreaVal:""}),UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea.SelectedItems,Value & "','"),Len(Concat(cbGFArea.SelectedItems,Value & "','"))-3) &"')"}));
+                */
             SearchFields: =["Value"]
             SearchItems: =[]
             Size: =11
             Width: =360
             X: =10
-            Y: =Label20.Y+Label20.Height
+            Y: =lblGFArea_1.Y+lblGFArea_1.Height
             ZIndex: =2
 
-        ComboBox1_1 As combobox:
+        cbGFSegment_1 As combobox:
             DisplayFields: =["Value"]
             Font: =Font.'Segoe UI'
             Height: =35
             IsSearchable: =false
-            Items: =["","Default OEM","Major Commercial","Major Public Sector","OEM","Small, Medium & Corporate Commercial","Small, Medium & Corporate Public Sector","Small, Medium & Corporate Scale","Strategic Commercial","Strategic Public Sector"]
-            OnChange: |-
-                =If(IsBlank(ComboBox1_1.Selected.Value) || IsEmpty(ComboBox1_1.SelectedItems),UpdateContext({varSegmentVal:""}),UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Group in ('"& Left(Concat(ComboBox1_1.SelectedItems,Value & "','"),Len(Concat(ComboBox1_1.SelectedItems,Value & "','"))-3) &"')"}))
+            Items: =["","Major Commercial","Major Public Sector","Strategic Commercial","Strategic Public Sector"]
+            OnChange: |
+                =If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                UpdateContext({varAreaVal:""});UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                ,
+                UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                //If area is empty
+                If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""});UpdateContext({varNoSegmentVal:""});,
+                UpdateContext({varNoSegmentVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:"&$filter=Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                ,
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""}),
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varNoSegmentVal:""}),
+                UpdateContext({varNoSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:" and Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                );
+                //If area and segment are empty
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)),
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""});UpdateContext({varNoIndustryVal:""});,
+                UpdateContext({varNoIndustryVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""}),UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varNoIndustryVal:""}),UpdateContext({varNoIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)),
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""});UpdateContext({varProductVal:""}),
+                UpdateContext({varNoProductVal:"&$filter=Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varProductVal:""}),UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""}),UpdateContext({varNoProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)) && (IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems)),
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varNoSolutionAreaVal:""});UpdateContext({varSolutionAreaVal:""});
+                UpdateContext({varSolutionAreaVal2:""});
+                ,
+                UpdateContext({varNoSolutionAreaVal:"&$filter=Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varSolutionAreaVal:""});UpdateContext({varNoSolutionAreaVal2:""});UpdateContext({varSolutionAreaVal2:""});,
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varNoSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                );
             SearchFields: =["Value"]
             SearchItems: =[]
             Size: =11
             Width: =360
             X: =10
-            Y: =Label20_1.Y+Label20_1.Height
+            Y: =lblGFSegment_1.Y+lblGFSegment_1.Height
             ZIndex: =3
 
-        Label20_1 As label:
+        lblGFSegment_1 As label:
             Font: =Font.'Segoe UI'
             Height: =35
             Size: =11
             Text: ="Segment"
             X: =10
-            Y: =ComboBox1.Y+ComboBox1.Height+50
+            Y: =cbGFArea_1.Y+cbGFArea_1.Height+30
             ZIndex: =4
 
-        Label22 As label:
+        lblGFTitle_1 As label:
             Align: =Align.Center
             Fill: =RGBA(237, 237, 237, 1)
             Font: =Font.Arial
             FontWeight: =FontWeight.Bold
             Height: =43
-            Text: ="Global Search"
+            Text: ="Global Filter"
             Width: =380
             ZIndex: =5
 
-        "Gallery_Commentary_Regions As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
-            Height: =522
-            Items: =["","ANZ","APAC","Asia HQ","Canada","Central and Eastern Europe","CorpHQ","EMEA HQ","France","Germany","Global Delivery","Greater China","Inactive Profit Centers","India","Japan","Korea","Latam","MEA","No WW Area","Not Applicable","UK","United States","UNKNOWN","Western Europe"]
-            Layout: =Layout.Vertical
-            TemplatePadding: =0
-            TemplateSize: =30
-            Visible: =false
+        cbGFIndustry_1 As combobox:
+            DisplayFields: =["Value"]
+            Font: =Font.'Segoe UI'
+            Height: =35
+            IsSearchable: =false
+            Items: =["","Health Payor","Health Pharma","Health Provider","MedTech"]
+            OnChange: |
+                =If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                UpdateContext({varAreaVal:""});UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                ,
+                UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                //If area is empty
+                If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""});UpdateContext({varNoSegmentVal:""});,
+                UpdateContext({varNoSegmentVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:"&$filter=Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                ,
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""}),
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varNoSegmentVal:""}),
+                UpdateContext({varNoSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:" and Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                );
+                //If area and segment are empty
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)),
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""});UpdateContext({varNoIndustryVal:""});,
+                UpdateContext({varNoIndustryVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""}),UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varNoIndustryVal:""}),UpdateContext({varNoIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)),
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""});UpdateContext({varProductVal:""}),
+                UpdateContext({varNoProductVal:"&$filter=Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varProductVal:""}),UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""}),UpdateContext({varNoProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)) && (IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems)),
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varNoSolutionAreaVal:""});UpdateContext({varSolutionAreaVal:""});
+                UpdateContext({varSolutionAreaVal2:""});
+                ,
+                UpdateContext({varNoSolutionAreaVal:"&$filter=Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varSolutionAreaVal:""});UpdateContext({varNoSolutionAreaVal2:""});UpdateContext({varSolutionAreaVal2:""});,
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varNoSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                );
+            SearchFields: =["Value"]
+            SearchItems: =[]
+            Size: =11
             Width: =360
-            Y: =180
+            X: =10
+            Y: =lblGFIndustry_1.Y+lblGFIndustry_1.Height
             ZIndex: =6
 
-            Checkbox_Region As checkbox:
-                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
-                CheckboxSize: =25
-                CheckmarkFill: =RGBA(0, 0, 0, 1)
-                Color: =RGBA(0, 0, 0, 1)
-                FocusedBorderThickness: =0
-                Font: =Font.'Segoe UI'
-                Height: =30
-                OnCheck: |
-                    =Collect(
-                          Coll_SelectedRegions,
-                          ThisItem.Value
-                       )
-                OnUncheck: |-
-                    =RemoveIf(
-                          Coll_SelectedRegions,
-                         Value = ThisItem.Value
-                       )
-                Reset: =
-                Size: =10.5
-                Text: =ThisItem.Value
-                Width: =216
-                X: =40
-                ZIndex: =4
+        lblGFIndustry_1 As label:
+            Font: =Font.'Segoe UI'
+            Height: =35
+            Size: =11
+            Text: ="Vertical"
+            X: =10
+            Y: =cbGFSegment_1.Y+cbGFSegment_1.Height+30
+            ZIndex: =7
 
-            Rectangle10 As rectangle:
-                Height: =30
-                Width: =5
-                X: =30
-                ZIndex: =5
+        cbGFProduct_1 As combobox:
+            DefaultSelectedItems: =["ACR Data & AI","ACR Digital & App Innovation","ACR Infra","ACR Security","App Innovation Licensing","Commercial Devices","Dynamics 365","Dynamics On Prem","Gaming","Infra Licensing","Linkedin","M365 Suites Core","M365 Suites E5","M365 Suites FLW","MW Cloud Standalone","MW Growth Bets","MW Licensing","Power Platform excl PBI","Security Cloud Standalone","SQL Server","UNKNOWN"]
+            DisplayFields: =["Value"]
+            Font: =Font.'Segoe UI'
+            Height: =35
+            IsSearchable: =false
+            Items: =["","ACR Data & AI","ACR Digital & App Innovation","ACR Infra","ACR Security","App Innovation Licensing","Azure","Commercial Devices","Dynamics 365","Dynamics On Prem","Gaming","Infra Licensing","Linkedin","M365 Suites Core","M365 Suites E5","M365 Suites FLW","MW Cloud Standalone","MW Growth Bets","MW Licensing","Power Platform excl PBI","Security Cloud Standalone","SQL Server","Support","UNKNOWN"]
+            OnChange: |
+                =If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                UpdateContext({varAreaVal:""});UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                ,
+                UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                //If area is empty
+                If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""});UpdateContext({varNoSegmentVal:""});,
+                UpdateContext({varNoSegmentVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:"&$filter=Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                ,
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""}),
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varNoSegmentVal:""}),
+                UpdateContext({varNoSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:" and Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                );
+                //If area and segment are empty
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)),
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""});UpdateContext({varNoIndustryVal:""});,
+                UpdateContext({varNoIndustryVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""}),UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varNoIndustryVal:""}),UpdateContext({varNoIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)),
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""});UpdateContext({varProductVal:""}),
+                UpdateContext({varNoProductVal:"&$filter=Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varProductVal:""}),UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""}),UpdateContext({varNoProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)) && (IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems)),
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varNoSolutionAreaVal:""});UpdateContext({varSolutionAreaVal:""});
+                UpdateContext({varSolutionAreaVal2:""});
+                ,
+                UpdateContext({varNoSolutionAreaVal:"&$filter=Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varSolutionAreaVal:""});UpdateContext({varNoSolutionAreaVal2:""});UpdateContext({varSolutionAreaVal2:""});,
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varNoSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                );
+            SearchFields: =["Value"]
+            SearchItems: =[]
+            Size: =11
+            Width: =360
+            X: =10
+            Y: =lblGFProduct_1.Y+lblGFProduct_1.Height
+            ZIndex: =8
 
-        Label23 As label:
-            Height: =209
+        lblGFProduct_1 As label:
+            Font: =Font.'Segoe UI'
+            Height: =35
+            Size: =11
+            Text: ="Product"
+            X: =10
+            Y: =cbGFIndustry_1.Y+cbGFIndustry_1.Height+50
+            ZIndex: =9
+
+        cbGFSolutionArea_1 As combobox:
+            DisplayFields: =["Value"]
+            Font: =Font.'Segoe UI'
+            Height: =35
+            IsSearchable: =false
+            Items: =["","Business Applications","Data & AI","Digital & Apps Innovation","Infrastructure","Modern Work","Security","Support"]
+            OnChange: |
+                =If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                UpdateContext({varAreaVal:""});UpdateContext({varNoAreaVal:""});UpdateContext({varMSXIAreaVal:""});UpdateContext({varNoMSXIAreaVal:""});UpdateContext({varAccountPlanAreaVal:""});
+                ,
+                UpdateContext({varAreaVal:" and Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoAreaVal:"&$filter=Delivery_x0020_Geography_x0020_Area/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varMSXIAreaVal:" and Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varNoMSXIAreaVal:"&$filter=Account/Custom_x0020_Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varAccountPlanAreaVal:" and Geography/Area in ('"& Left(Concat(cbGFArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFArea_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                //If area is empty
+                If(IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems),
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""});UpdateContext({varNoSegmentVal:""});,
+                UpdateContext({varNoSegmentVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"});
+                );
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:"&$filter=Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                ,
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varSegmentVal:""}),
+                UpdateContext({varSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varNoSegmentVal:""}),
+                UpdateContext({varNoSegmentVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Segment_x0020_Name in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                If(IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems),UpdateContext({varMSXISegmentVal:""}),UpdateContext({varMSXISegmentVal:" and Segment/Field_x0020_Segment in ('"& Left(Concat(cbGFSegment_1.SelectedItems,Value & "','"),Len(Concat(cbGFSegment_1.SelectedItems,Value & "','"))-3) &"')"}));
+                );
+                //If area and segment are empty
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)),
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""});UpdateContext({varNoIndustryVal:""});,
+                UpdateContext({varNoIndustryVal:"&$filter=Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varIndustryVal:""}),UpdateContext({varIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems),UpdateContext({varNoIndustryVal:""}),UpdateContext({varNoIndustryVal:" and Account_x0020_Top_x0020_Parent_x0020_Dimension/Vertical in ('"& Substitute(Left(Concat(cbGFIndustry_1.SelectedItems,Value & "','"),Len(Concat(cbGFIndustry_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)),
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""});UpdateContext({varProductVal:""}),
+                UpdateContext({varNoProductVal:"&$filter=Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varProductVal:""}),UpdateContext({varProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                If(IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems),UpdateContext({varNoProductVal:""}),UpdateContext({varNoProductVal:" and Commercial_x0020_Workload_x0020_Bridge/Commercial_x0020_Workload in ('"& Substitute(Left(Concat(cbGFProduct_1.SelectedItems,Value & "','"),Len(Concat(cbGFProduct_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"}));
+                );
+                
+                If((IsBlank(cbGFArea_1.Selected.Value) || IsEmpty(cbGFArea_1.SelectedItems)) && (IsBlank(cbGFSegment_1.Selected.Value) || IsEmpty(cbGFSegment_1.SelectedItems)) && (IsBlank(cbGFIndustry_1.Selected.Value) || IsEmpty(cbGFIndustry_1.SelectedItems)) && (IsBlank(cbGFProduct_1.Selected.Value) || IsEmpty(cbGFProduct_1.SelectedItems)),
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varNoSolutionAreaVal:""});UpdateContext({varSolutionAreaVal:""});
+                UpdateContext({varSolutionAreaVal2:""});
+                ,
+                UpdateContext({varNoSolutionAreaVal:"&$filter=Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                ,
+                If(IsBlank(cbGFSolutionArea_1.Selected.Value) || IsEmpty(cbGFSolutionArea_1.SelectedItems),UpdateContext({varSolutionAreaVal:""});UpdateContext({varNoSolutionAreaVal2:""});UpdateContext({varSolutionAreaVal2:""});,
+                UpdateContext({varSolutionAreaVal:" and Service_x0020_Forecast/Solution_x0020_Area in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                UpdateContext({varNoSolutionAreaVal2:" and Solution_x0020_Area_x0020_Bridge/SolutionAreas in ('"& Substitute(Left(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"),Len(Concat(cbGFSolutionArea_1.SelectedItems,Value & "','"))-3),"&","%26") &"')"});
+                );
+                );
+            SearchFields: =["Value"]
+            SearchItems: =[]
+            Size: =11
+            Width: =360
+            X: =10
+            Y: =lblGFSolutionArea_1.Y+lblGFSolutionArea_1.Height
+            ZIndex: =10
+
+        lblGFSolutionArea_1 As label:
+            Font: =Font.'Segoe UI'
+            Height: =35
+            Size: =11
+            Text: ="Solution Area"
+            X: =10
+            Y: =cbGFProduct_1.Y+cbGFProduct_1.Height+30
+            ZIndex: =11
+
+        Label20_1 As label:
+            Height: =216
+            Overflow: =Overflow.Scroll
             Text: =PowerBI_Results21_FRA_6.TileUrl
             Visible: =false
-            Width: =330
-            X: =30
+            Width: =346
+            X: =24
+            Y: =561
+            ZIndex: =12
+
+        Label22_3 As label:
+            Align: =Align.Right
+            Font: =Font.Arial
+            FontWeight: =FontWeight.Bold
+            Height: =20
+            Size: =9
+            Text: ="*Applicable to Financial and Market Insight views"
+            Width: =335
+            X: =34
+            Y: =59
+            ZIndex: =13
+
+        Rectangle10_3 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =1
+            Width: =300
+            X: =70
+            Y: =79
+            ZIndex: =14
+
+        Label22_4 As label:
+            Align: =Align.Right
+            Font: =Font.Arial
+            FontWeight: =FontWeight.Bold
+            Height: =20
+            Size: =9
+            Text: ="*Applicable to Financial views only"
+            Width: =335
+            X: =34
             Y: =372
-            ZIndex: =7
+            ZIndex: =15
+
+        Rectangle10_4 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =1
+            Width: =220
+            X: =150
+            Y: =392
+            ZIndex: =16
+
+    iconGlobalFilter_1 As icon.FilterFlat:
+        Height: =30
+        Icon: |-
+            =If(
+                IsBlank(cbGFArea_1.Selected.Value) && IsBlank(cbGFSegment_1.Selected.Value) && IsBlank(cbGFIndustry_1.Selected.Value) && IsBlank(cbGFProduct_1.Selected.Value),
+                Icon.FilterFlat,
+                Icon.FilterFlatFilled
+            )
+        OnSelect: |-
+            =UpdateContext({varGFilter:!varGFilter})
+        Width: =30
+        X: =1820
+        Y: =78
+        ZIndex: =18
 
     GroupMenu_LeftNav_Finance_8 As group:
         Height: =5
